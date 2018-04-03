@@ -1,0 +1,44 @@
+.reviewData {
+	
+}
+
+.dateTextArea {
+	width: 60%;
+	height: 10px;
+}
+
+#dropdownMenuButton {
+	background: DeepSkyBlue;
+}
+
+#dateField {
+	background: DeepSkyBlue;
+}
+
+input::placeholder {
+	color: white;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+    outline: none;
+    border: none;
+}
+
+
+#greenButton {
+	background: lime;
+}
+
+#yellowButton {
+	background: yellow;
+}
+
+#redButton {
+	background: red;
+}
