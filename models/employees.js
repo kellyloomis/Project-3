@@ -28,8 +28,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Employees.associate = function(models) {
-    // We're saying that a Employees should belong to a Company
-    // A Employees can't be created without a Company due to the foreign key constraint
+    // We're saying that an Employee should belong to a User
+    // An Employees can't be created without a User due to the foreign key constraint
     Employees.belongsTo(models.Users, {
       foreignKey: {
         allowNull: false
