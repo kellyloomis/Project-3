@@ -23,6 +23,11 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         isEmail: true
       }
+    },
+    // Giving the Employees model a lastname of type STRING
+    goals: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
 
   });
