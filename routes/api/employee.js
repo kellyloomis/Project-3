@@ -12,9 +12,4 @@ router
   .get(employeeController.findById)
   .delete(employeeController.remove);
 
-// Matches with "/api/employee/:search"
-router
-  .route("/:search")
-  .get(employeeController.findById);
-
 module.exports = router;
