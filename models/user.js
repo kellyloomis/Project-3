@@ -46,9 +46,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    // Associating User with Employees
-    // When a User is deleted, also delete any associated Employees
-    User.hasMany(models.Employees, {
+    // Associating User with Employee
+    // When a User is deleted, also delete any associated Employee
+    User.hasMany(models.Employee, {
       onDelete: "cascade"
     });
   };
