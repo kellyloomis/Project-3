@@ -1,7 +1,13 @@
 const express = require("express");
 const path = require("path");
-const PORT = process.env.PORT || 3001;
+const bodyParser = require("body-parser");
+const routes = require("./routes");
 const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Configure body parser for AJAX requests
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -11,11 +17,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+// Add routes, both API and view
+app.use(routes);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
