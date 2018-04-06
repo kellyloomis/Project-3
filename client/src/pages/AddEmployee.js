@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import Header from "../components/WelcomePage/Header/Header.js";
-import "./Welcome.css";
-import PhotoGrid from "../components/WelcomePage/PhotoGrid/PhotoGrid.js"
+import Header from "../components/AddEmployeePage/Header/Header.js";
+import "./AddEmployee.css";
 import Footer from "../components/Common/Footer/Footer.js"
 
 class Welcome extends Component {
 
 	render() {
 		return (
-			<div className="w3-content">
+			<div className="w3-light-grey">
 				<Header />
-				<PhotoGrid />
 				<Footer />
 			</div>
 		);

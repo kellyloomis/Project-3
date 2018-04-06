@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Link, Route } from "react-router-dom";
+
 import "./Header.css"
 
 class Header extends Component {
@@ -13,7 +15,9 @@ class Header extends Component {
 			    <div className="w3-bar">
 			      <a href="{#}" className="w3-bar-item w3-button">Enter Review</a>
 			      <a href="{#}" className="w3-bar-item w3-button">Run Report</a>  
-			      <a href="{#}" className="w3-bar-item w3-button">Add New Employee</a> 
+			       <Link to="/add-employee" className="w3-bar-item w3-button">
+			       		Add New Employee
+			       </Link>
 			      <a href="{#}" className="w3-bar-item w3-button">View Employee Profile</a>
 			    </div>
 			  </div>
