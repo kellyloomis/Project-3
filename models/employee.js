@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
   Employee.associate = function(models) {
     // We're saying that an Employee should belong to a User
     // An Employee can't be created without a User due to the foreign key constraint
-    Employee.belongsTo(models.Users, {
+    Employee.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
