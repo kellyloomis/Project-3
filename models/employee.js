@@ -23,11 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         isEmail: true
       }
-    },
-    // Giving the Employee model a goals of type STRING
-    goals: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
 
   });
