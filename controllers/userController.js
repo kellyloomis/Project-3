@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.User
-      .find(req.query)
+      .findAll(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -20,10 +20,19 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  update: function(req, res) {
+    db.User
+      .update(req.body, {
+        where: {id: req.params.id}
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   remove: function(req, res) {
     db.User
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .destroy({ 
+        where: {id: req.params.id} 
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
