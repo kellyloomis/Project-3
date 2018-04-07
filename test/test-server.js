@@ -476,3 +476,173 @@ describe('Reviews', function() {
   });
 }); // End Review Test Cases
 
+/**
+* Test Cases for Goal endpoints
+**/
+describe('Reviews', function() {
+  // This will be our temporary User so that we can store an Employee under this User
+  let demoUser = {
+    'username': 'demo',
+      'password': 'pass',
+      'email': 'demo@email.com',
+      'firstname': 'Java',
+      'lastname': 'Script'
+  }
+
+  // This will be our temporary Employee so that we can store a Review under this Employee
+  let demoEmployee = {
+      'firstname': 'New',
+      'lastname': 'Guy',
+      'email': 'employee@mail.com'
+    };
+
+  // This newGoal object will be used for testing of Create, Update, and Delete
+  let newGoal = {
+      'goals': "Git gud",
+      'achieved': "Git pulled"
+    };
+
+    // Create our User to store the demo Employee
+  it('should add a SINGLE demo user', function(done) {
+    chai.request(server)
+    .post('/api/user')
+    .send(demoUser)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('username');
+      res.body.should.have.property('password');
+      res.body.should.have.property('email');
+      res.body.should.have.property('firstname');
+      res.body.should.have.property('lastname');
+      res.body.should.have.property('id');
+      res.body.username.should.equal('demo');
+      res.body.password.should.equal('pass');
+      res.body.email.should.equal('demo@email.com');
+      res.body.firstname.should.equal('Java');
+      res.body.lastname.should.equal('Script');
+
+      // Save the id to associate this User's id to the new Employee
+      demoEmployee.UserId = res.body.id;
+      done();
+    });
+  });
+
+    // Create an Employee to store the demo Review
+  it('should add a SINGLE demo employee', function(done) {
+    chai.request(server)
+    .post('/api/employee')
+    .send(demoEmployee)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('email');
+      res.body.should.have.property('firstname');
+      res.body.should.have.property('lastname');
+      res.body.should.have.property('id');
+      res.body.email.should.equal('employee@mail.com');
+      res.body.firstname.should.equal('New');
+      res.body.lastname.should.equal('Guy');
+
+      // Save the id to associate this Employee's id to the new Review
+      newGoal.EmployeeId = res.body.id;
+      done();
+    });
+  });
+
+    // Test retrieving all Goal (should be empty for now)
+  it('should list ALL goals on /api/goal GET', function(done) {
+    chai.request(server)
+    .get('/api/goal')
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('array');
+      done();
+    });
+  });
+
+  // Test creating a Goal, which will be the newGoal object we defined above
+  it('should add a SINGLE goal on /api/goal POST', function(done) {
+    chai.request(server)
+    .post('/api/goal')
+    .send(newGoal)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('goals');
+      res.body.should.have.property('achieved');;
+      res.body.should.have.property('id');
+      res.body.goals.should.equal("Git gud");
+      res.body.achieved.should.equal("Git pulled");
+
+      // Save the id for later so that we only work with one newReview
+      newGoal.id = res.body.id;
+      done();
+    });
+  });
+
+  // Test retrieving a single Goal, which will be the newGoal object we defined above
+  it('should list a SINGLE goal on /api/goal/:id GET', function(done) {
+    chai.request(server)
+        .get('/api/goal/' + newGoal.id)
+        .end(function(err, res){
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.have.property('goals');
+          res.body.should.have.property('achieved');;
+          res.body.should.have.property('id');
+          res.body.id.should.equal(newGoal.id);
+          res.body.goals.should.equal("Git gud");
+          res.body.achieved.should.equal("Git pulled");
+          done();
+        });
+  });
+
+  // Test updating a single Goal, which will be the newGoal object we defined above
+  it('should update a SINGLE review on /api/review/:id PUT', function(done) {
+    chai.request(server)
+        .post('/api/goal/' + newGoal.id)
+        .send({
+          'goals': "Git push"
+      })
+        .end(function(error, response){
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.should.be.a('array');
+          chai.request(server)
+            .get('/api/goal/' + newGoal.id)
+            .end(function(err, res) {
+            res.body.should.have.property('goals');
+            res.body.should.have.property('achieved');;
+            res.body.should.have.property('id');
+            res.body.id.should.equal(newGoal.id);
+            res.body.goals.should.equal("Git push");
+            res.body.achieved.should.equal("Git pulled");
+            done();
+            });
+      });
+  });
+
+  // Test deleting a single Goal, which will be the newGoal object we defined above
+  it('should delete a SINGLE goal on /api/goal/:id DELETE', function(done) {
+    chai.request(server)
+      .delete('/api/goal/' + newGoal.id)
+      .end(function(err, res) {
+        res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.equal(1);
+            chai.request(server)
+              .get('/api/review/' + newGoal.id)
+              .end(function(error, response) {
+                 should.not.exist(response.body);
+                done();
+              });
+      });
+  });
+}); // End Goal Test Cases
+
