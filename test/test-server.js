@@ -148,8 +148,7 @@ describe('Employees', function() {
 	let newEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com',
-    	'goals': "Git gud"
+    	'email': 'employee@mail.com'
     };
 
     // Create our User to store the new Employee
@@ -203,12 +202,10 @@ describe('Employees', function() {
       res.body.should.have.property('email');
       res.body.should.have.property('firstname');
       res.body.should.have.property('lastname');
-      res.body.should.have.property('goals');
       res.body.should.have.property('id');
       res.body.email.should.equal('employee@mail.com');
       res.body.firstname.should.equal('New');
       res.body.lastname.should.equal('Guy');
-      res.body.goals.should.equal('Git gud');
 
       // Save the id for later so that we only work with one newEmployee
       newEmployee.id = res.body.id;
@@ -224,13 +221,11 @@ describe('Employees', function() {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
-	      res.body.should.have.property('goals');
 	      res.body.should.have.property('email');
 	      res.body.should.have.property('firstname');
 	      res.body.should.have.property('lastname');
 	      res.body.should.have.property('id');
 	      res.body.id.should.equal(newEmployee.id);
-	      res.body.goals.should.equal('Git gud');
 	      res.body.email.should.equal('employee@mail.com');
 	      res.body.firstname.should.equal('New');
 	      res.body.lastname.should.equal('Guy');
@@ -253,13 +248,11 @@ describe('Employees', function() {
           chai.request(server)
           	.get('/api/employee/' + newEmployee.id)
           	.end(function(err, res) {
-			      res.body.should.have.property('goals');
 			      res.body.should.have.property('email');
 			      res.body.should.have.property('firstname');
 			      res.body.should.have.property('lastname');
 			      res.body.should.have.property('id');
 			      res.body.id.should.equal(newEmployee.id);
-			      res.body.goals.should.equal('Git gud');
 			      res.body.email.should.equal('employee@mail.com');
 			      res.body.firstname.should.equal('Super');
 			      res.body.lastname.should.equal('Man');
@@ -303,8 +296,7 @@ describe('Reviews', function() {
 	let demoEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com',
-    	'goals': "Git gud"
+    	'email': 'employee@mail.com'
     };
 
 	// This newReview object will be used for testing of Create, Update, and Delete
@@ -356,12 +348,10 @@ describe('Reviews', function() {
       res.body.should.have.property('email');
       res.body.should.have.property('firstname');
       res.body.should.have.property('lastname');
-      res.body.should.have.property('goals');
       res.body.should.have.property('id');
       res.body.email.should.equal('employee@mail.com');
       res.body.firstname.should.equal('New');
       res.body.lastname.should.equal('Guy');
-      res.body.goals.should.equal('Git gud');
 
       // Save the id to associate this Employee's id to the new Review
       newReview.EmployeeId = res.body.id;

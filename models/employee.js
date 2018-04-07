@@ -24,7 +24,6 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     }
-
   });
 
   Employee.associate = function(models) {
