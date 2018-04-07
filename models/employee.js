@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-    // Giving the Employee model a lastname of type STRING
+    // Giving the Employee model a goals of type STRING
     goals: {
       type: DataTypes.STRING,
       allowNull: true
