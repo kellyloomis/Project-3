@@ -13,7 +13,9 @@ class Header extends Component {
 			  
 			  <div className="w3-padding-4">
 			    <div className="w3-bar">
-			      <a href="{#}" className="w3-bar-item w3-button">Enter Review</a>
+					<Link to="/enter-review" className="w3-bar-item w3-button">
+						Enter Review
+					</Link>
 			      <a href="{#}" className="w3-bar-item w3-button">Run Report</a>  
 			       <Link to="/add-employee" className="w3-bar-item w3-button">
 			       		Add New Employee

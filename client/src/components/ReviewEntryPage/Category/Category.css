@@ -1,0 +1,26 @@
+.w3-panel {
+	padding: 50px 50px;
+}
+	
+#greenButton {
+	background: #4caf50;
+}
+
+#yellowButton {
+	background: #ff9800;
+}
+
+#redButton {
+	background: #e91e63;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+    outline: none;
+    border: none;
+}
