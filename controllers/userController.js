@@ -1,27 +1,27 @@
 const db = require("../models");
 
-// Defining methods for the employeeController
+// Defining methods for the userController
 module.exports = {
   findAll: function(req, res) {
-    db.Employee
+    db.User
       .findAll(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Employee
+    db.User
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Employee
+    db.User
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Employee
+    db.User
       .update(req.body, {
         where: {id: req.params.id}
       })
@@ -29,7 +29,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Employee
+    db.User
       .destroy({ 
         where: {id: req.params.id} 
       })
