@@ -14,6 +14,7 @@ import { withStyles, Grid } from "material-ui";
 import {
   StatsCard,
   ChartCard,
+  TasksCard,
   RegularCard,
   Table,
   ItemGrid
@@ -33,7 +34,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Grid container>
-          <ItemGrid xs={12} sm={6} md={6}>
+          <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
               icon={Store}
               iconColor="green"
@@ -43,7 +44,10 @@ class Dashboard extends React.Component {
               statText="Last 24 Hours"
             />
           </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={6}>
+          <ItemGrid xs={12} sm={12} md={6}>
+            <TasksCard />
+          </ItemGrid>
+          <ItemGrid xs={12} sm={6} md={3}>
             <StatsCard
               icon={Accessibility}
               iconColor="blue"

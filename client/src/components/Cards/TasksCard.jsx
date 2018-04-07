@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import {
   withStyles,
   Card,
@@ -9,11 +9,11 @@ import {
   Tabs,
   Tab
 } from "material-ui";
-import { BugReport, Code, Cloud } from "material-ui-icons";
+import { Code, Cloud } from "material-ui-icons";
 
 import { Tasks } from "./../../components";
 
-import { bugs, website, server } from "./../../variables/general";
+import { goals, achieved } from "./../../variables/general";
 
 import tasksCardStyle from "./../../variables/styles/tasksCardStyle";
 
@@ -26,6 +26,8 @@ class TasksCard extends React.Component {
   };
   render() {
     const { classes } = this.props;
+    console.log(goals);
+    console.log(this.state);
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -52,18 +54,8 @@ class TasksCard extends React.Component {
                   label: classes.label,
                   rootInheritSelected: classes.rootInheritSelected
                 }}
-                icon={<BugReport className={classes.tabIcon} />}
-                label={"Bugs"}
-              />
-              <Tab
-                classes={{
-                  wrapper: classes.tabWrapper,
-                  rootLabelIcon: classes.labelIcon,
-                  label: classes.label,
-                  rootInheritSelected: classes.rootInheritSelected
-                }}
                 icon={<Code className={classes.tabIcon} />}
-                label={"Website"}
+                label={"Goals"}
               />
               <Tab
                 classes={{
@@ -73,7 +65,7 @@ class TasksCard extends React.Component {
                   rootInheritSelected: classes.rootInheritSelected
                 }}
                 icon={<Cloud className={classes.tabIcon} />}
-                label={"Server"}
+                label={"Achieved"}
               />
             </Tabs>
           }
@@ -82,27 +74,18 @@ class TasksCard extends React.Component {
           {this.state.value === 0 && (
             <Typography component="div">
               <Tasks
-                checkedIndexes={[0, 3]}
-                tasksIndexes={[0, 1, 2, 3]}
-                tasks={bugs}
+                checkedIndexes={[]}
+                tasksIndexes={[0, 1]}
+                tasks={goals}
               />
             </Typography>
           )}
           {this.state.value === 1 && (
             <Typography component="div">
               <Tasks
-                checkedIndexes={[0]}
-                tasksIndexes={[0, 1]}
-                tasks={website}
-              />
-            </Typography>
-          )}
-          {this.state.value === 2 && (
-            <Typography component="div">
-              <Tasks
-                checkedIndexes={[1]}
+                checkedIndexes={[0,1, 2]}
                 tasksIndexes={[0, 1, 2]}
-                tasks={server}
+                tasks={achieved}
               />
             </Typography>
           )}
@@ -111,9 +94,5 @@ class TasksCard extends React.Component {
     );
   }
 }
-
-TasksCard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(tasksCardStyle)(TasksCard);
