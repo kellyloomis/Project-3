@@ -286,3 +286,168 @@ describe('Employees', function() {
   });
 }); // End Employee Test Cases
 
+/**
+*	Test Cases for Review endpoints
+**/
+describe('Reviews', function() {
+	// This will be our temporary User so that we can store an Employee under this User
+	let demoUser = {
+		'username': 'demo',
+    	'password': 'pass',
+    	'email': 'demo@email.com',
+    	'firstname': 'Java',
+    	'lastname': 'Script'
+	}
+
+	// This will be our temporary Employee so that we can store a Review under this Employee
+	let demoEmployee = {
+    	'firstname': 'New',
+    	'lastname': 'Guy',
+    	'email': 'employee@mail.com',
+    	'goals': "Git gud"
+    };
+
+	// This newReview object will be used for testing of Create, Update, and Delete
+	let newReview = {
+    	'review': 'Git pull yourself together'
+    };
+
+    // Create our User to store the demo Employee
+  it('should add a SINGLE demo user', function(done) {
+  	chai.request(server)
+    .post('/api/user')
+    .send(demoUser)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('username');
+      res.body.should.have.property('password');
+      res.body.should.have.property('email');
+      res.body.should.have.property('firstname');
+      res.body.should.have.property('lastname');
+      res.body.should.have.property('id');
+      res.body.username.should.equal('demo');
+      res.body.password.should.equal('pass');
+      res.body.email.should.equal('demo@email.com');
+      res.body.firstname.should.equal('Java');
+      res.body.lastname.should.equal('Script');
+
+      // Save the id to associate this User's id to the new Employee
+      demoEmployee.UserId = res.body.id;
+      done();
+    });
+  });
+
+    // Create an Employee to store the demo Review
+  it('should add a SINGLE demo employee', function(done) {
+  	chai.request(server)
+    .post('/api/employee')
+    .send(demoEmployee)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('email');
+      res.body.should.have.property('firstname');
+      res.body.should.have.property('lastname');
+      res.body.should.have.property('goals');
+      res.body.should.have.property('id');
+      res.body.email.should.equal('employee@mail.com');
+      res.body.firstname.should.equal('New');
+      res.body.lastname.should.equal('Guy');
+      res.body.goals.should.equal('Git gud');
+
+      // Save the id to associate this Employee's id to the new Review
+      newReview.EmployeeId = res.body.id;
+      done();
+    });
+  });
+
+    // Test retrieving all Review (should be empty for now)
+  it('should list ALL reviews on /api/review GET', function(done) {
+  	chai.request(server)
+    .get('/api/review')
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('array');
+      done();
+    });
+  });
+
+  // Test creating a Review, which will be the newReview object we defined above
+  it('should add a SINGLE review on /api/review POST', function(done) {
+  	chai.request(server)
+    .post('/api/review')
+    .send(newReview)
+    .end(function(err, res){
+      res.should.have.status(200);
+      res.should.be.json;
+      res.body.should.be.a('object');
+      res.body.should.have.property('review');
+      res.body.should.have.property('id');
+      res.body.review.should.equal('Git pull yourself together');
+
+      // Save the id for later so that we only work with one newReview
+      newReview.id = res.body.id;
+      done();
+    });
+  });
+
+  // Test retrieving a single Review, which will be the newReview object we defined above
+  it('should list a SINGLE review on /api/review/:id GET', function(done) {
+  	chai.request(server)
+        .get('/api/review/' + newReview.id)
+        .end(function(err, res){
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+	      res.body.should.have.property('review');
+	      res.body.should.have.property('id');
+	      res.body.id.should.equal(newReview.id);
+	      res.body.review.should.equal('Git pull yourself together');
+          done();
+        });
+  });
+
+  // Test updating a single Review, which will be the newReview object we defined above
+  it('should update a SINGLE review on /api/review/:id PUT', function(done) {
+  	chai.request(server)
+        .post('/api/review/' + newReview.id)
+        .send({
+        	'review': 'Git commit to being better'
+    	})
+        .end(function(error, response){
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.should.be.a('array');
+          chai.request(server)
+          	.get('/api/review/' + newReview.id)
+          	.end(function(err, res) {
+			      res.body.should.have.property('review');
+			      res.body.id.should.equal(newReview.id);
+			      res.body.review.should.equal('Git commit to being better');
+         		  done();
+          	});
+      });
+  });
+
+  // Test deleting a single Review, which will be the newReview object we defined above
+  it('should delete a SINGLE review on /api/review/:id DELETE', function(done) {
+  	chai.request(server)
+  		.delete('/api/review/' + newReview.id)
+  		.end(function(err, res) {
+  			res.should.have.status(200);
+          	res.should.be.json;
+          	res.body.should.equal(1);
+          	chai.request(server)
+          		.get('/api/review/' + newReview.id)
+          		.end(function(error, response) {
+          			 should.not.exist(response.body);
+          			done();
+          		});
+  		});
+  });
+}); // End Review Test Cases
+
