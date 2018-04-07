@@ -309,7 +309,12 @@ describe('Reviews', function() {
 
 	// This newReview object will be used for testing of Create, Update, and Delete
 	let newReview = {
-    	'review': 'Git pull yourself together'
+    	'attendance': 2,
+      'appearance': 0,
+      'professionalism': 1,
+      'communication': 2,
+      'taskcompletion': 1,
+      'quality': 1
     };
 
     // Create our User to store the demo Employee
@@ -385,9 +390,19 @@ describe('Reviews', function() {
       res.should.have.status(200);
       res.should.be.json;
       res.body.should.be.a('object');
-      res.body.should.have.property('review');
+      res.body.should.have.property('appearance');
+      res.body.should.have.property('attendance');
+      res.body.should.have.property('professionalism');
+      res.body.should.have.property('communication');
+      res.body.should.have.property('taskcompletion');
+      res.body.should.have.property('quality');
       res.body.should.have.property('id');
-      res.body.review.should.equal('Git pull yourself together');
+      res.body.appearance.should.equal(0);
+      res.body.attendance.should.equal(2);
+      res.body.professionalism.should.equal(1);
+      res.body.communication.should.equal(2);
+      res.body.taskcompletion.should.equal(1);
+      res.body.quality.should.equal(1);
 
       // Save the id for later so that we only work with one newReview
       newReview.id = res.body.id;
@@ -403,10 +418,20 @@ describe('Reviews', function() {
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
-	      res.body.should.have.property('review');
-	      res.body.should.have.property('id');
-	      res.body.id.should.equal(newReview.id);
-	      res.body.review.should.equal('Git pull yourself together');
+	        res.body.should.have.property('appearance');
+          res.body.should.have.property('attendance');
+          res.body.should.have.property('professionalism');
+          res.body.should.have.property('communication');
+          res.body.should.have.property('taskcompletion');
+          res.body.should.have.property('quality');
+          res.body.should.have.property('id');
+  	      res.body.id.should.equal(newReview.id);
+  	      res.body.appearance.should.equal(0);
+          res.body.attendance.should.equal(2);
+          res.body.professionalism.should.equal(1);
+          res.body.communication.should.equal(2);
+          res.body.taskcompletion.should.equal(1);
+          res.body.quality.should.equal(1);
           done();
         });
   });
@@ -416,7 +441,7 @@ describe('Reviews', function() {
   	chai.request(server)
         .post('/api/review/' + newReview.id)
         .send({
-        	'review': 'Git commit to being better'
+        	'appearance': 1
     	})
         .end(function(error, response){
           response.should.have.status(200);
@@ -425,10 +450,20 @@ describe('Reviews', function() {
           chai.request(server)
           	.get('/api/review/' + newReview.id)
           	.end(function(err, res) {
-			      res.body.should.have.property('review');
+			      res.body.should.have.property('appearance');
+            res.body.should.have.property('attendance');
+            res.body.should.have.property('professionalism');
+            res.body.should.have.property('communication');
+            res.body.should.have.property('taskcompletion');
+            res.body.should.have.property('quality');
 			      res.body.id.should.equal(newReview.id);
-			      res.body.review.should.equal('Git commit to being better');
-         		  done();
+			      res.body.appearance.should.equal(1);
+            res.body.attendance.should.equal(2);
+            res.body.professionalism.should.equal(1);
+            res.body.communication.should.equal(2);
+            res.body.taskcompletion.should.equal(1);
+            res.body.quality.should.equal(1);
+         		done();
           	});
       });
   });
