@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.16.2",
+    "can-fixture-defaults": "^1.0.4",
     "chartist": "^0.10.1",
     "classnames": "^2.2.5",
     "material-ui": "1.0.0-beta.34",

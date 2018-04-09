@@ -20,7 +20,8 @@ class NewEmployee extends Component {
     manager: "",
     department: "",
     goals: "",
-    userId: ""
+    userId: "",
+    employeeId: ""
   };
 
   //******************************* TODO *******************************
@@ -62,10 +63,20 @@ class NewEmployee extends Component {
         lastname: this.state.lastName,
         // manager: this.state.manager,
         // department: this.state.department,
-        // goals: this.state.goals,
         UserId: 2
       })
-        .then(res => console.log(res))
+        .then(res => {
+          this.setState({
+            employeeId : res.data.id
+          });
+          console.log(res)
+          API.saveGoal({
+            goals: this.state.goals,
+            EmployeeId: this.state.employeeId
+          })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        })
         .catch(err => console.log(err));
     }
   };
