@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
   // Gets all employees
-  getEmployee: function() {
+  getAllEmployee: function() {
     return axios.get("/api/employee");
   },
   // Saves an employee to the database
