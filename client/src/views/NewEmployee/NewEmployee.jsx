@@ -36,11 +36,24 @@ class NewEmployee extends Component {
     });
   };
 
+  // Checks if the form has been completed and returns true if it has, false if not
+  // Console.log for now but will eventually be a notification popup
+  isValid = () => {
+    if(this.state.firstName && this.state.lastName && 
+       this.state.companyName && this.state.employeeIdNumber &&
+       this.state.manager && this.state.department) 
+    {
+      return true;
+    } else {
+      console.log("Please complete all fields of the form.");
+    }
+  }
+
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
   // THIS CURRENTLY ADDS TO USERID 1 FOR TEST PURPOSES
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.firstName && this.state.lastName) {
+    if (this.isValid()) {
       API.saveEmployee({
         // companyName: this.state.companyName,
         // employeeIdNumber: this.state.employeeIdNumber,
