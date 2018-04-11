@@ -16,7 +16,7 @@ class Header extends Component {
 			      <Link to="/review-entry" className="w3-bar-item w3-button">
 			    		Enter Review
 			      </Link>
-			      <Link to="/dashboard" className="w3-bar-item w3-button">
+			      <Link to="/select-report" className="w3-bar-item w3-button">
 			       		Run Reports
 			       </Link>
 			       <Link to="/add-employee" className="w3-bar-item w3-button">
