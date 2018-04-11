@@ -51,7 +51,7 @@ class NewEmployee extends Component {
   }
 
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
-  // THIS CURRENTLY ADDS TO USERID 1 FOR TEST PURPOSES
+  // THIS CURRENTLY ADDS TO USERID 2 FOR TEST PURPOSES
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.isValid()) {
