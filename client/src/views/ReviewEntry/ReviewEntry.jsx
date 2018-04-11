@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Nav from "../../components/ReviewEntryPage/Nav/Nav.js";
-import Form from "../../components/ReviewEntryPage/Form/Form.js"
-import Category from "../../components/ReviewEntryPage/Category/Category.js";
-import Footer from "../../components/Common/Footer/Footer.js";
+import Nav from "../../components/ReviewEntryPage/Nav/Nav.jsx";
+import Form from "../../components/ReviewEntryPage/Form/Form.jsx"
+import Category from "../../components/ReviewEntryPage/Category/Category.jsx";
+import Footer from "../../components/Common/Footer/Footer.jsx";
 import categories from "../../components/ReviewEntryPage/Category/categories.json";
 
 import "./ReviewEntry.css";

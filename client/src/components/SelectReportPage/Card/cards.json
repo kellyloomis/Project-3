@@ -1,0 +1,18 @@
+{
+    "data": [{
+            "title": "Individual Employee",
+            "text1": "View progress of an individual",
+            "text2": "Enter date range for report data"
+        },
+        {
+            "title": "Your Team",
+            "text1": "View progress of all employees assigned to you",
+            "text2": "Enter date range for report data"
+        },
+        {
+            "title": "All Employees",
+            "text1": "View progress of all employees",
+            "text2": "Enter date range for report data"
+        }
+    ]
+}
