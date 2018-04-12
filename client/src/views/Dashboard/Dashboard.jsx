@@ -15,8 +15,6 @@ import {
   StatsCard,
   ChartCard,
   TasksCard,
-  RegularCard,
-  Table,
   ItemGrid
 } from "./../../components";
 

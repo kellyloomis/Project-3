@@ -12,4 +12,8 @@ router.route("/:id")
   .post(employeeController.update)
   .delete(employeeController.remove);
 
+ // Matches with "/api/employee/:start/:end"
+router.route("/:start/:end")
+  .get(employeeController.findWithin);
+
 module.exports = router;

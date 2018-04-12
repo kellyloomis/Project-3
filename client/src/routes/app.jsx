@@ -4,29 +4,51 @@ import NewEmployee from "./../views/NewEmployee/NewEmployee.jsx";
 import ReviewEntry from "./../views/ReviewEntry/ReviewEntry.jsx";
 import SelectReport from "./../views/SelectReport/SelectReport.jsx";
 
+import {
+  Dashboard,
+  Person,
+  ContentPaste,
+  LibraryBooks,
+  BubbleChart
+} from "material-ui-icons";
 
 const appRoutes = [
   {
     path: "/welcome",
+    sidebarName: "Home",
+    navbarName: "Home",
+    icon: Dashboard,
     component: WelcomePage
   },
   {
     path: "/dashboard",
+    sidebarName: "Reports",
+    navbarName: "Reports",
+    icon: Person,
     component: DashboardPage
   },
   {
     path: "/add-employee",
+    sidebarName: "Add Employee",
+    navbarName: "Add Employee",
+    icon: ContentPaste,
     component: NewEmployee
   },
   {
     path: "/review-entry",
+    sidebarName: "Review",
+    navbarName: "Review",
+    icon: LibraryBooks,
     component: ReviewEntry
   },
   {
     path: "/select-report",
+    sidebarName: "Reports",
+    navbarName: "Reports",
+    icon: BubbleChart,
     component: SelectReport
   },
-  { redirect: true, path: "/", to: "/welcome" }
+  { redirect: true, path: "/", to: "/welcome",  navbarName: "Redirect" }
 ];
 
 export default appRoutes;

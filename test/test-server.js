@@ -277,6 +277,25 @@ describe('Employees', function() {
           		});
   		});
   });
+
+  // Test retrieving all Employee from within a specified date range
+  it('should retrieve ALL employee within date on /api/employee/:start/:end', function(done) {
+    let start = new Date("April 01, 2018");
+    let end = new Date("April 10, 2018");
+    chai.request(server)
+      .get('/api/employee/' + start + '/' + end)
+      .end(function(err, res) {
+        res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.equal(1);
+            chai.request(server)
+              .get('/api/employee/' + newEmployee.id)
+              .end(function(error, response) {
+                 should.not.exist(response.body);
+                done();
+              });
+      });
+  });
 }); // End Employee Test Cases
 
 /**
