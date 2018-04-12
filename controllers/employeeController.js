@@ -40,7 +40,7 @@ module.exports = {
     db.Employee
       .findAll({
         where: {
-          createdAt: {
+          updatedAt: {
             $between: [req.params.start, req.params.end]
           }
         }

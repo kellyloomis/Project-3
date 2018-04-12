@@ -280,20 +280,15 @@ describe('Employees', function() {
 
   // Test retrieving all Employee from within a specified date range
   it('should retrieve ALL employee within date on /api/employee/:start/:end', function(done) {
-    let start = new Date("April 01, 2018");
-    let end = new Date("April 10, 2018");
+    let start = ("2018-04-01 00:00:00");
+    let end = ("2018-04-10 00:00:00");
     chai.request(server)
       .get('/api/employee/' + start + '/' + end)
       .end(function(err, res) {
         res.should.have.status(200);
             res.should.be.json;
-            res.body.should.equal(1);
-            chai.request(server)
-              .get('/api/employee/' + newEmployee.id)
-              .end(function(error, response) {
-                 should.not.exist(response.body);
-                done();
-              });
+            res.body.should.be.a("array");
+            done();
       });
   });
 }); // End Employee Test Cases
