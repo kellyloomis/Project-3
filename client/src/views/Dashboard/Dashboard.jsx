@@ -32,31 +32,6 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Grid container>
-          <ItemGrid xs={12} sm={6} md={3}>
-            <StatsCard
-              icon={Store}
-              iconColor="green"
-              title="Revenue"
-              description="$34,245"
-              statIcon={DateRange}
-              statText="Last 24 Hours"
-            />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={12} md={6}>
-            <TasksCard />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={3}>
-            <StatsCard
-              icon={Accessibility}
-              iconColor="blue"
-              title="Followers"
-              description="+245"
-              statIcon={Update}
-              statText="Just Updated"
-            />
-          </ItemGrid>
-        </Grid>
-        <Grid container>
           <ItemGrid xs={12} sm={12} md={4}>
             <ChartCard
               chart={
@@ -121,6 +96,33 @@ class Dashboard extends React.Component {
               statIcon={AccessTime}
               statText="campaign sent 2 days ago"
             />
+          </ItemGrid>
+        </Grid>
+        <Grid container>
+          <ItemGrid xs={12} sm={6} md={6}>
+            <StatsCard
+              icon={Store}
+              iconColor="green"
+              title="Revenue"
+              description="$34,245"
+              statIcon={DateRange}
+              statText="Last 24 Hours"
+            />
+          </ItemGrid>
+          <ItemGrid xs={12} sm={6} md={6}>
+            <StatsCard
+              icon={Accessibility}
+              iconColor="blue"
+              title="Followers"
+              description="+245"
+              statIcon={Update}
+              statText="Just Updated"
+            />
+          </ItemGrid>
+        </Grid>
+        <Grid container>
+          <ItemGrid xs={12} sm={12} md={12}>
+            <TasksCard />
           </ItemGrid>
         </Grid>
       </div>
