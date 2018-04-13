@@ -148,7 +148,8 @@ describe('Employees', function() {
 	let newEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com'
+    	'email': 'employee@mail.com',
+      firebaseId: 'firebasedemo'
     };
 
     // Create our User to store the new Employee
@@ -310,7 +311,8 @@ describe('Reviews', function() {
 	let demoEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com'
+    	'email': 'employee@mail.com',
+      'firebaseId': 'firebasedemo'
     };
 
 	// This newReview object will be used for testing of Create, Update, and Delete
@@ -507,7 +509,8 @@ describe('Reviews', function() {
   let demoEmployee = {
       'firstname': 'New',
       'lastname': 'Guy',
-      'email': 'employee@mail.com'
+      'email': 'employee@mail.com',
+      'firebaseId': 'firebasedemo'
     };
 
   // This newGoal object will be used for testing of Create, Update, and Delete
