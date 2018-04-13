@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
+import { auth } from './../../firebase.js';
+
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
@@ -25,13 +27,25 @@ const switchRoutes = (
 );
 
 class App extends React.Component {
-  state = {
-    mobileOpen: false
-  };
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+      mobileOpen: false
+    }
+  }
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   componentDidMount() {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } 
+      if(!this.state.user) {
+        this.props.history.push("/signup");
+      }
+    });
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
@@ -40,6 +54,7 @@ class App extends React.Component {
   componentDidUpdate() {
     this.refs.mainPanel.scrollTop = 0;
   }
+
   render() {
     const { classes, ...rest } = this.props;
     return (
