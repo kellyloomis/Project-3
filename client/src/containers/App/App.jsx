@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { auth } from './../../firebase.js';
+import firebase, { auth } from './../../firebase.js';
 
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -31,16 +31,11 @@ const switchRoutes = (
   </Switch>
 );
 
-const actions = [
-  { icon: <Person />, name: 'Profile' },
-  { icon: <PowerSettingsNew />, name: 'Logout', click: this.logout }
-];
-
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: null,
+      user: firebase.auth().currentUser,
       mobileOpen: false,
       open: false,
       hidden: false
@@ -51,13 +46,17 @@ class App extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } else {
-        this.props.history.push("/signup");
-      }
-    });
+    // let user = firebase.auth().currentUser;
+    if(!this.state.user) {
+      this.props.history.push("/signup");
+    }
+    // auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({ user });
+    //   } else {
+    //     this.props.history.push("/signup");
+    //   }
+    // });
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
@@ -74,6 +73,7 @@ class App extends React.Component {
         this.setState({
           user: null
         });
+        this.props.history.push("/signup");
       });
   }
 
@@ -125,6 +125,11 @@ class App extends React.Component {
             icon={<PowerSettingsNew />}
             tooltipTitle={"Logout"}
             onClick={this.logout}
+          />
+          <SpeedDialAction
+            key={"Profile"}
+            icon={<Person />}
+            tooltipTitle={"Profile"}
           />
         </SpeedDial>
 
