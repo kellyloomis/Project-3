@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { auth } from './../../firebase.js';
+import firebase from './../../firebase.js';
 
 import "./Header.css"
 
@@ -8,21 +8,16 @@ class Header extends Component {
 	constructor() {
     super();
     this.state = {
-      user: null,
+      user: firebase.auth().currentUser,
       userName: "User",
       mobileOpen: false
     }
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({user: user, userName: user.displayName});
-      } 
-      if(!this.state.user) {
-        this.props.history.push("/signup");
-      }
-    });    
+	  if (this.state.user) {
+	    this.setState({userName: this.state.user.displayName});
+	  }
   }
 
 	render() {
