@@ -6,12 +6,16 @@ class Category extends Component {
 		return (
 			<div className="w3-third w3-container w3-margin-bottom" key={this.props.key}>
 				<div className="w3-container w3-white">
-					<button type="button" class="btn btn-info btn-circle btn-xl" id="greenButton"><i class="fa fa-check"></i></button>
-					<button type="button" class="btn btn-info btn-circle btn-xl" id="yellowButton"><i class="fa fa-check"></i></button>
-					<button type="button" class="btn btn-info btn-circle btn-xl" id="redButton"><i class="fa fa-check"></i></button>
+					<button type="button" className="btn btn-info btn-circle btn-xl" id="greenButton"><i className="fa fa-check"></i></button>
+					<button type="button" className="btn btn-info btn-circle btn-xl" id="yellowButton"><i className="fa fa-check"></i></button>
+					<button type="button" className="btn btn-info btn-circle btn-xl" id="redButton"><i className="fa fa-check"></i></button>
 					<br/><br/>
 					<p><b>{this.props.title}</b></p>
 					<p>{this.props.text}</p>
+					<div className="form-group">
+			          <label htmlFor="exampleFormControlTextarea1">Comments</label>
+			          <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+			        </div>
 				</div>
 			</div>
 		);
