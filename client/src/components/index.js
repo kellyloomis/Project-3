@@ -31,7 +31,15 @@ import PhotoGrid from "./Grid/PhotoGrid.jsx";
 // // // Header
 // #############################
 
-import OurHeader from "./OurHeader/Header.jsx"
+import Header from "./Header/Header.jsx";
+import HeaderLinks from "./Header/HeaderLinks.jsx";
+import OurHeader from "./OurHeader/Header.jsx";
+
+// ##############################
+// // // Sidebar
+// #############################
+
+import Sidebar from "./Sidebar/Sidebar.jsx";
 
 // ##############################
 // // // Snackbar
@@ -82,7 +90,11 @@ export {
   ItemGrid,
   PhotoGrid,
   // Header
+  Header,
+  HeaderLinks,
   OurHeader,
+  // Sidebar
+  Sidebar,
   //Snackbar
   Snackbar,
   SnackbarContent,

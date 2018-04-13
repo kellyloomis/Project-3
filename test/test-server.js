@@ -277,6 +277,20 @@ describe('Employees', function() {
           		});
   		});
   });
+
+  // Test retrieving all Employee from within a specified date range
+  it('should retrieve ALL employee within date on /api/employee/:start/:end', function(done) {
+    let start = ("2018-04-01 00:00:00");
+    let end = ("2018-04-10 00:00:00");
+    chai.request(server)
+      .get('/api/employee/' + start + '/' + end)
+      .end(function(err, res) {
+        res.should.have.status(200);
+            res.should.be.json;
+            res.body.should.be.a("array");
+            done();
+      });
+  });
 }); // End Employee Test Cases
 
 /**

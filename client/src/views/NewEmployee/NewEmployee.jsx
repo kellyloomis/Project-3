@@ -74,7 +74,10 @@ class NewEmployee extends Component {
             goals: this.state.goals,
             EmployeeId: this.state.employeeId
           })
-            .then(res => console.log(res))
+            .then(res => {
+              console.log(res);
+              this.props.history.push("/");
+            })
             .catch(err => console.log(err));
         })
         .catch(err => console.log(err));

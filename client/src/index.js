@@ -4,17 +4,20 @@ import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
-import "./assets/css/dashboard.css";
+import Signup from "./views/Signup/Signup.jsx";
 
 import indexRoutes from "./routes/index.jsx";
+
+import "./assets/css/dashboard.css";
 
 const history = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={history}>
     <Switch>
-      {indexRoutes.map((prop) => {
-        return <Route path={prop.path} component={prop.component} />;
+    	<Route path="/signup" component={Signup} />
+      {indexRoutes.map((prop, key) => {
+        return <Route path={prop.path} component={prop.component}  key={key}/>;
       })}
     </Switch>
   </Router>,

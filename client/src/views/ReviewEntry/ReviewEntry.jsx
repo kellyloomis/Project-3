@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Category from "../../components/ReviewEntryPage/Category/Category.jsx";
-import Footer from "../../components/Common/Footer/Footer.jsx";
 import categories from "../../components/ReviewEntryPage/Category/categories.json";
 
 import "./ReviewEntry.css";
@@ -27,7 +26,6 @@ class ReviewEntry extends Component {
 				<div>
 					<button className="w3-btn w3-blue">Submit</button>
 				</div>
-				<Footer />
 			</div>
 		);
 	}

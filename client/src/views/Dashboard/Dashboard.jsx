@@ -15,8 +15,6 @@ import {
   StatsCard,
   ChartCard,
   TasksCard,
-  RegularCard,
-  Table,
   ItemGrid
 } from "./../../components";
 
@@ -33,31 +31,6 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Grid container>
-          <ItemGrid xs={12} sm={6} md={3}>
-            <StatsCard
-              icon={Store}
-              iconColor="green"
-              title="Revenue"
-              description="$34,245"
-              statIcon={DateRange}
-              statText="Last 24 Hours"
-            />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={12} md={6}>
-            <TasksCard />
-          </ItemGrid>
-          <ItemGrid xs={12} sm={6} md={3}>
-            <StatsCard
-              icon={Accessibility}
-              iconColor="blue"
-              title="Followers"
-              description="+245"
-              statIcon={Update}
-              statText="Just Updated"
-            />
-          </ItemGrid>
-        </Grid>
         <Grid container>
           <ItemGrid xs={12} sm={12} md={4}>
             <ChartCard
@@ -126,24 +99,30 @@ class Dashboard extends React.Component {
           </ItemGrid>
         </Grid>
         <Grid container>
-          <ItemGrid xs={12} sm={12} md={12}>
-            <RegularCard
-              headerColor="orange"
-              cardTitle="Employees Stats"
-              cardSubtitle="New employees on 7th April, 2018"
-              content={
-                <Table
-                  tableHeaderColor="warning"
-                  tableHead={["ID", "Name", "Salary", "Country"]}
-                  tableData={[
-                    ["1", "John Doe", "$36,738", "Niger"],
-                    ["2", "Jane Hope", "$23,789", "Curaçao"],
-                    ["3", "Han Solo", "$56,142", "Netherlands"],
-                    ["4", "Luke Skywalker", "$38,735", "Korea, South"]
-                  ]}
-                />
-              }
+          <ItemGrid xs={12} sm={6} md={6}>
+            <StatsCard
+              icon={Store}
+              iconColor="green"
+              title="Revenue"
+              description="$34,245"
+              statIcon={DateRange}
+              statText="Last 24 Hours"
             />
+          </ItemGrid>
+          <ItemGrid xs={12} sm={6} md={6}>
+            <StatsCard
+              icon={Accessibility}
+              iconColor="blue"
+              title="Followers"
+              description="+245"
+              statIcon={Update}
+              statText="Just Updated"
+            />
+          </ItemGrid>
+        </Grid>
+        <Grid container>
+          <ItemGrid xs={12} sm={12} md={12}>
+            <TasksCard />
           </ItemGrid>
         </Grid>
       </div>
