@@ -11,7 +11,7 @@ import {
   Paper,
   ClickAwayListener
 } from "material-ui";
-import { Person, Notifications, Dashboard, Search } from "material-ui-icons";
+import { Notifications, Dashboard, Search } from "material-ui-icons";
 
 import { CustomInput, IconButton as SearchButton } from "./../../components";
 
@@ -117,14 +117,6 @@ class HeaderLinks extends React.Component {
             </ClickAwayListener>
           </Popper>
         </Manager>
-        <IconButton
-          color="inherit"
-          aria-label="Person"
-          className={classes.buttonLink}
-        >
-          <Person className={classes.links} />
-
-        </IconButton>
       </div>
     );
   }

@@ -10,6 +10,11 @@ const appStyle = theme => ({
     top: "0",
     height: "100vh"
   },
+  speedDial: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 3,
+  },
   mainPanel: {
     [theme.breakpoints.up("md")]: {
       width: `100%`

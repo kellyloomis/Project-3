@@ -7,6 +7,11 @@ import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
 import { withStyles, Hidden } from "material-ui";
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
+import PowerSettingsNew from 'material-ui-icons/PowerSettingsNew';
+import Person from 'material-ui-icons/Person';
 
 import { Header, Sidebar } from "./../../components";
 
@@ -26,13 +31,21 @@ const switchRoutes = (
   </Switch>
 );
 
+const actions = [
+  { icon: <Person />, name: 'Profile' },
+  { icon: <PowerSettingsNew />, name: 'Logout', click: this.logout }
+];
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       user: null,
-      mobileOpen: false
+      mobileOpen: false,
+      open: false,
+      hidden: false
     }
+    this.logout = this.logout.bind(this);
   }
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -41,8 +54,7 @@ class App extends React.Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
-      } 
-      if(!this.state.user) {
+      } else {
         this.props.history.push("/signup");
       }
     });
@@ -53,12 +65,70 @@ class App extends React.Component {
   }
   componentDidUpdate() {
     this.refs.mainPanel.scrollTop = 0;
+  };
+
+  logout() {
+    console.log("Logging out");
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
   }
+
+  handleClick = () => {
+    this.setState({
+      open: !this.state.open,
+    });
+  };
+
+  handleOpen = () => {
+    if (!this.state.hidden) {
+      this.setState({
+        open: true,
+      });
+    }
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
 
   render() {
     const { classes, ...rest } = this.props;
+    const { hidden, open } = this.state;
+
+    let isTouch;
+    if (typeof document !== 'undefined') {
+      isTouch = 'ontouchstart' in document.documentElement;
+    }
     return (
       <div className={classes.wrapper}>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          hidden={hidden}
+          icon={<SpeedDialIcon />}
+          onBlur={this.handleClose}
+          onClick={this.handleClick}
+          onClose={this.handleClose}
+          onFocus={isTouch ? undefined : this.handleOpen}
+          onMouseEnter={isTouch ? undefined : this.handleOpen}
+          onMouseLeave={this.handleClose}
+          open={open}
+        >
+          <SpeedDialAction
+            key={"Logout"}
+            icon={<PowerSettingsNew />}
+            tooltipTitle={"Logout"}
+            onClick={this.logout}
+          />
+        </SpeedDial>
+
+
         <Hidden mdUp>
           <Sidebar
             routes={appRoutes}

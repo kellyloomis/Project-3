@@ -24,17 +24,12 @@ class Signup extends Component {
         this.setState({
           user
         });
-        this.props.history.push("/");
+        if(user) {
+          this.props.history.push("/");
+        }
       });
   };
-  componentWillMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-        this.props.history.push("/");
-      }
-    });
-  };
+
   render() {
     return (
       <div className="signup-page">
@@ -53,13 +48,13 @@ class Signup extends Component {
                       <div className="header header-primary text-center">
                         <h4>Sign Up</h4>
                         <div className="social-line">
-                          <Button href="#pablo" justIcon link>
+                          <Button justIcon link>
                             <i className="fa fa-facebook-square"></i>
                           </Button>
-                          <Button href="#pablo" justIcon link>
+                          <Button justIcon link>
                             <i className="fa fa-twitter"></i>
                           </Button>
-                          <Button href="#pablo" justIcon link onClick={this.login}>
+                          <Button justIcon link onClick={this.login}>
                             <i className="fa fa-google-plus"></i>
                           </Button>
                         </div>
