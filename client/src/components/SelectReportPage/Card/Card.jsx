@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Card.css"
-import cards from "./cards.json"
 
 class Card extends Component {
     render() {
