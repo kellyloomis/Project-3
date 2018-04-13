@@ -46,17 +46,9 @@ class App extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   componentDidMount() {
-    // let user = firebase.auth().currentUser;
     if(!this.state.user) {
       this.props.history.push("/signup");
     }
-    // auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.setState({ user });
-    //   } else {
-    //     this.props.history.push("/signup");
-    //   }
-    // });
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
