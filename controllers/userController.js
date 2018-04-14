@@ -14,6 +14,24 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findOne: function(req, res) {
+    console.log("QUERYING NOW");
+    console.log(req.body);
+    db.User
+      .findOrCreate({
+        where: {
+          firebaseId: req.body.uid
+        },
+        defaults: {
+          username: req.body.email,
+          password: req.body.uid,
+          email: req.body.email
+        }
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  }
+  ,
   create: function(req, res) {
     db.User
       .create(req.body)

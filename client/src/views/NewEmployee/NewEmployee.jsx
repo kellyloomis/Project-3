@@ -12,8 +12,8 @@ import {
 class NewEmployee extends Component {
   // Setting our component's initial state
   state = {
+    user: JSON.parse(sessionStorage.getItem("user")),
     companyName: "",
-    employeeIdNumber: "",
     email: "",
     firstName: "",
     lastName: "",
@@ -21,13 +21,22 @@ class NewEmployee extends Component {
     department: "",
     goals: "",
     userId: "",
-    employeeId: ""
+    employeeId: "",
+    firebaseId: ""
   };
 
-  //******************************* TODO *******************************
   // When the component mounts, load the current manager(User model) and save them to this.state.manager
   // Also save the User ID to this.state.userId
-  componentDidMount() {};
+  componentDidMount() {
+    console.log(this.state.user);
+    if(this.state.user) {
+      this.setState({
+        company: this.state.user.companyName || "",
+        manager: this.state.user.email,
+        userId: this.state.user.id
+      });
+    }
+  };
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -41,9 +50,7 @@ class NewEmployee extends Component {
   // Console.log for now but will eventually be a notification popup
   isValid = () => {
     if(this.state.firstName && this.state.lastName && 
-       this.state.companyName && this.state.employeeIdNumber &&
-       this.state.manager && this.state.department) 
-    {
+       this.state.companyName && this.state.manager && this.state.department) {
       return true;
     } else {
       console.log("Please complete all fields of the form.");
@@ -51,19 +58,17 @@ class NewEmployee extends Component {
   }
 
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
-  // THIS CURRENTLY ADDS TO USERID 2 FOR TEST PURPOSES
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.isValid()) {
       API.saveEmployee({
-        // companyName: this.state.companyName,
-        // employeeIdNumber: this.state.employeeIdNumber,
+        company: this.state.companyName,
         email: this.state.email,
         firstname: this.state.firstName,
         lastname: this.state.lastName,
-        // manager: this.state.manager,
-        // department: this.state.department,
-        UserId: 2
+        manager: this.state.manager,
+        department: this.state.department,
+        UserId: this.state.userId
       })
         .then(res => {
           this.setState({
@@ -95,7 +100,7 @@ class NewEmployee extends Component {
               content={
                 <div>
                   <Grid container>
-                    <ItemGrid xs={12} sm={12} md={5}>
+                    <ItemGrid xs={12} sm={12} md={7}>
                       <CustomInput
                         labelText="Company Name"
                         id="company-name"
@@ -107,19 +112,7 @@ class NewEmployee extends Component {
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={3}>
-                      <CustomInput
-                        labelText="Employee ID Number"
-                        id="employee-id-number"
-                        value={this.state.employeeIdNumber}
-                        onChange={this.handleInputChange}
-                        name="employeeIdNumber"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                      />
-                    </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={4}>
+                    <ItemGrid xs={12} sm={12} md={5}>
                       <CustomInput
                         labelText="Email address"
                         id="email-address"

@@ -15,7 +15,8 @@ describe('Users', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
     };
 
     // Test retrieving all Users
@@ -141,7 +142,8 @@ describe('Employees', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
 	}
 
 	// This newEmployee object will be used for testing of Create, Update, and Delete
@@ -303,7 +305,8 @@ describe('Reviews', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
 	}
 
 	// This will be our temporary Employee so that we can store a Review under this Employee
@@ -500,7 +503,8 @@ describe('Reviews', function() {
       'password': 'pass',
       'email': 'demo@email.com',
       'firstname': 'Java',
-      'lastname': 'Script'
+      'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
   }
 
   // This will be our temporary Employee so that we can store a Review under this Employee

@@ -1,10 +1,21 @@
 import axios from "axios";
 
 export default {
+  // Gets the user with the given firebase id
+  getUser: function(firebaseUser) {
+    console.log("getUser called");
+    console.log(firebaseUser);
+    return axios.post("/api/user/fid", firebaseUser);
+  },
+
   // Gets all employees
   getAllEmployee: function() {
     return axios.get("/api/employee");
   },
+  // Gets all employees from User
+  getAllEmployeeFromUser: function(userId) {
+    return axios.get("/api/employee/user/" + userId);
+  },  
   // Saves an employee to the database
   saveEmployee: function(employeeData) {
     return axios.post("/api/employee", employeeData);
