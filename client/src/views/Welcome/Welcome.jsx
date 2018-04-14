@@ -16,7 +16,7 @@ class Welcome extends Component {
 	state = {
 		user: JSON.parse(sessionStorage.getItem("user")),
 		employees: "",
-		data: null
+		data: []
 	};
 
 
@@ -56,7 +56,7 @@ class Welcome extends Component {
 				<OurHeader />
 				<Grid container>
 		          <ItemGrid xs={12} sm={12} md={12}>
-		          {this.state.data ?
+		          {this.state.data.length !== 0 ?
 		          	<RegularCard
 		              headerColor="orange"
 		              cardTitle="Employees Stats"
