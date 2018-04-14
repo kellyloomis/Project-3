@@ -74,10 +74,8 @@ class Signup extends Component {
   };
 
   customRegister() {
-    console.log(this.state);
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
-    console.log(email + " : " + password);
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(result => {
       console.log("CUSTOM REGISTER");
@@ -137,7 +135,6 @@ class Signup extends Component {
                           placeholder="Email..."
                           name="email"
                           value={this.state.email}
-                          onChange={this.handleInputChange}
                           formControlProps={{
                             fullWidth: true
                           }}
@@ -149,7 +146,6 @@ class Signup extends Component {
                           placeholder="Password..."
                           name="password"
                           value={this.state.password}
-                          onChange={this.handleInputChange}
                           formControlProps={{
                             fullWidth: true,
                             type: "password"

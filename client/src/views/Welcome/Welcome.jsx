@@ -64,7 +64,7 @@ class Welcome extends Component {
 		              content={
 		                <Table
 		                  tableHeaderColor="warning"
-		                  tableHead={["ID", "Name", "Salary", "Country"]}
+		                  tableHead={["ID", "Name", "Email", "Department"]}
 		                  tableData={this.state.data}
 		                />
 		              }

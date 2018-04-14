@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
 
 import { auth } from './../../firebase.js';
 
@@ -41,6 +41,7 @@ class App extends React.Component {
       hidden: false
     }
     this.logout = this.logout.bind(this);
+    this.profile = this.profile.bind(this);
   }
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -57,6 +58,10 @@ class App extends React.Component {
   }
   componentDidUpdate() {
     this.refs.mainPanel.scrollTop = 0;
+  };
+
+  profile() {
+    this.props.history.push("/profile");
   };
 
   logout() {
@@ -123,6 +128,7 @@ class App extends React.Component {
             key={"Profile"}
             icon={<Person />}
             tooltipTitle={"Profile"}
+            onClick={this.profile}
           />
         </SpeedDial>
 
