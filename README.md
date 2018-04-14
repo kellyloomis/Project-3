@@ -1,6 +1,6 @@
 # Peak Performance
 
-Our application allows managers to simply track their employee’s goals, measures and performance on a weekly basis.  Managers will utilize existing templates, with the option of customizing, to individually score each employee on a scale of: below expectations, meets expectations, exceeds expectations.  Managers will have a required text box for each question to briefly explain why the selected option/score was given.  
+Our application allows managers to simply track their employee’s goals and performance on a weekly basis.  Managers will utilize existing templates, with the option of customizing, to individually score each employee on a scale of: below expectations, meets expectations, exceeds expectations.  Managers will have a required text box for each question to briefly explain why the selected option/score was given.  
 
 ## Features
 
@@ -19,13 +19,9 @@ Clone repo
 git clone https://github.com/kellyloomis/Project-3.git
 cd Project-3
 yarn install
-cd client
-yarn install
-cd Project-3
-yarn build
 ```
 
-Update Sequelize in Server.js to force: true
+Update Sequelize in Server.js to {force: true} on initial run to create database; remove after for data persistence
 ```
 db.sequelize.sync({force: true}).then(function() {
     app.listen(PORT, function() {
