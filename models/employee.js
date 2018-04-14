@@ -23,10 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         isEmail: true
       }
-    },
-    firebaseId: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   });
 

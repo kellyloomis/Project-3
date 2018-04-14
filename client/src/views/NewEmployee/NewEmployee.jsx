@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Grid, InputLabel } from "material-ui";
 import API from "./../../api/API";
 
+import firebase from './../../firebase.js';
+
+
 import {
   RegularCard,
   Button,
@@ -12,6 +15,7 @@ import {
 class NewEmployee extends Component {
   // Setting our component's initial state
   state = {
+    user: firebase.auth().currentUser,
     companyName: "",
     employeeIdNumber: "",
     email: "",
@@ -21,13 +25,22 @@ class NewEmployee extends Component {
     department: "",
     goals: "",
     userId: "",
-    employeeId: ""
+    employeeId: "",
+    firebaseId: ""
   };
 
   //******************************* TODO *******************************
   // When the component mounts, load the current manager(User model) and save them to this.state.manager
   // Also save the User ID to this.state.userId
-  componentDidMount() {};
+  componentDidMount() {
+    if(this.state.user) {
+      console.log(this.state.user);
+      this.setState({
+        manager: this.state.user.displayName,
+        firebaseId: this.state.user.uid
+      });
+    }
+  };
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {

@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.42",
     "@material-ui/lab": "^1.0.0-alpha.1",
     "axios": "^0.16.2",
     "bootstrap": "3",

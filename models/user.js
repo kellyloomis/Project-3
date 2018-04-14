@@ -42,16 +42,18 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    // Giving the User model a firebaseId of type STRING
+    firebaseId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    // Giving the User model a companyName of type STRING
+    companyName: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
-
-  User.associate = function(models) {
-    // Associating User with Employee
-    // When a User is deleted, also delete any associated Employee
-    User.hasMany(models.Employee, {
-      onDelete: "cascade"
-    });
-  };
 
   return User;
 };

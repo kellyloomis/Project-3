@@ -15,7 +15,8 @@ describe('Users', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
     };
 
     // Test retrieving all Users
@@ -141,15 +142,15 @@ describe('Employees', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
 	}
 
 	// This newEmployee object will be used for testing of Create, Update, and Delete
 	let newEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com',
-      firebaseId: 'firebasedemo'
+    	'email': 'employee@mail.com'
     };
 
     // Create our User to store the new Employee
@@ -304,15 +305,15 @@ describe('Reviews', function() {
     	'password': 'pass',
     	'email': 'demo@email.com',
     	'firstname': 'Java',
-    	'lastname': 'Script'
+    	'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
 	}
 
 	// This will be our temporary Employee so that we can store a Review under this Employee
 	let demoEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com',
-      'firebaseId': 'firebasedemo'
+    	'email': 'employee@mail.com'
     };
 
 	// This newReview object will be used for testing of Create, Update, and Delete
@@ -502,15 +503,15 @@ describe('Reviews', function() {
       'password': 'pass',
       'email': 'demo@email.com',
       'firstname': 'Java',
-      'lastname': 'Script'
+      'lastname': 'Script',
+      'firebaseId': 'firebasedemo'
   }
 
   // This will be our temporary Employee so that we can store a Review under this Employee
   let demoEmployee = {
       'firstname': 'New',
       'lastname': 'Guy',
-      'email': 'employee@mail.com',
-      'firebaseId': 'firebasedemo'
+      'email': 'employee@mail.com'
     };
 
   // This newGoal object will be used for testing of Create, Update, and Delete
