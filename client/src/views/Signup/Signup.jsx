@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { auth, provider } from './../../firebase.js';
+import API from "./../../api/API";
 import {
   Grid, Row, Col,
 } from 'react-bootstrap';
@@ -17,6 +18,17 @@ class Signup extends Component {
     }
     this.login = this.login.bind(this);
   }
+
+  getUserId(firebaseUser) {
+    API.getUser(firebaseUser)
+      .then(res => {
+        console.log("API returns:");
+        console.log(res);
+        sessionStorage.setItem("user", JSON.stringify(res.data[0]));
+        this.props.history.push("/");
+      });
+  };
+
   login() {
     auth.signInWithPopup(provider) 
       .then((result) => {
@@ -25,7 +37,7 @@ class Signup extends Component {
           user
         });
         if(user) {
-          this.props.history.push("/");
+          this.getUserId(user);
         }
       });
   };

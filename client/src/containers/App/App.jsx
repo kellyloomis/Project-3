@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import firebase, { auth } from './../../firebase.js';
+import { auth } from './../../firebase.js';
 
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -35,7 +35,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: firebase.auth().currentUser,
+      user: sessionStorage.getItem("user"),
       mobileOpen: false,
       open: false,
       hidden: false
@@ -46,6 +46,7 @@ class App extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   componentDidMount() {
+    console.log(this.state.user);
     if(!this.state.user) {
       this.props.history.push("/signup");
     }
