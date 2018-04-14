@@ -1,6 +1,6 @@
 {
   "name": "mern",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Performance Review - Project 3",
   "main": "server.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "client": "node scripts/start-client.js",
     "start": "concurrently \"nodemon server.js\" \"npm run client\"",
     "build": "node scripts/build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd client && yarn install",
+    "postinstall": "yarn build"
   },
   "author": "",
   "license": "ISC",
