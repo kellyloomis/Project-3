@@ -8,7 +8,7 @@ class Header extends Component {
 	constructor() {
     super();
     this.state = {
-      user: firebase.auth().currentUser,
+      user: JSON.parse(sessionStorage.getItem("user")),
       userName: "User",
       mobileOpen: false
     }
@@ -16,8 +16,10 @@ class Header extends Component {
 
   componentDidMount() {
 	  if (this.state.user) {
-	    this.setState({userName: this.state.user.displayName});
-	  }
+			console.log("===================/n")
+			console.log(this.state.user)
+	    this.setState({userName: this.state.user.username});
+		}
   }
 
 	render() {
