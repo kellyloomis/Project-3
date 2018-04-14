@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import firebase from './../../firebase.js';
 
 import "./Header.css"
 
@@ -8,7 +7,7 @@ class Header extends Component {
 	constructor() {
     super();
     this.state = {
-      user: firebase.auth().currentUser,
+      user: JSON.parse(sessionStorage.getItem("user")),
       userName: "User",
       mobileOpen: false
     }
@@ -16,7 +15,7 @@ class Header extends Component {
 
   componentDidMount() {
 	  if (this.state.user) {
-	    this.setState({userName: this.state.user.displayName});
+	    this.setState({userName: this.state.user.username});
 	  }
   }
 

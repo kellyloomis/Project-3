@@ -16,7 +16,9 @@ function CustomInput({ ...props }) {
     success,
     value,
     onChange,
-    name
+    name,
+    type,
+    placeholder
   } = props;
 
   const labelClasses = cx({
@@ -56,6 +58,8 @@ function CustomInput({ ...props }) {
         onChange={onChange}
         value={value}
         name={name}
+        type={type}
+        placeholder={placeholder}
       />
       {error ? (
         <Clear className={classes.feedback + " " + classes.labelRootError} />

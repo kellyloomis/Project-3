@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import Particles from 'react-particles-js';
-import { auth, provider } from './../../firebase.js';
+import firebase, { auth, provider } from './../../firebase.js';
 import API from "./../../api/API";
 import {
   Grid, Row, Col,
 } from 'react-bootstrap';
 import Button from './../../components/Signup/elements/CustomButton/CustomButton';
-import Input from './../../components/Signup/elements/CustomInput/CustomInput';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Lock from '@material-ui/icons/Lock';
+
+import {
+  CustomInput
+} from "./../../components";
 
 import './../../assets/css/App.css';
 
@@ -26,9 +31,14 @@ class Signup extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      name: "",
+      password: "",
+      email: ""
     }
     this.login = this.login.bind(this);
+    this.customRegister = this.customRegister.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   getUserId(firebaseUser) {
@@ -41,6 +51,15 @@ class Signup extends Component {
       });
   };
 
+  // Handles updating component state when the user types into the input field
+  handleInputChange = event => {
+    console.log("changing");
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
   login() {
     auth.signInWithPopup(provider) 
       .then((result) => {
@@ -50,9 +69,30 @@ class Signup extends Component {
         });
         if(user) {
           this.getUserId(user);
-        }
+        };
       });
   };
+
+  customRegister() {
+    console.log(this.state);
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    console.log(email + " : " + password);
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(result => {
+      console.log("CUSTOM REGISTER");
+      const user = result;
+      this.setState({
+        user
+      });
+      if(user) {
+        this.getUserId(user);
+      };
+    })
+    .catch(function(error) {
+      console.log(error)
+    });
+  }
 
   render() {
     return (
@@ -90,24 +130,34 @@ class Signup extends Component {
                       </div>
                       <p className="text-divider">Or</p>
                       <div className="content">
-                        <Input
-                          type="text"
-                          placeholder="First Name..."
-                          addonIcon={<i className="fa fa-user"></i>}
-                        />
-                        <Input
+                        <CustomInput
+                          labelText="Email"
+                          id="email"
                           type="email"
                           placeholder="Email..."
-                          addonIcon={<i className="fa fa-envelope"></i>}
+                          name="email"
+                          value={this.state.email}
+                          onChange={this.handleInputChange}
+                          formControlProps={{
+                            fullWidth: true
+                          }}
                         />
-                        <Input
+                        <CustomInput
+                          labelText="Password"
+                          id="password"
                           type="password"
                           placeholder="Password..."
-                          addonIcon={<i className="fa fa-lock"></i>}
+                          name="password"
+                          value={this.state.password}
+                          onChange={this.handleInputChange}
+                          formControlProps={{
+                            fullWidth: true,
+                            type: "password"
+                          }}
                         />
                       </div>
                       <div className="footer text-center">
-                        <Button bsStyle="primary" bsSize="large" link>Get Started</Button>
+                        <Button onClick={this.customRegister} bsStyle="primary" bsSize="large" link>Get Started</Button>
                       </div>
                     </form>
                   </div>
