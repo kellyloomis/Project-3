@@ -6,6 +6,10 @@ router.route("/")
   .get(employeeController.findAll)
   .post(employeeController.create);
 
+// Matches with "/api/employee/user/:id"
+router.route("/user/:id")
+  .get(employeeController.findByUserId);
+
 // Matches with "/api/employee/:id"
 router.route("/:id")
   .get(employeeController.findById)

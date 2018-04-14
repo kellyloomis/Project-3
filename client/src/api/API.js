@@ -12,6 +12,10 @@ export default {
   getAllEmployee: function() {
     return axios.get("/api/employee");
   },
+  // Gets all employees from User
+  getAllEmployeeFromUser: function(userId) {
+    return axios.get("/api/employee/user/" + userId);
+  },  
   // Saves an employee to the database
   saveEmployee: function(employeeData) {
     return axios.post("/api/employee", employeeData);
