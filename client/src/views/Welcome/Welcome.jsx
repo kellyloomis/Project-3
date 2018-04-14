@@ -60,7 +60,7 @@ class Welcome extends Component {
 		          	<RegularCard
 		              headerColor="orange"
 		              cardTitle="Employees Stats"
-		              cardSubtitle="New employees on 7th April, 2018"
+		              cardSubtitle={"Updated as of: " + new Date().toLocaleDateString('en-US')}
 		              content={
 		                <Table
 		                  tableHeaderColor="warning"
