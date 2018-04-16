@@ -8,22 +8,26 @@ class Header extends Component {
     super();
     this.state = {
       user: JSON.parse(sessionStorage.getItem("user")),
-      userName: "User",
+      displayName: "User",
       mobileOpen: false
     }
   }
 
   componentDidMount() {
-	  if (this.state.user) {
-	    this.setState({userName: this.state.user.username});
+	if (this.state.user) {
+	  	if(this.state.user.firstname) {
+	  		this.setState({displayName: this.state.user.firstname})
+	  	} else {
+	    	this.setState({displayName: this.state.user.username});
 		}
+	}
   }
 
 	render() {
 		console.log(this);
 		return (
 			<header className="w3-panel w3-center w3-opacity">
-			  <h1 className="w3-xxlarge">Welcome {this.state.userName}!</h1>
+			  <h1 className="w3-xxlarge">Welcome {this.state.displayName}!</h1>
 			  <h1 className="w3-large">What Would You Like To Do?</h1>
 			  
 			  <div className="w3-padding-4">
