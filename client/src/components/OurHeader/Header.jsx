@@ -16,7 +16,7 @@ class Header extends Component {
   componentDidMount() {
 	  if (this.state.user) {
 	    this.setState({userName: this.state.user.username});
-	  }
+		}
   }
 
 	render() {

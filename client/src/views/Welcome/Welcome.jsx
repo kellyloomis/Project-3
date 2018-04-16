@@ -60,11 +60,15 @@ class Welcome extends Component {
 		          	<RegularCard
 		              headerColor="orange"
 		              cardTitle="Employees Stats"
-		              cardSubtitle="New employees on 7th April, 2018"
+		              cardSubtitle={"Updated as of: " + new Date().toLocaleDateString('en-US')}
 		              content={
 		                <Table
 		                  tableHeaderColor="warning"
+<<<<<<< HEAD
 		                  tableHead={["ID", "Name", "Email", "Department"]}
+=======
+		                  tableHead={["ID", "Name", "Manager", "Department"]}
+>>>>>>> d57c7f78e7b6fb08f05ab7f6e56540c780eb2bc1
 		                  tableData={this.state.data}
 		                />
 		              }
