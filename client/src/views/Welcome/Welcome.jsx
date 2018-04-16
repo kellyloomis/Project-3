@@ -48,7 +48,7 @@ class Welcome extends Component {
 			data: output
 		});
 		console.log(this.state.data);
-	}
+	};
 
 	render() {
 		return (

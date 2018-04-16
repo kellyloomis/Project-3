@@ -10,28 +10,34 @@ import {
   ItemGrid
 } from "./../../components";
 
-import avatar from "./../../assets/img/vader.jpg";
+import avatar from "./../../assets/img/trooper.png";
 
 class UserProfile extends Component {
 
   state = {
-    user: JSON.parse(sessionStorage.getItem("user")),
+    manager: "",
+    department: "",
     company: "",
-    username: "",
     email: "",
     firstname: "",
     lastname: ""
   }
 
   componentDidMount() {
-    if (this.state.user) {
-      this.setState({
-        username: this.state.user.username,
-        company: this.state.user.companyName || "",
-        email: this.state.user.email,
-        firstname: this.state.user.firstname || "",
-        lastname: this.state.user.lastname || ""
-      });
+    if(this.props.location.state.employeeIdSelected) {
+      console.log("Getting Employee ID: " + this.props.location.state.employeeIdSelected);
+      API.getEmployee(this.props.location.state.employeeIdSelected)
+        .then(res => {
+          console.log(res);
+          this.setState({
+            manager: res.data.manager || "",
+            department: res.data.department || "",
+            company: res.data.company || "",
+            email: res.data.email,
+            firstname: res.data.firstname || "",
+            lastname: res.data.lastname || ""
+          });
+        });
     }
   }
 
@@ -74,12 +80,12 @@ class UserProfile extends Component {
         <Grid container>
           <ItemGrid xs={12} sm={12} md={8}>
             <RegularCard
-              cardTitle="Edit Profile"
-              cardSubtitle="Complete your profile"
+              cardTitle="Edit Employee"
+              cardSubtitle="Complete your employee's profile"
               content={
                 <div>
                   <Grid container>
-                    <ItemGrid xs={12} sm={12} md={5}>
+                    <ItemGrid xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Company"
                         id="company"
@@ -91,25 +97,27 @@ class UserProfile extends Component {
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={3}>
+                  </Grid>
+                  <Grid container>
+                    <ItemGrid xs={12} sm={12} md={7}>
                       <CustomInput
-                        labelText="Username"
-                        id="username"
-                        value={this.state.username}
+                        labelText="Manager"
+                        id="manager"
+                        value={this.state.manager}
                         onChange={this.handleInputChange}
-                        name="username"
+                        name="manager"
                         formControlProps={{
                           fullWidth: true
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={4}>
+                    <ItemGrid xs={12} sm={12} md={5}>
                       <CustomInput
-                        labelText="Email address"
-                        id="email-address"
-                        value={this.state.email}
+                        labelText="Department"
+                        id="department"
+                        value={this.state.department}
                         onChange={this.handleInputChange}
-                        name="email"
+                        name="department"
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -117,7 +125,7 @@ class UserProfile extends Component {
                     </ItemGrid>
                   </Grid>
                   <Grid container>
-                    <ItemGrid xs={12} sm={12} md={6}>
+                    <ItemGrid xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="First Name"
                         id="first-name"
@@ -129,7 +137,7 @@ class UserProfile extends Component {
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={6}>
+                    <ItemGrid xs={12} sm={12} md={4}>
                       <CustomInput
                         labelText="Last Name"
                         id="last-name"
@@ -141,16 +149,28 @@ class UserProfile extends Component {
                         }}
                       />
                     </ItemGrid>
+                    <ItemGrid xs={12} sm={12} md={4}>
+                      <CustomInput
+                        labelText="Email"
+                        id="email"
+                        value={this.state.email}
+                        onChange={this.handleInputChange}
+                        name="email"
+                        formControlProps={{
+                          fullWidth: true
+                        }}
+                      />
+                    </ItemGrid>
                   </Grid>
                 </div>
               }
-              footer={<Button onClick={this.handleFormSubmit} color="primary">Update Profile</Button>}
+              footer={<Button onClick={this.handleFormSubmit} color="primary">Update Employee</Button>}
             />
           </ItemGrid>
           <ItemGrid xs={12} sm={12} md={4}>
             <ProfileCard
               avatar={avatar}
-              subtitle="Manager"
+              subtitle={this.state.department || "Department"}
               title={this.state.firstname && this.state.lastname ? this.state.firstname + " " + this.state.lastname : "Your Name"}
               description={this.state.company || "Company Name"}
             />
