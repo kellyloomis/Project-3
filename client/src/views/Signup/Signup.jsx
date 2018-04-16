@@ -111,13 +111,11 @@ class Signup extends Component {
                       </div>
                     </form>
                   </div>
-
                 </Col>
               </Row>
             </Grid>
           </div>
         </div>
-
       </div>
     );
   }
