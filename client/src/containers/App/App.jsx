@@ -11,7 +11,7 @@ import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import PowerSettingsNew from 'material-ui-icons/PowerSettingsNew';
-import Person from 'material-ui-icons/Person';
+import { Dashboard, Person } from 'material-ui-icons';
 
 import { Header, Sidebar } from "./../../components";
 
@@ -42,6 +42,7 @@ class App extends React.Component {
     }
     this.logout = this.logout.bind(this);
     this.profile = this.profile.bind(this);
+    this.reports = this.reports.bind(this);
   }
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
@@ -62,6 +63,10 @@ class App extends React.Component {
 
   profile() {
     this.props.history.push("/profile");
+  };
+
+  reports() {
+    this.props.history.push("/select-report");
   };
 
   logout() {
@@ -129,6 +134,12 @@ class App extends React.Component {
             icon={<Person />}
             tooltipTitle={"Profile"}
             onClick={this.profile}
+          />
+          <SpeedDialAction
+            key={"Reports"}
+            icon={<Dashboard />}
+            tooltipTitle={"Reports"}
+            onClick={this.reports}
           />
         </SpeedDial>
 
