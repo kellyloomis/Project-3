@@ -26,10 +26,10 @@ class UserProfile extends Component {
     if (this.state.user) {
       this.setState({
         username: this.state.user.username,
-        company: this.state.user.company,
+        company: this.state.user.company || "",
         email: this.state.user.email,
-        firstname: this.state.user.firstname,
-        lastname: this.state.user.lastname
+        firstname: this.state.user.firstname || "",
+        lastname: this.state.user.lastname || ""
       });
     }
   }
