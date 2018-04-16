@@ -41,7 +41,6 @@ class Header extends Component {
 			       <Link to="/add-employee" className="w3-bar-item w3-button">
 			       		Add New Employee
 			       </Link>
-			      <a href="{#}" className="w3-bar-item w3-button">View Employee Profile</a>
 			    </div>
 			  </div>
 			</header>

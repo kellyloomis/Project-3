@@ -1,12 +1,17 @@
 import React from "react";
 import {
   withStyles,
+  IconButton,
   Table,
   TableHead,
   TableRow,
   TableBody,
-  TableCell
+  TableCell,
+  Tooltip
 } from "material-ui";
+
+import { Edit, Close } from "material-ui-icons";
+
 
 import PropTypes from "prop-types";
 
@@ -30,6 +35,9 @@ function CustomTable({ ...props }) {
                   </TableCell>
                 );
               })}
+              <TableCell className={classes.tableCell + " " + classes.tableHeadCell}>
+                {"Available Actions"}
+              </TableCell>
             </TableRow>
           </TableHead>
         ) : null}
@@ -44,6 +52,42 @@ function CustomTable({ ...props }) {
                     </TableCell>
                   );
                 })}
+                <TableCell className={classes.tableActions}>
+                <Tooltip
+                  id="tooltip-top"
+                  title="View Employee"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <IconButton
+                    aria-label="Edit"
+                    className={classes.tableActionButton}
+                  >
+                    <Edit
+                      className={
+                        classes.tableActionButtonIcon + " " + classes.edit
+                      }
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip
+                  id="tooltip-top-start"
+                  title="Delete"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <IconButton
+                    aria-label="Close"
+                    className={classes.tableActionButton}
+                  >
+                    <Close
+                      className={
+                        classes.tableActionButtonIcon + " " + classes.close
+                      }
+                    />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
               </TableRow>
             );
           })}
