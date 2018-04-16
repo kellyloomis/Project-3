@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid } from "material-ui";
+import API from "./../../api/API";
 
 import {
   ProfileCard,
@@ -26,7 +27,7 @@ class UserProfile extends Component {
     if (this.state.user) {
       this.setState({
         username: this.state.user.username,
-        company: this.state.user.company || "",
+        company: this.state.user.companyName || "",
         email: this.state.user.email,
         firstname: this.state.user.firstname || "",
         lastname: this.state.user.lastname || ""
@@ -40,6 +41,31 @@ class UserProfile extends Component {
     this.setState({
       [name]: value
     });
+  };
+
+  // When the form is submitted, use the API.updateUser method to save the new User data
+  handleFormSubmit = event => {
+    event.preventDefault();
+      API.updateUser(this.state.user.id, {
+        username: this.state.username,
+        companyName: this.state.company,
+        email: this.state.email,
+        firstname: this.state.firstname,
+        lastname: this.state.lastname
+      })
+        .then(res => {
+          console.log(res);
+          // We update the user held in session storage
+          API.getUser({uid:this.state.user.firebaseId})
+            .then(res => {
+              console.log("API returns:");
+              console.log(res);
+              sessionStorage.setItem("user", JSON.stringify(res.data[0]));
+              this.props.history.push("/");
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
   };
 
   render() {
@@ -118,7 +144,7 @@ class UserProfile extends Component {
                   </Grid>
                 </div>
               }
-              footer={<Button color="primary">Update Profile</Button>}
+              footer={<Button onClick={this.handleFormSubmit} color="primary">Update Profile</Button>}
             />
           </ItemGrid>
           <ItemGrid xs={12} sm={12} md={4}>
