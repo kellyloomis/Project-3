@@ -6,8 +6,6 @@ import {
   Grid, Row, Col,
 } from 'react-bootstrap';
 import Button from './../../components/Signup/elements/CustomButton/CustomButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Lock from '@material-ui/icons/Lock';
 
 import {
   CustomInput
