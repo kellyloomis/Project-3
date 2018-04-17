@@ -26,6 +26,7 @@ class UserProfile extends Component {
   componentDidMount() {
     if(this.props.location.state.employeeIdSelected) {
       console.log("Getting Employee ID: " + this.props.location.state.employeeIdSelected);
+      console.log(this.state);
       API.getEmployee(this.props.location.state.employeeIdSelected)
         .then(res => {
           console.log(res);

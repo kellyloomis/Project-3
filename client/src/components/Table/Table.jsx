@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'
 
+import API from "./../../api/API";
+
 import {
   withStyles,
   IconButton,
@@ -21,8 +23,13 @@ import tableStyle from "./../../variables/styles/tableStyle";
 
 class CustomTable extends Component {
   
-  handleEdit(obj) {
-    console.log(obj);
+  delete(obj) {
+    let employeeId = obj[0];
+    API.deleteEmployee(employeeId)
+      .then(res => {
+        console.log("Delete successful");
+        console.log(res);
+      });
   }
 
   render() {
@@ -92,6 +99,7 @@ class CustomTable extends Component {
                     <IconButton
                       aria-label="Close"
                       className={classes.tableActionButton}
+                      onClick={() => this.delete(prop)}
                     >
                       <Close
                         className={
