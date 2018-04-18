@@ -15,6 +15,7 @@ import avatar from "./../../assets/img/trooper.png";
 class UserProfile extends Component {
 
   state = {
+    user: JSON.parse(sessionStorage.getItem("user")),
     manager: "",
     department: "",
     company: "",
@@ -26,7 +27,6 @@ class UserProfile extends Component {
   componentDidMount() {
     if(this.props.location.state.employeeIdSelected) {
       console.log("Getting Employee ID: " + this.props.location.state.employeeIdSelected);
-      console.log(this.state);
       API.getEmployee(this.props.location.state.employeeIdSelected)
         .then(res => {
           console.log(res);
@@ -53,24 +53,17 @@ class UserProfile extends Component {
   // When the form is submitted, use the API.updateUser method to save the new User data
   handleFormSubmit = event => {
     event.preventDefault();
-      API.updateUser(this.state.user.id, {
-        username: this.state.username,
-        companyName: this.state.company,
+      API.updateEmployee(this.props.location.state.employeeIdSelected, {
+        manager: this.state.manager,
+        company: this.state.company,
+        department: this.state.department,
         email: this.state.email,
         firstname: this.state.firstname,
         lastname: this.state.lastname
       })
         .then(res => {
           console.log(res);
-          // We update the user held in session storage
-          API.getUser({uid:this.state.user.firebaseId})
-            .then(res => {
-              console.log("API returns:");
-              console.log(res);
-              sessionStorage.setItem("user", JSON.stringify(res.data[0]));
-              this.props.history.push("/");
-            })
-            .catch(err => console.log(err));
+          this.props.history.push("/");
         })
         .catch(err => console.log(err));
   };
