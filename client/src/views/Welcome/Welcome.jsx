@@ -53,7 +53,9 @@ class Welcome extends Component {
 	render() {
 		return (
 			<div className="w3-content">
-				<OurHeader />
+				<OurHeader 
+					employees={this.state.employees}
+				/>
 				<Grid container>
 		          <ItemGrid xs={12} sm={12} md={12}>
 		          {this.state.data.length !== 0 ?
