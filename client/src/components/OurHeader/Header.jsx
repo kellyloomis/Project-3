@@ -25,6 +25,7 @@ class Header extends Component {
 
 	render() {
 		console.log(this);
+		console.log("Employees: ", this.props.employees);
 		return (
 			<header className="w3-panel w3-center w3-opacity">
 			  <h1 className="w3-xxlarge">Welcome {this.state.displayName}!</h1>
@@ -32,9 +33,10 @@ class Header extends Component {
 			  
 			  <div className="w3-padding-4">
 			    <div className="w3-bar">
-			      <Link to="/review-entry" className="w3-bar-item w3-button">
-			    		Enter Review
-			      </Link>
+			      
+			      <Link to={{ pathname: '/review-entry', state: { employees: this.props.employees} }} className="w3-bar-item w3-button">
+			       		Enter Review
+			       </Link>
 			      <Link to="/select-report" className="w3-bar-item w3-button">
 			       		Run Reports
 			       </Link>
