@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from 'react-router-dom';
 import classNames from "classnames";
 import { Manager, Target, Popper } from "react-popper";
 import {
@@ -11,7 +10,7 @@ import {
   Paper,
   ClickAwayListener
 } from "material-ui";
-import { Notifications, Dashboard, Search } from "material-ui-icons";
+import { Notifications, Search } from "material-ui-icons";
 
 import { CustomInput, IconButton as SearchButton } from "./../../components";
 
@@ -51,16 +50,6 @@ class HeaderLinks extends React.Component {
         >
           <Search className={classes.searchIcon} />
         </SearchButton>
-        <IconButton
-          component={Link}
-          to="/select-report"
-          color="inherit"
-          aria-label="Dashboard"
-          className={classes.buttonLink}
-        >
-          <Dashboard className={classes.links} />
-        
-        </IconButton>
         <Manager style={{ display: "inline-block" }}>
           <Target>
             <IconButton

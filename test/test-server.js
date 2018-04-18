@@ -150,7 +150,8 @@ describe('Employees', function() {
 	let newEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com'
+    	'email': 'employee@mail.com',
+      'manager': "Java"
     };
 
     // Create our User to store the new Employee
@@ -313,7 +314,8 @@ describe('Reviews', function() {
 	let demoEmployee = {
     	'firstname': 'New',
     	'lastname': 'Guy',
-    	'email': 'employee@mail.com'
+    	'email': 'employee@mail.com',
+      'manager': "Java"
     };
 
 	// This newReview object will be used for testing of Create, Update, and Delete
@@ -496,7 +498,7 @@ describe('Reviews', function() {
 /**
 * Test Cases for Goal endpoints
 **/
-describe('Reviews', function() {
+describe('Goal', function() {
   // This will be our temporary User so that we can store an Employee under this User
   let demoUser = {
     'username': 'demo',
@@ -511,7 +513,8 @@ describe('Reviews', function() {
   let demoEmployee = {
       'firstname': 'New',
       'lastname': 'Guy',
-      'email': 'employee@mail.com'
+      'email': 'employee@mail.com',
+      'manager': "Java"
     };
 
   // This newGoal object will be used for testing of Create, Update, and Delete

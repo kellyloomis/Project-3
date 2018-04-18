@@ -32,15 +32,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Review.associate = function(models) {
-    // We're saying that a Review should belong to an Employee
-    // A Review can't be created without an Employee due to the foreign key constraint
-    Review.belongsTo(models.Employee, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Review.associate = function(models) {
+  //   // We're saying that a Review should belong to an Employee
+  //   // A Review can't be created without an Employee due to the foreign key constraint
+  //   Review.belongsTo(models.Employee, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   return Review;
 };

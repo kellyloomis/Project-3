@@ -12,15 +12,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Goal.associate = function(models) {
-    // We're saying that a Goal should belong to an Employee
-    // A Goal can't be created without an Employee due to the foreign key constraint
-    Goal.belongsTo(models.Employee, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Goal.associate = function(models) {
+  //   // We're saying that a Goal should belong to an Employee
+  //   // A Goal can't be created without an Employee due to the foreign key constraint
+  //   Goal.belongsTo(models.Employee, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   return Goal;
 };

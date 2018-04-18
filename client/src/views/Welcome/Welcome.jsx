@@ -48,7 +48,7 @@ class Welcome extends Component {
 			data: output
 		});
 		console.log(this.state.data);
-	}
+	};
 
 	render() {
 		return (
@@ -64,7 +64,7 @@ class Welcome extends Component {
 		              content={
 		                <Table
 		                  tableHeaderColor="warning"
-		                  tableHead={["ID", "Name", "Manager", "Department"]}
+		                  tableHead={["ID", "Name", "Email", "Department"]}
 		                  tableData={this.state.data}
 		                />
 		              }

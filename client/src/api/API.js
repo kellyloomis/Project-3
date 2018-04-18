@@ -7,6 +7,10 @@ export default {
     console.log(firebaseUser);
     return axios.post("/api/user/fid", firebaseUser);
   },
+  // Updates a User to the database
+  updateUser: function(id, userData) {
+    return axios.post("/api/user/" + id, userData);
+  },
 
   // Gets all employees
   getAllEmployee: function() {

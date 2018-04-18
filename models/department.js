@@ -7,15 +7,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Department.associate = function(models) {
-    // We're saying that a Department should belong to a User
-    // A Department can't be created without a User due to the foreign key constraint
-    Department.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Department.associate = function(models) {
+  //   // We're saying that a Department should belong to a User
+  //   // A Department can't be created without a User due to the foreign key constraint
+  //   Department.belongsTo(models.User, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
 
   return Department;
 };
