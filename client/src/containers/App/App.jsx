@@ -50,7 +50,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log(this.state.user);
     if(!this.state.user) {
-      this.props.history.push("/signup");
+      this.props.history.push("/landing");
     }
     if(navigator.platform.indexOf('Win') > -1){
       // eslint-disable-next-line

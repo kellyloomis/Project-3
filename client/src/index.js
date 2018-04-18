@@ -5,6 +5,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 
 import Signup from "./views/Signup/Signup.jsx";
+import Landing from "./views/Landing/Landing.jsx";
 
 import indexRoutes from "./routes/index.jsx";
 
@@ -16,6 +17,7 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
     	<Route path="/signup" component={Signup} />
+    	<Route path="/landing" component={Landing} />
       {indexRoutes.map((prop, key) => {
         return <Route path={prop.path} component={prop.component}  key={key}/>;
       })}
