@@ -28,7 +28,8 @@ class CustomTable extends Component {
     API.deleteEmployee(employeeId)
       .then(res => {
         console.log("Delete successful");
-        console.log(res);
+        console.log(this.props);
+        //this.props.history.push("/");
       });
   }
 
@@ -100,6 +101,8 @@ class CustomTable extends Component {
                       aria-label="Close"
                       className={classes.tableActionButton}
                       onClick={() => this.delete(prop)}
+                      component={Link} 
+                      to="/"
                     >
                       <Close
                         className={
