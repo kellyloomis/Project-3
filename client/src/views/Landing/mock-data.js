@@ -43,7 +43,7 @@ export const team = [
     }
   },
   {
-    id: 3,
+    id: 4,
     img: team4,
     name: 'Kylie Jenner',
     role: 'Role Here',

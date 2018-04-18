@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { Button, Navbar, NavItem, Nav } from 'react-bootstrap';
 
-import logo from './../../img/reactlogo.png';
-
-import './../../helpers/BootstrapStyles';
-import 'bootstrap/dist/css/bootstrap.css';
-import './../../css/App.css';
-import './../../css/demo.css';
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -41,15 +34,13 @@ class Header extends Component {
     });
 
     return (
-      <Navbar bsStyle="default" fixedTop className={navbarStyles}>
+      <Navbar bsStyle="default" fixedTop className={navbarStyles} style={{padding: '0'}}>
         <Navbar.Header>
           <Navbar.Toggle />
           <a href="/">
-            <div className="logo-container">
-              <div className="logo">
-                  <img src={logo} alt="Logo" />
-              </div>
-            </div>
+          <Navbar.Brand>
+            <p style={{color: '#fff'}}>Peak Performance</p>
+          </Navbar.Brand> 
           </a>
         </Navbar.Header>
         <Navbar.Collapse>

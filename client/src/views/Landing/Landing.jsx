@@ -12,8 +12,7 @@ import Profile from './components/Profile/Profile';
 
 import ImageHeader from './ImageHeader';
 
-import './helpers/BootstrapStyles';
-import 'bootstrap/dist/css/bootstrap.css';
+import './../../assets/css/bootstrap.css';
 import './css/App.css';
 import './css/demo.css';
 
@@ -84,7 +83,7 @@ class Landing extends Component {
                   <Row>
                     {_map(team, item => {
                       return (
-                        <Col md={6}>
+                        <Col key={item.id} md={6}>
                           <Profile
                             img={item.img}
                             imgSize={170}
