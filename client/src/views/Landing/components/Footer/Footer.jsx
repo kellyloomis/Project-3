@@ -12,10 +12,10 @@ class Footer extends Component {
                 <a href="/">Peak Performance</a>
               </li>
               <li>
-                <a href="#">About Us</a>
+                <a href="/">About Us</a>
               </li>
               <li>
-                <a href="#">Licenses</a>
+                <a href="/">Licenses</a>
               </li>
             </ul>
           </nav>

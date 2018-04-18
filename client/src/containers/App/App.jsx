@@ -18,6 +18,8 @@ import { Header, Sidebar } from "./../../components";
 import appRoutes from "./../../routes/app.jsx";
 
 import appStyle from "./../../variables/styles/appStyle.jsx";
+// import "./../../assets/css/bootstrap.css";
+
 
 import logo from "./../../assets/img/reactlogo.png";
 
