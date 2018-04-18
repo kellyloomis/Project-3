@@ -41,7 +41,7 @@ class ReviewEntry extends Component {
 				  <button className="w3-button w3-blue">Select Employee</button>
 				  <div className="w3-dropdown-content w3-bar-block w3-border">
 				  	
-			  		{employees.employees.map((item, index) => (
+			  		{employees && employees.employees.map((item, index) => (
 						<button className="w3-block w3-white w3-border-color-white" onClick={this.handleSelectEmployee.bind(this, item.id)} key={item.id.toString()} value={item.id}>
 							{item.firstname + " " + item.lastname}
 						</button>
