@@ -204,6 +204,7 @@ class TasksCard extends React.Component {
                 checkedIndexes={this.state.achieveIndex}
                 tasksIndexes={this.state.achieveIndex}
                 tasks={this.state.achieved}
+                taskUpdate={this.updateTaskCard}
                 ids={this.state.achievedIds}
                 disable={true}
               />

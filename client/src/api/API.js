@@ -67,5 +67,9 @@ export default {
   // Saves an achieved goal to the database
   saveAchieved: function(achievedData) {
     return axios.post("/api/achieved", achievedData);
+  },
+  // Deletes the achieved goal with the given id
+  deleteAchieved: function(id) {
+    return axios.delete("/api/achieved/" + id);
   }
 };

@@ -37,21 +37,6 @@ class Tasks extends React.Component {
     });
   };
   handleToggle = value => () => {
-    // const { checked } = this.state;
-    // const currentIndex = checked.indexOf(value);
-    // const newChecked = [...checked];
-
-    // if (currentIndex === -1) {
-    //   newChecked.push(value);
-    // } else {
-    //   newChecked.splice(currentIndex, 1);
-    // }
-
-    // this.setState({
-    //   checked: newChecked
-    // });
-    // console.log(this.state);
-
     let id = this.props.ids[value];
     console.log("Toggling goal id: " + id);
     API.saveAchieved({
@@ -62,7 +47,7 @@ class Tasks extends React.Component {
       API.deleteGoal(id)
         .then(res => {
           this.props.taskUpdate();
-        })
+        });
     });
   };
   handleEdit = value => () => {
@@ -90,8 +75,19 @@ class Tasks extends React.Component {
         });
     }
   };
-  componentDidMount() {
-    console.log(this.state);
+  handleDelete = value => () => {
+    let id = this.props.ids[value];
+    if(this.props.disable) {
+      API.deleteAchieved(id)
+        .then(res => {
+          this.props.taskUpdate();
+        })
+    } else {
+      API.deleteGoal(id)
+        .then(res => {
+          this.props.taskUpdate();
+        })
+    }
   }
   render() {
     const { classes, tasksIndexes, tasks, disable } = this.props;
@@ -127,7 +123,7 @@ class Tasks extends React.Component {
                         <InputAdornment position="end">
                           <IconButton
                             aria-label="Toggle password visibility"
-                             onClick={this.handleChangeGoal}
+                            onClick={this.handleChangeGoal}
                           >
                             <Done />
                           </IconButton>
@@ -138,7 +134,8 @@ class Tasks extends React.Component {
                   : tasks[value]}
               </TableCell>
               <TableCell className={classes.tableActions}>
-                <Tooltip
+                {disable ? "" : 
+                  <Tooltip
                   id="tooltip-top"
                   title="Edit"
                   placement="top"
@@ -156,6 +153,8 @@ class Tasks extends React.Component {
                     />
                   </IconButton>
                 </Tooltip>
+                }
+                
                 <Tooltip
                   id="tooltip-top-start"
                   title="Remove"
@@ -165,6 +164,7 @@ class Tasks extends React.Component {
                   <IconButton
                     aria-label="Close"
                     className={classes.tableActionButton}
+                    onClick={this.handleDelete(value)}
                   >
                     <Close
                       className={
