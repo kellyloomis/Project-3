@@ -37,20 +37,33 @@ class Tasks extends React.Component {
     });
   };
   handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+    // const { checked } = this.state;
+    // const currentIndex = checked.indexOf(value);
+    // const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+    // if (currentIndex === -1) {
+    //   newChecked.push(value);
+    // } else {
+    //   newChecked.splice(currentIndex, 1);
+    // }
 
-    this.setState({
-      checked: newChecked
+    // this.setState({
+    //   checked: newChecked
+    // });
+    // console.log(this.state);
+
+    let id = this.props.ids[value];
+    console.log("Toggling goal id: " + id);
+    API.saveAchieved({
+      description: this.props.tasks[value],
+      EmployeeId: this.props.employee
+    })
+    .then(res => {
+      API.deleteGoal(id)
+        .then(res => {
+          this.props.taskUpdate();
+        })
     });
-    console.log(this.state);
   };
   handleEdit = value => () => {
     let id = this.props.ids[value];

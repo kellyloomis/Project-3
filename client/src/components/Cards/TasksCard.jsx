@@ -194,6 +194,7 @@ class TasksCard extends React.Component {
                 tasks={this.state.goals}
                 ids={this.state.goalIds}
                 taskUpdate={this.updateTaskCard}
+                employee={this.state.employeeId}
               />
             </Typography>
           )}
