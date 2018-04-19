@@ -36,14 +36,11 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findWithin: function(req, res) {
+  getEmployeeGoals: function(req, res) {
     db.Goal
       .findAll({
         where: {
-          UserId: req.params.id,
-          from: {
-            $between: [req.params.start, req.params.end]
-          }
+          EmployeeId: req.params.id,
         }
       })
       .then(dbModel => res.json(dbModel))

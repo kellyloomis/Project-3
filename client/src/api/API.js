@@ -38,7 +38,7 @@ export default {
   },
   // Gets all Goals by Employee
   getEmployeeGoals: function(id) {
-    return axios.get("/api/employee/goals/" + id);
+    return axios.get("/api/goal/employee/" + id);
   },
 
   // Gets all goals

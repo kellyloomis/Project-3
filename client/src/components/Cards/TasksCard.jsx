@@ -27,6 +27,7 @@ class TasksCard extends React.Component {
       value: 0,
       employeeId: props.employee,
       goals: [],
+      goalIndex: [],
       achieved: []
     };
 
@@ -34,7 +35,21 @@ class TasksCard extends React.Component {
       API.getEmployeeGoals(this.state.employeeId)
         .then(res => {
           console.log("Got Goals!");
-          console.log(res);
+          let goalArray = res.data.map(goal => {
+            return goal.goals;
+          });
+          let goalIndexes = [];
+          for(let i = 0; i < goalArray.length; i++) {
+            goalIndexes.push(i);
+          }
+          console.log("INDEX");
+          console.log(goalIndexes);
+          console.log("ARRAY");
+          console.log(goalArray);
+          this.setState({
+            goals: goalArray,
+            goalIndex: goalIndexes
+          });
         });
     }
   }
@@ -93,8 +108,8 @@ class TasksCard extends React.Component {
             <Typography component="div">
               <Tasks
                 checkedIndexes={[]}
-                tasksIndexes={[0, 1]}
-                tasks={goals}
+                tasksIndexes={this.state.goalIndex}
+                tasks={this.state.goals}
               />
             </Typography>
           )}

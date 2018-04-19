@@ -6,6 +6,9 @@ router.route("/")
   .get(goalController.findAll)
   .post(goalController.create);
 
+ router.route("/employee/:id")
+ 	.get(goalController.getEmployeeGoals);
+
 // Matches with "/api/goal/:id"
 router
   .route("/:id")
