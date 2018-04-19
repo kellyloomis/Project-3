@@ -26,6 +26,7 @@ class TasksCard extends React.Component {
     this.state = {
       value: 0,
       employeeId: props.employee,
+      goalCount: props.goalCount,
       goals: [],
       goalIndex: [],
       goalIds: [],
@@ -84,6 +85,16 @@ class TasksCard extends React.Component {
           });
         });
     }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    console.log("NEXT");
+    console.log(nextProps);
+    console.log("THIS");
+    console.log(this.props);
+    if(this.props.goalCount !== nextProps.goalCount) {
+      this.updateTaskCard();
+    }
   }
 
   handleChange = (event, value) => {
@@ -140,7 +151,7 @@ class TasksCard extends React.Component {
           });
         });
     }
-  }
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -151,7 +162,7 @@ class TasksCard extends React.Component {
             title: classes.cardTitle,
             content: classes.cardHeaderContent
           }}
-          title="Tasks:"
+          title="Goals:"
           action={
             <Tabs
               classes={{
@@ -170,7 +181,7 @@ class TasksCard extends React.Component {
                   rootInheritSelected: classes.rootInheritSelected
                 }}
                 icon={<Code className={classes.tabIcon} />}
-                label={"Goals"}
+                label={"Current"}
               />
               <Tab
                 classes={{

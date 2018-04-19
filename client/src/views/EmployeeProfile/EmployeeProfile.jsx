@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Grid } from "material-ui";
+import { Card, CardContent, FormControl, Grid, IconButton, Input, InputAdornment, InputLabel } from "material-ui";
+import { Done } from "material-ui-icons";
+
 import API from "./../../api/API";
 
 import {
@@ -23,8 +25,10 @@ class EmployeeProfile extends Component {
     email: "",
     firstname: "",
     lastname: "",
-    goals: ""
-  }
+    goals: "",
+    newGoals: 0,
+    newGoalCount: 0
+  };
 
   componentDidMount() {
     if(this.props.location.state.employeeIdSelected) {
@@ -42,6 +46,26 @@ class EmployeeProfile extends Component {
           });
         });
     }
+  };
+
+  addGoal = () => {
+    this.setState({
+      newGoals: this.state.newGoals + 1
+    });
+  };
+
+  handleAddNewGoal = value => () => {
+    let selected = document.getElementById("goal-textbox" + value);
+    API.saveGoal({
+      goals: selected.value,
+      EmployeeId: this.props.location.state.employeeIdSelected
+    })
+    .then(res => {
+      document.getElementById("newGoalGrid" + value).innerHTML = "";
+      this.setState({
+        newGoalCount: this.state.newGoalCount + 1
+      });
+    });
   }
 
   // Handles updating component state when the user types into the input field
@@ -71,6 +95,38 @@ class EmployeeProfile extends Component {
   };
 
   render() {
+    let goalCards = [];
+    for(let i = 0; i < this.state.newGoals; i++) {
+      goalCards.push(
+          <Grid container id={"newGoalGrid" + i} key={i}>
+          <ItemGrid xs={12} sm={12} md={12}>
+            <Card>
+              <CardContent>
+                <FormControl fullWidth={true}>
+                    <InputLabel htmlFor="goal-textbox">New Goal</InputLabel>
+                    <Input
+                      id={"goal-textbox" + i}
+                      type={'text'}
+                      name="currentGoal"
+                      fullWidth={true}
+                      autoFocus={true}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="Save new goal"
+                            onClick={this.handleAddNewGoal(i)}
+                          >
+                            <Done />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+              </CardContent>
+            </Card>
+          </ItemGrid>
+        </Grid>
+        );}
     return (
       <div>
         <Grid container>
@@ -160,7 +216,8 @@ class EmployeeProfile extends Component {
                   </Grid>
                 </div>
               }
-              footer={<Button onClick={this.handleFormSubmit} color="primary">Update Employee</Button>}
+              footer={[<Button key={1} onClick={this.handleFormSubmit} color="primary">Update Employee</Button>, 
+              <Button key={2} onClick={this.addGoal} color="warning">Add Goal</Button>]}
             />
           </ItemGrid>
           <ItemGrid xs={12} sm={12} md={4}>
@@ -174,9 +231,10 @@ class EmployeeProfile extends Component {
         </Grid>
         <Grid container>
           <ItemGrid xs={12} sm={12} md={12}>
-            <TasksCard employee={this.props.location.state.employeeIdSelected}/>
+            <TasksCard goalCount={this.state.newGoalCount} employee={this.props.location.state.employeeIdSelected}/>
           </ItemGrid>
         </Grid>
+        {goalCards}
       </div>
     );
   }
