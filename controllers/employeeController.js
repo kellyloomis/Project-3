@@ -57,5 +57,15 @@ module.exports = {
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  getGoals: function(req, res) {
+    db.Employee
+      .getGoals({
+        where: {
+          EmployeeId: req.params.id
+        }
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };

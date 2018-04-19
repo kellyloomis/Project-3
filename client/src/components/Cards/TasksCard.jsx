@@ -1,4 +1,5 @@
 import React from "react";
+import API from "./../../api/API";
 
 import {
   withStyles,
@@ -18,9 +19,26 @@ import { goals, achieved } from "./../../variables/general";
 import tasksCardStyle from "./../../variables/styles/tasksCardStyle";
 
 class TasksCard extends React.Component {
-  state = {
-    value: 0
-  };
+  constructor(props) {
+    super();
+    console.log("TASKS");
+    console.log(props);
+    this.state = {
+      value: 0,
+      employeeId: props.employee,
+      goals: [],
+      achieved: []
+    };
+
+    if(this.state.employeeId) {
+      API.getEmployeeGoals(this.state.employeeId)
+        .then(res => {
+          console.log("Got Goals!");
+          console.log(res);
+        });
+    }
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };

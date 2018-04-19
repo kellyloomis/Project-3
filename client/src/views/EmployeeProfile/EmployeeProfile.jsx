@@ -13,7 +13,7 @@ import {
 
 import avatar from "./../../assets/img/trooper.png";
 
-class UserProfile extends Component {
+class EmployeeProfile extends Component {
 
   state = {
     user: JSON.parse(sessionStorage.getItem("user")),
@@ -22,7 +22,8 @@ class UserProfile extends Component {
     company: "",
     email: "",
     firstname: "",
-    lastname: ""
+    lastname: "",
+    goals: ""
   }
 
   componentDidMount() {
@@ -173,7 +174,7 @@ class UserProfile extends Component {
         </Grid>
         <Grid container>
           <ItemGrid xs={12} sm={12} md={12}>
-            <TasksCard />
+            <TasksCard employee={this.props.location.state.employeeIdSelected}/>
           </ItemGrid>
         </Grid>
       </div>
@@ -181,4 +182,4 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile;
+export default EmployeeProfile;

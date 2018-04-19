@@ -10,6 +10,10 @@ router.route("/")
 router.route("/user/:id")
   .get(employeeController.findByUserId);
 
+// Matches with "/api/employee/goals/:id"
+router.route("/goals/:id")
+  .get(employeeController.getGoals);
+
 // Matches with "/api/employee/:id"
 router.route("/:id")
   .get(employeeController.findById)

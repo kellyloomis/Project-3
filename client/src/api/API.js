@@ -36,6 +36,10 @@ export default {
   deleteEmployee: function(id) {
     return axios.delete("/api/employee/" + id);
   },
+  // Gets all Goals by Employee
+  getEmployeeGoals: function(id) {
+    return axios.get("/api/employee/goals/" + id);
+  },
 
   // Gets all goals
   getAllGoal: function() {

@@ -55,12 +55,22 @@ class NewEmployee extends Component {
     } else {
       console.log("Please complete all fields of the form.");
     }
-  }
+  };
+
+  parseGoals = () => {
+    console.log("PARSING");
+    
+  };
 
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
   handleFormSubmit = event => {
     event.preventDefault();
+    let goalArray = "";
     if (this.isValid()) {
+      if(this.state.goals) {
+      goalArray = this.state.goals.split(',');
+      console.log(goalArray);
+    }
       API.saveEmployee({
         company: this.state.companyName,
         email: this.state.email,
@@ -75,16 +85,21 @@ class NewEmployee extends Component {
             employeeId : res.data.id
           });
           console.log(res)
-          API.saveGoal({
-            goals: this.state.goals,
+          goalArray.forEach(goal => {
+            API.saveGoal({
+            goals: goal.trim(),
             EmployeeId: this.state.employeeId
           })
             .then(res => {
               console.log(res);
-              this.props.history.push("/");
+              
             })
             .catch(err => console.log(err));
+          });
         })
+        // .done(() => {
+        //   this.props.history.push("/");
+        // })
         .catch(err => console.log(err));
     }
   };
