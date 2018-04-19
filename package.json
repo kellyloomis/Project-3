@@ -1,35 +1,35 @@
 {
-	"name": "mern",
-	"version": "1.0.6",
-	"description": "Performance Review - Project 3",
-	"main": "server.js",
-	"scripts": {
-		"server": "node server.js",
-		"client": "node scripts/start-client.js",
-		"start": "concurrently \"nodemon server.js\" \"npm run client\"",
-		"build": "node scripts/build.js",
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"install": "cd client && yarn install",
-		"postinstall": "yarn build"
-	},
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"concurrently": "^3.5.0",
-		"eslint": "^4.19.1",
-		"eslint-plugin-react": "^7.7.0",
-		"jest": "^22.4.3",
-		"nodemon": "^1.11.0",
-		"react": "^16.2.0",
-		"react-dom": "^16.2.0",
-		"react-scripts": "1.1.1"
-	},
-	"dependencies": {
-		"chai": "^4.1.2",
-		"chai-http": "^4.0.0",
-		"express": "^4.15.4",
-		"mysql": "^2.15.0",
-		"mysql2": "^1.5.3",
-		"sequelize": "^4.37.5"
-	}
+  "name": "mern",
+  "version": "1.0.6",
+  "description": "Performance Review - Project 3",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd client && yarn install",
+    "postinstall": "yarn build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3",
+    "nodemon": "^1.11.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
+  },
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "express": "^4.15.4",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.37.5"
+  }
 }
