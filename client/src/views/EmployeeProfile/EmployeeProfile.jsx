@@ -7,7 +7,8 @@ import {
   RegularCard,
   Button,
   CustomInput,
-  ItemGrid
+  ItemGrid,
+  TasksCard
 } from "./../../components";
 
 import avatar from "./../../assets/img/trooper.png";
@@ -168,6 +169,11 @@ class UserProfile extends Component {
               title={this.state.firstname && this.state.lastname ? this.state.firstname + " " + this.state.lastname : "Your Name"}
               description={this.state.company || "Company Name"}
             />
+          </ItemGrid>
+        </Grid>
+        <Grid container>
+          <ItemGrid xs={12} sm={12} md={12}>
+            <TasksCard />
           </ItemGrid>
         </Grid>
       </div>

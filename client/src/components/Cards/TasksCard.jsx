@@ -86,6 +86,7 @@ class TasksCard extends React.Component {
                 checkedIndexes={[0,1, 2]}
                 tasksIndexes={[0, 1, 2]}
                 tasks={achieved}
+                disable={true}
               />
             </Typography>
           )}

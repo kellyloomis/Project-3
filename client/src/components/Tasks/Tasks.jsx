@@ -33,9 +33,10 @@ class Tasks extends React.Component {
     this.setState({
       checked: newChecked
     });
+    console.log(this.state);
   };
   render() {
-    const { classes, tasksIndexes, tasks } = this.props;
+    const { classes, tasksIndexes, tasks, disable } = this.props;
     return (
       <Table className={classes.table}>
         <TableBody>
@@ -48,6 +49,7 @@ class Tasks extends React.Component {
                   onClick={this.handleToggle(value)}
                   checkedIcon={<Check className={classes.checkedIcon} />}
                   icon={<Check className={classes.uncheckedIcon} />}
+                  disabled={disable}
                   classes={{
                     checked: classes.checked
                   }}
@@ -59,7 +61,7 @@ class Tasks extends React.Component {
               <TableCell className={classes.tableActions}>
                 <Tooltip
                   id="tooltip-top"
-                  title="Edit Task"
+                  title="Edit"
                   placement="top"
                   classes={{ tooltip: classes.tooltip }}
                 >
