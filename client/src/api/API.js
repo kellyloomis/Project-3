@@ -40,7 +40,10 @@ export default {
   getEmployeeGoals: function(id) {
     return axios.get("/api/goal/employee/" + id);
   },
-
+  // Gets all Achieved Goals by Employee
+  getEmployeeAchieved: function(id) {
+    return axios.get("/api/achieved/employee/" + id);
+  },
   // Gets all goals
   getAllGoal: function() {
     return axios.get("/api/goal");

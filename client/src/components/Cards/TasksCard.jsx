@@ -14,7 +14,7 @@ import { Code, Cloud } from "material-ui-icons";
 
 import { Tasks } from "./../../components";
 
-import { goals, achieved } from "./../../variables/general";
+// import { goals, achieved } from "./../../variables/general";
 
 import tasksCardStyle from "./../../variables/styles/tasksCardStyle";
 
@@ -28,7 +28,8 @@ class TasksCard extends React.Component {
       employeeId: props.employee,
       goals: [],
       goalIndex: [],
-      achieved: []
+      achieved: [],
+      achieveIndex: []
     };
 
     if(this.state.employeeId) {
@@ -51,6 +52,27 @@ class TasksCard extends React.Component {
             goalIndex: goalIndexes
           });
         });
+
+        API.getEmployeeAchieved(this.state.employeeId)
+        .then(res => {
+          console.log("Got Achieved Goals!");
+          console.log(res);
+          let achievedArray = res.data.map(achieved => {
+            return achieved.description;
+          });
+          let achievedIndexes = [];
+          for(let i = 0; i < achievedArray.length; i++) {
+            achievedIndexes.push(i);
+          }
+          console.log("INDEX");
+          console.log(achievedIndexes);
+          console.log("ARRAY");
+          console.log(achievedArray);
+          this.setState({
+            achieved: achievedArray,
+            achieveIndex: achievedIndexes
+          });
+        });
     }
   }
 
@@ -59,8 +81,6 @@ class TasksCard extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(goals);
-    console.log(this.state);
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -116,9 +136,9 @@ class TasksCard extends React.Component {
           {this.state.value === 1 && (
             <Typography component="div">
               <Tasks
-                checkedIndexes={[0,1, 2]}
-                tasksIndexes={[0, 1, 2]}
-                tasks={achieved}
+                checkedIndexes={this.state.achieveIndex}
+                tasksIndexes={this.state.achieveIndex}
+                tasks={this.state.achieved}
                 disable={true}
               />
             </Typography>
