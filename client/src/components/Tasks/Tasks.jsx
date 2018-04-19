@@ -1,4 +1,6 @@
 import React from "react";
+import API from "./../../api/API";
+
 import {
   withStyles,
   Checkbox,
@@ -7,9 +9,13 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  Tooltip
+  Tooltip,
+  FormControl,
+  Input,
+  InputLabel,
+  InputAdornment
 } from "material-ui";
-import { Edit, Close, Check } from "material-ui-icons";
+import { Edit, Close, Check, Done } from "material-ui-icons";
 
 import PropTypes from "prop-types";
 
@@ -17,25 +23,74 @@ import tasksStyle from "./../../variables/styles/tasksStyle.jsx";
 
 class Tasks extends React.Component {
   state = {
-    checked: this.props.checkedIndexes
+    checked: this.props.checkedIndexes,
+    editValue: "",
+    editing: false,
+    currentId: "",
+    currentGoal: ""
   };
-  handleToggle = value => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
+  // Handles updating component state when the user types into the input field
+  handleInputChange = event => {
+    const { name, value } = event.target;
     this.setState({
-      checked: newChecked
+      [name]: value
     });
   };
+  handleToggle = value => () => {
+    let id = this.props.ids[value];
+    console.log("Toggling goal id: " + id);
+    API.saveAchieved({
+      description: this.props.tasks[value],
+      EmployeeId: this.props.employee
+    })
+    .then(res => {
+      API.deleteGoal(id)
+        .then(res => {
+          this.props.taskUpdate();
+        });
+    });
+  };
+  handleEdit = value => () => {
+    let id = this.props.ids[value];
+    this.setState({
+      editValue: value,
+      editing: true,
+      currentId: id,
+      currentGoal: this.props.tasks[value]
+    });
+  };
+  handleChangeGoal = () => {
+    if(this.props.disable) {
+      console.log("Changing Achieved ID: " + this.state.currentId + " into " + this.state.currentGoal);
+    } else {
+      console.log("Changing Goal ID: " + this.state.currentId + " into " + this.state.currentGoal);
+      API.updateGoal(this.state.currentId, {
+        goals: this.state.currentGoal
+      })
+        .then(res => {
+          this.setState({
+            editing: false
+          });
+          this.props.taskUpdate();
+        });
+    }
+  };
+  handleDelete = value => () => {
+    let id = this.props.ids[value];
+    if(this.props.disable) {
+      API.deleteAchieved(id)
+        .then(res => {
+          this.props.taskUpdate();
+        })
+    } else {
+      API.deleteGoal(id)
+        .then(res => {
+          this.props.taskUpdate();
+        })
+    }
+  }
   render() {
-    const { classes, tasksIndexes, tasks } = this.props;
+    const { classes, tasksIndexes, tasks, disable } = this.props;
     return (
       <Table className={classes.table}>
         <TableBody>
@@ -48,24 +103,48 @@ class Tasks extends React.Component {
                   onClick={this.handleToggle(value)}
                   checkedIcon={<Check className={classes.checkedIcon} />}
                   icon={<Check className={classes.uncheckedIcon} />}
+                  disabled={disable}
                   classes={{
                     checked: classes.checked
                   }}
                 />
               </TableCell>
               <TableCell className={classes.tableCell}>
-                {tasks[value]}
+                {this.state.editing && this.state.editValue === value ? 
+                  <FormControl className={classes.margin + " " + classes.textField}>
+                    <InputLabel htmlFor="goal-textbox">Goal</InputLabel>
+                    <Input
+                      id="goal-textbox"
+                      type={'text'}
+                      name="currentGoal"
+                      onChange={this.handleInputChange}
+                      value={this.state.currentGoal || tasks[value]}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="Toggle password visibility"
+                            onClick={this.handleChangeGoal}
+                          >
+                            <Done />
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                  : tasks[value]}
               </TableCell>
               <TableCell className={classes.tableActions}>
-                <Tooltip
+                {disable ? "" : 
+                  <Tooltip
                   id="tooltip-top"
-                  title="Edit Task"
+                  title="Edit"
                   placement="top"
                   classes={{ tooltip: classes.tooltip }}
                 >
                   <IconButton
                     aria-label="Edit"
                     className={classes.tableActionButton}
+                    onClick={this.handleEdit(value)}
                   >
                     <Edit
                       className={
@@ -74,6 +153,8 @@ class Tasks extends React.Component {
                     />
                   </IconButton>
                 </Tooltip>
+                }
+                
                 <Tooltip
                   id="tooltip-top-start"
                   title="Remove"
@@ -83,6 +164,7 @@ class Tasks extends React.Component {
                   <IconButton
                     aria-label="Close"
                     className={classes.tableActionButton}
+                    onClick={this.handleDelete(value)}
                   >
                     <Close
                       className={

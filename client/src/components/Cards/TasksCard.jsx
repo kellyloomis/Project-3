@@ -1,4 +1,5 @@
 import React from "react";
+import API from "./../../api/API";
 
 import {
   withStyles,
@@ -13,21 +14,146 @@ import { Code, Cloud } from "material-ui-icons";
 
 import { Tasks } from "./../../components";
 
-import { goals, achieved } from "./../../variables/general";
+// import { goals, achieved } from "./../../variables/general";
 
 import tasksCardStyle from "./../../variables/styles/tasksCardStyle";
 
 class TasksCard extends React.Component {
-  state = {
-    value: 0
+  constructor(props) {
+    super();
+    console.log("TASKS");
+    console.log(props);
+    this.state = {
+      value: 0,
+      employeeId: props.employee,
+      goalCount: props.goalCount,
+      goals: [],
+      goalIndex: [],
+      goalIds: [],
+      achieved: [],
+      achieveIndex: [],
+      achievedIds: []
+    };
+    this.updateTaskCard = this.updateTaskCard.bind(this);
+    if(this.state.employeeId) {
+      API.getEmployeeGoals(this.state.employeeId)
+        .then(res => {
+          console.log("Got Goals!");
+          let goalArray = res.data.map(goal => {
+            return goal.goals;
+          });
+          let goalIndexes = [];
+          for(let i = 0; i < goalArray.length; i++) {
+            goalIndexes.push(i);
+          }
+          let goalIdArray = res.data.map(goal => {
+            return goal.id;
+          });
+          console.log("INDEX");
+          console.log(goalIndexes);
+          console.log("ARRAY");
+          console.log(goalArray);
+          this.setState({
+            goals: goalArray,
+            goalIndex: goalIndexes,
+            goalIds: goalIdArray 
+          });
+        });
+
+        API.getEmployeeAchieved(this.state.employeeId)
+        .then(res => {
+          console.log("Got Achieved Goals!");
+          console.log(res);
+          let achievedArray = res.data.map(achieved => {
+            return achieved.description;
+          });
+          let achievedIndexes = [];
+          for(let i = 0; i < achievedArray.length; i++) {
+            achievedIndexes.push(i);
+          }
+          let achievedIdArray = res.data.map(achieved => {
+            return achieved.id;
+          });
+          console.log("INDEX");
+          console.log(achievedIndexes);
+          console.log("ARRAY");
+          console.log(achievedArray);
+          this.setState({
+            achieved: achievedArray,
+            achieveIndex: achievedIndexes,
+            achievedIds: achievedIdArray
+          });
+        });
+    }
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log("NEXT");
+    console.log(nextProps);
+    console.log("THIS");
+    console.log(this.props);
+    if(this.props.goalCount !== nextProps.goalCount) {
+      this.updateTaskCard();
+    }
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
+  updateTaskCard() {
+    if(this.state.employeeId) {
+      API.getEmployeeGoals(this.state.employeeId)
+        .then(res => {
+          console.log("Got Goals!");
+          let goalArray = res.data.map(goal => {
+            return goal.goals;
+          });
+          let goalIndexes = [];
+          for(let i = 0; i < goalArray.length; i++) {
+            goalIndexes.push(i);
+          }
+          let goalIdArray = res.data.map(goal => {
+            return goal.id;
+          });
+          console.log("INDEX");
+          console.log(goalIndexes);
+          console.log("ARRAY");
+          console.log(goalArray);
+          this.setState({
+            goals: goalArray,
+            goalIndex: goalIndexes,
+            goalIds: goalIdArray 
+          });
+        });
+
+        API.getEmployeeAchieved(this.state.employeeId)
+        .then(res => {
+          console.log("Got Achieved Goals!");
+          console.log(res);
+          let achievedArray = res.data.map(achieved => {
+            return achieved.description;
+          });
+          let achievedIndexes = [];
+          for(let i = 0; i < achievedArray.length; i++) {
+            achievedIndexes.push(i);
+          }
+          let achievedIdArray = res.data.map(achieved => {
+            return achieved.id;
+          });
+          console.log("INDEX");
+          console.log(achievedIndexes);
+          console.log("ARRAY");
+          console.log(achievedArray);
+          this.setState({
+            achieved: achievedArray,
+            achieveIndex: achievedIndexes,
+            achievedIds: achievedIdArray
+          });
+        });
+    }
+  };
   render() {
     const { classes } = this.props;
-    console.log(goals);
-    console.log(this.state);
     return (
       <Card className={classes.card}>
         <CardHeader
@@ -36,7 +162,7 @@ class TasksCard extends React.Component {
             title: classes.cardTitle,
             content: classes.cardHeaderContent
           }}
-          title="Tasks:"
+          title="Goals:"
           action={
             <Tabs
               classes={{
@@ -55,7 +181,7 @@ class TasksCard extends React.Component {
                   rootInheritSelected: classes.rootInheritSelected
                 }}
                 icon={<Code className={classes.tabIcon} />}
-                label={"Goals"}
+                label={"Current"}
               />
               <Tab
                 classes={{
@@ -75,17 +201,23 @@ class TasksCard extends React.Component {
             <Typography component="div">
               <Tasks
                 checkedIndexes={[]}
-                tasksIndexes={[0, 1]}
-                tasks={goals}
+                tasksIndexes={this.state.goalIndex}
+                tasks={this.state.goals}
+                ids={this.state.goalIds}
+                taskUpdate={this.updateTaskCard}
+                employee={this.state.employeeId}
               />
             </Typography>
           )}
           {this.state.value === 1 && (
             <Typography component="div">
               <Tasks
-                checkedIndexes={[0,1, 2]}
-                tasksIndexes={[0, 1, 2]}
-                tasks={achieved}
+                checkedIndexes={this.state.achieveIndex}
+                tasksIndexes={this.state.achieveIndex}
+                tasks={this.state.achieved}
+                taskUpdate={this.updateTaskCard}
+                ids={this.state.achievedIds}
+                disable={true}
               />
             </Typography>
           )}

@@ -61,6 +61,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Employee.hasMany(models.Review);
     Employee.hasMany(models.Goal);
+    Employee.hasMany(models.Achieved);
     Employee.hasMany(models.Department);
   };
 

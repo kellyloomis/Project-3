@@ -4,11 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     goals: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    // Giving the Goal model an achieved of type STRING
-    achieved: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   });
 

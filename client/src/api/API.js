@@ -36,7 +36,14 @@ export default {
   deleteEmployee: function(id) {
     return axios.delete("/api/employee/" + id);
   },
-
+  // Gets all Goals by Employee
+  getEmployeeGoals: function(id) {
+    return axios.get("/api/goal/employee/" + id);
+  },
+  // Gets all Achieved Goals by Employee
+  getEmployeeAchieved: function(id) {
+    return axios.get("/api/achieved/employee/" + id);
+  },
   // Gets all goals
   getAllGoal: function() {
     return axios.get("/api/goal");
@@ -56,5 +63,13 @@ export default {
   // Deletes the goal with the given id
   deleteGoal: function(id) {
     return axios.delete("/api/goal/" + id);
+  },
+  // Saves an achieved goal to the database
+  saveAchieved: function(achievedData) {
+    return axios.post("/api/achieved", achievedData);
+  },
+  // Deletes the achieved goal with the given id
+  deleteAchieved: function(id) {
+    return axios.delete("/api/achieved/" + id);
   }
 };
