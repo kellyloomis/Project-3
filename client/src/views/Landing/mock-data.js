@@ -24,7 +24,7 @@ export const team = [
     role: 'Role Here',
     description:
         'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
-            links: {
+    links: {
       twitter: '#twitter',
       linkedin: '#linkedin'
     }
@@ -36,7 +36,7 @@ export const team = [
     role: 'Role Here',
     description:
       'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
-          links: {
+    links: {
       googleplus: '#googleplus',
       youtube: '#youtube',
       twitter: '#twitter'

@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Goal = sequelize.define("Goal", {
+  var Goal = sequelize.define('Goal', {
     // Giving the Goal model a goals of type STRING
     goals: {
       type: DataTypes.STRING,

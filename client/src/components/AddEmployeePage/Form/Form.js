@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import "./Form.css"
+import React, { Component } from 'react';
+import './Form.css';
 
 class Form extends Component {
 
-	render() {
-		return (
-		<form>
+  render() {
+    return (
+      <form>
 	        <div className="w3-row-padding wrapper-1">
 	          <div className="w3-half w3-margin-bottom">
 	            <input className="w3-input w3-border" type="number" placeholder="EIN" required/>
@@ -32,8 +32,8 @@ class Form extends Component {
 	        </div>
 	        <button className="w3-button w3-dark-grey" type="submit">Add Employee</button>
       	</form>
-		);
-	}	
+    );
+  }	
 }
 
 export default Form;
