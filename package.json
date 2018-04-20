@@ -10,7 +10,8 @@
     "build": "node scripts/build.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install": "cd client && yarn install",
-    "postinstall": "yarn build"
+    "postinstall": "yarn build",
+    "lint": "eslint ./client/src ./config ./controllers ./models ./routes ./scripts ./test"
   },
   "author": "",
   "license": "ISC",

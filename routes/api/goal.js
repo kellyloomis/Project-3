@@ -1,17 +1,17 @@
-const router = require("express").Router();
-const goalController = require("../../controllers/goalController");
+const router = require('express').Router();
+const goalController = require('../../controllers/goalController');
 
 // Matches with "/api/goal"
-router.route("/")
+router
+  .route('/')
   .get(goalController.findAll)
   .post(goalController.create);
 
- router.route("/employee/:id")
- 	.get(goalController.getEmployeeGoals);
+router.route('/employee/:id').get(goalController.getEmployeeGoals);
 
 // Matches with "/api/goal/:id"
 router
-  .route("/:id")
+  .route('/:id')
   .get(goalController.findById)
   .post(goalController.update)
   .delete(goalController.remove);

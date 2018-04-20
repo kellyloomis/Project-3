@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Employee = sequelize.define("Employee", {
+  var Employee = sequelize.define('Employee', {
     // Giving the Employee model a firstname of type STRING
     firstname: {
       type: DataTypes.STRING,
