@@ -18,7 +18,6 @@ class ReviewEntry extends Component {
   constructor() {
     super();
     this.state = {
-      employeeId: '',
       attendance: 3,
       appearance: 3,
       professionalism: 3,
@@ -27,8 +26,6 @@ class ReviewEntry extends Component {
       quality: 3,
       selectedEmployee: ''
     };
-    this.handleSelectEmployee = this.handleSelectEmployee.bind(this);
-    this.handleReviewSelect = this.handleReviewSelect.bind(this);
   }
 
   createMenuItems = () => {
@@ -36,11 +33,7 @@ class ReviewEntry extends Component {
     let menuItems = [];
     employees.forEach(employee => {
       menuItems.push(
-        <MenuItem
-          key={employee.id}
-          onClick={this.handleSelectEmployee(employee.id)}
-          value={employee.firstname + ' ' + employee.lastname}
-        >
+        <MenuItem key={employee.id} value={employee.id}>
           {employee.firstname + ' ' + employee.lastname}
         </MenuItem>
       );
@@ -50,11 +43,6 @@ class ReviewEntry extends Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSelectEmployee = id => () => {
-    console.log('you clicked employee', id);
-    this.setState({ employeeId: id });
   };
 
   handleReviewSelect = score => {
