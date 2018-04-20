@@ -103,7 +103,7 @@ class ReviewEntry extends Component {
         <br />
         <br />
         <div>
-          {categories.data.map((item, index) => (
+          {categories.data.map(item => (
             <Category
               key={item.title}
               title={item.title}
