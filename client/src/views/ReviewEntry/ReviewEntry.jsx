@@ -2,7 +2,17 @@ import React, { Component } from "react";
 import Category from "../../components/ReviewEntryPage/Category/Category.jsx";
 import categories from "../../components/ReviewEntryPage/Category/categories.json";
 
+import { FormControl, InputLabel, MenuItem, Select } from "material-ui";
+import { withStyles } from 'material-ui/styles';
+
 import "./ReviewEntry.css";
+
+const styles = theme => ({
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 300,
+  }
+});
 
 class ReviewEntry extends Component {
 
@@ -15,43 +25,63 @@ class ReviewEntry extends Component {
       professionalism: 3,
       communication: 3,
       taskCompletion: 3,
-      quality: 3
+      quality: 3,
+      selectedEmployee: ""
     };
     this.handleSelectEmployee = this.handleSelectEmployee.bind(this);
     this.handleReviewSelect = this.handleSelectEmployee.bind(this);
-  }
+  };
 
-  	handleSelectEmployee = (id) => {
+  	createMenuItems = () => {
+  		let employees = this.props.location.state.employees;
+  		let menuItems = [];
+  		employees.forEach(employee => {
+  			menuItems.push(<MenuItem key={employee.id} onClick={this.handleSelectEmployee(employee.id)} value={employee.firstname + " " + employee.lastname}>{employee.firstname + " " + employee.lastname}</MenuItem>);
+  		});
+  		return menuItems;
+  	};
+
+  	handleChange = event => {
+	    this.setState({ [event.target.name]: event.target.value });
+	  };
+
+  	handleSelectEmployee = (id) => () => {
   		console.log("you clicked me", id);
   		this.setState({ employeeId: id});
-  	}
+  	};
 
   	handleReviewSelect = () => {
   		console.log("you clicked me");
-  	}
+  	};
 
 	render() {
 		const employees = this.props.location.state;
+		const { classes } = this.props;
 
 		console.log("employees: ", employees);
 		return (
 			
 			<div className="w3-content">
-				<div className="w3-dropdown-hover">
-				  <button className="w3-button w3-blue">Select Employee</button>
-				  <div className="w3-dropdown-content w3-bar-block w3-border">
-				  	
-			  		{employees && employees.employees.map((item, index) => (
-						<button className="w3-block w3-white w3-border-color-white" onClick={this.handleSelectEmployee.bind(this, item.id)} key={item.id.toString()} value={item.id}>
-							{item.firstname + " " + item.lastname}
-						</button>
-				  	))}
-				  </div>
-				</div>
+		        <FormControl className={classes.formControl}>
+		          <InputLabel htmlFor="employee-select">Select Employee</InputLabel>
+		          <Select
+		            value={this.state.selectedEmployee}
+		            onChange={this.handleChange}
+		            inputProps={{
+		              name: 'selectedEmployee',
+		              id: 'employee-select',
+		            }}
+		          >
+		            <MenuItem value="">
+		              <em>None</em>
+		            </MenuItem>
+		            {this.createMenuItems()}
+		          </Select>
+		        </FormControl>
 				<br/><br/>
 				<div>
 					{categories.data.map((item, index) => (
-						<Category  key={index.toString()} title={item.title} text={item.text} onClick={this.handleReviewSelect}/>
+						<Category key={item.title} title={item.title} text={item.text} onClick={this.handleReviewSelect}/>
 					))}
 				</div>
 				<div>
@@ -64,4 +94,4 @@ class ReviewEntry extends Component {
 	}
 }
 
-export default ReviewEntry;
+export default withStyles(styles)(ReviewEntry);
