@@ -19,7 +19,7 @@ export default {
   // Gets all employees from User
   getAllEmployeeFromUser: function(userId) {
     return axios.get('/api/employee/user/' + userId);
-  },  
+  },
   // Saves an employee to the database
   saveEmployee: function(employeeData) {
     return axios.post('/api/employee', employeeData);
@@ -71,5 +71,13 @@ export default {
   // Deletes the achieved goal with the given id
   deleteAchieved: function(id) {
     return axios.delete('/api/achieved/' + id);
+  },
+  // Saves a review to the database
+  saveReview: function(reviewData) {
+    return axios.post('/api/review', reviewData);
+  },
+  // Deletes the review with the given id
+  deleteReview: function(id) {
+    return axios.delete('/api/review/' + id);
   }
 };

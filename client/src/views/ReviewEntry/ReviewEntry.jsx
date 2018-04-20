@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Category from '../../components/ReviewEntryPage/Category/Category.jsx';
 import categories from '../../components/ReviewEntryPage/Category/categories.json';
-
+import API from './../../api/API';
 import { FormControl, InputLabel, MenuItem, Select } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
 
@@ -24,7 +24,7 @@ class ReviewEntry extends Component {
       communication: 3,
       taskCompletion: 3,
       quality: 3,
-      selectedEmployee: ''
+      EmployeeId: ''
     };
   }
 
@@ -62,7 +62,11 @@ class ReviewEntry extends Component {
   };
 
   handleSubmit = () => {
-    console.log('you clicked SUBMIT', this.state);
+    console.log('you clicked SUBMIT');
+    API.saveReview(this.state).then(res => {
+      console.log('API returns:');
+      console.log(res);
+    });
   };
 
   render() {
@@ -75,10 +79,10 @@ class ReviewEntry extends Component {
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="employee-select">Select Employee</InputLabel>
           <Select
-            value={this.state.selectedEmployee}
+            value={this.state.EmployeeId}
             onChange={this.handleChange}
             inputProps={{
-              name: 'selectedEmployee',
+              name: 'EmployeeId',
               id: 'employee-select'
             }}
           >
