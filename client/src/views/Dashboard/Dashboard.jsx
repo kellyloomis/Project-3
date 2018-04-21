@@ -2,7 +2,7 @@ import React from 'react';
 // react plugin for creating charts
 import ChartistGraph from 'react-chartist';
 import {
-  Store,
+  Description,
   DateRange,
   Update,
   ArrowUpward,
@@ -26,22 +26,6 @@ import {
 
 import dashboardStyle from './../../variables/styles/dashboardStyle';
 
-const MONTHS = [
-      "FILLER",
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec"
-    ];
-
 class Dashboard extends React.Component {
 
   state = {
@@ -53,37 +37,14 @@ class Dashboard extends React.Component {
     performanceTrendSeries: []
   };
 
-  getMonths = () => {
-    if(this.state.start && this.state.end) {
-      let startDateSplitArray = this.props.location.state.start.split('-');
-      let endDateSplitArray = this.props.location.state.end.split('-');
-      let monthCount = 0;
-      if(parseInt(startDateSplitArray[1], 10) > parseInt(endDateSplitArray[1], 10)) {
-        monthCount = 12 - parseInt(startDateSplitArray[1], 10) + parseInt(endDateSplitArray[1], 10);
-      } else {
-        monthCount = parseInt(endDateSplitArray[1], 10) - parseInt(startDateSplitArray[1], 10);
-      }
-      let dateInt = parseInt(startDateSplitArray[1], 10)
-      console.log("Date: " + MONTHS[dateInt]);
-      console.log(monthCount);
-      let dateRange = [];
-      for(let i = dateInt; i <= dateInt + monthCount; i++) {
-        dateRange.push(MONTHS[i]);
-      }
-      console.log("Months to dispay:");
-      console.log(dateRange);
-      return dateRange;
-    }
-  };
-
   getCompletedGoals = () => {
     let seriesData = [];
     for(let i = 1; i <= 12; i++) {
       API.getAchievedWithin("2018-" + i + "-01 00:00:00", "2018-" + i + "-28 00:00:00")
         .then(res => {
           //console.log(res.data);
-          seriesData.push(res.data.length);
-          if(res.data.length > completedTasksChart.options.high) {
+          seriesData[i-1] = (res.data.length);
+          if(res.data.length >= completedTasksChart.options.high) {
             completedTasksChart.options.high = res.data.length + 1;
           }
           if(i === 12) {
@@ -101,8 +62,8 @@ class Dashboard extends React.Component {
       API.getAchievedWithinByEmployee("2018-" + i + "-01 00:00:00", "2018-" + i + "-28 00:00:00", employeeId)
         .then(res => {
           //console.log(res.data);
-          seriesData.push(res.data.length);
-          if(res.data.length > completedTasksChart.options.high) {
+          seriesData[i-1] = (res.data.length);
+          if(res.data.length >= completedTasksChart.options.high) {
             completedTasksChart.options.high = res.data.length + 1;
           }
           if(i === 12) {
@@ -144,9 +105,9 @@ class Dashboard extends React.Component {
           averageSum = sumArray.reduce((a, b) => {return a + b}, 0);
           console.log(averageSum);
           if(reviewCount > 0) {
-            seriesData.push(averageSum/reviewCount);
+            seriesData[i-1] = (averageSum/reviewCount);
           } else {
-            seriesData.push(0);
+            seriesData[i-1] = (0);
           }
           if(i === 12) {
             this.setState({
@@ -188,9 +149,9 @@ class Dashboard extends React.Component {
           console.log(averageSum);
           console.log(reviewCount);
           if(reviewCount > 0) {
-            seriesData.push(averageSum/reviewCount);
+            seriesData[i-1] = (averageSum/reviewCount);
           } else {
-            seriesData.push(0);
+            seriesData[i-1] = (0);
           }
           if(i === 12) {
             console.log(seriesData);
@@ -263,8 +224,8 @@ class Dashboard extends React.Component {
         <Grid container>
           <ItemGrid xs={12} sm={6} md={6}>
             <StatsCard
-              icon={Store}
-              iconColor="green"
+              icon={Description}
+              iconColor="purple"
               title="Selected Reports"
               description={this.props.location.state.id ? "Individual Employee" : "All Employees"}
               statIcon={DateRange}
@@ -345,7 +306,7 @@ class Dashboard extends React.Component {
               title="Completed Goals"
               text="Last Campaign Performance"
               statIcon={AccessTime}
-              statText="campaign sent 2 days ago"
+              statText="last goal completed 2 days ago"
             />
           </ItemGrid>
         </Grid>
