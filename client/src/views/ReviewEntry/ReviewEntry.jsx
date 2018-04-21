@@ -22,9 +22,9 @@ class ReviewEntry extends Component {
       appearance: 3,
       professionalism: 3,
       communication: 3,
-      taskCompletion: 3,
+      taskcompletion: 3,
       quality: 3,
-      EmployeeId: ''
+      EmployeeId: 0
     };
   }
 
@@ -62,8 +62,9 @@ class ReviewEntry extends Component {
   };
 
   handleSubmit = () => {
-    console.log('you clicked SUBMIT');
-    API.saveReview(this.state).then(res => {
+    let data = this.state;
+    console.log('you clicked SUBMIT', data);
+    API.saveReview(data).then(res => {
       console.log('API returns:');
       console.log(res);
     });
