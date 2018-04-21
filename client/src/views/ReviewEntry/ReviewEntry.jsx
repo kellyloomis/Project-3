@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import Category from '../../components/ReviewEntryPage/Category/Category.jsx';
 import categories from '../../components/ReviewEntryPage/Category/categories.json';
 import API from './../../api/API';
 import { FormControl, InputLabel, MenuItem, Select } from 'material-ui';
+import { HighlightOff } from "material-ui-icons";
 import { withStyles } from 'material-ui/styles';
 
 import {
-  Button
+  Button,
+  Snackbar
 } from "./../../components";
 
 import './ReviewEntry.css';
@@ -23,13 +24,15 @@ class ReviewEntry extends Component {
   constructor() {
     super();
     this.state = {
-      attendance: 3,
-      appearance: 3,
-      professionalism: 3,
-      communication: 3,
-      taskcompletion: 3,
-      quality: 3,
-      EmployeeId: 0
+      attendance: "",
+      appearance: "",
+      professionalism: "",
+      communication: "",
+      taskcompletion: "",
+      quality: "",
+      EmployeeId: "",
+      errorMessage: "",
+      tc: false
     };
   }
 
@@ -62,17 +65,66 @@ class ReviewEntry extends Component {
           : data.subject === 'COMMUNICATION'
             ? this.setState({ communication: data.score })
             : data.subject === 'TASK COMPLETION'
-              ? this.setState({ taskCompletion: data.score })
+              ? this.setState({ taskcompletion: data.score })
               : this.setState({ quality: data.score });
   };
 
+  validate = () => {
+  	console.log(this.state);
+  	if(!this.state.EmployeeId) {
+  		console.log("first error");
+  		this.setState({
+  			errorMessage: "Please select an Employee to review."
+  		});
+  		return false;
+  	}
+  	if(!this.state.attendance ||
+  		 !this.state.appearance ||
+  		 !this.state.communication ||
+  		 !this.state.professionalism ||
+  		 !this.state.quality ||
+  		 !this.state.taskcompletion) {
+  		this.setState({
+  			errorMessage: "Please complete all entry for the review."
+  		});
+  		return false;
+  	}
+  	return true;
+  };
+
   handleSubmit = () => {
-    let data = this.state;
-    console.log('you clicked SUBMIT', data);
+  	console.log('you clicked SUBMIT');
+    if(!this.validate()) {
+    	this.showNotification("tc");
+    	return;
+    }
+    let data = {
+    	attendance: this.state.attendance,
+  		appearance: this.state.appearance,
+  		communication: this.state.communication,
+  		professionalism: this.state.professionalism,
+  		quality: this.state.quality,
+  		taskcompletion: this.state.taskcompletion,
+  		EmployeeId: this.state.EmployeeId
+  	};
     API.saveReview(data).then(res => {
       console.log('API returns:');
       console.log(res);
+      this.props.history.push("/welcome");
     });
+  };
+
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    setTimeout(
+      function() {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      6000
+    );
   };
 
   render() {
@@ -82,6 +134,15 @@ class ReviewEntry extends Component {
     console.log('employees: ', employees);
     return (
       <div className="w3-content">
+      	<Snackbar
+          place="tc"
+          color="warning"
+          icon={HighlightOff}
+          message={this.state.errorMessage}
+          open={this.state.tc}
+          closeNotification={() => this.setState({ tc: false })}
+          close
+        />
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="employee-select">Select Employee</InputLabel>
           <Select
@@ -114,7 +175,7 @@ class ReviewEntry extends Component {
           <br />
           <br />
           
-          <Button fullWidth={true} size="large" onClick={this.handleSubmit} component={Link} to="/welcome" color="warning">Submit</Button>
+          <Button fullWidth={true} size="large" onClick={this.handleSubmit} color="primary">Submit</Button>
         </div>
       </div>
     );
