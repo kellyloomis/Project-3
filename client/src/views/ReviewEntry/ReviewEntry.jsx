@@ -53,7 +53,23 @@ class ReviewEntry extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleReviewSelect = score => {
+  handleReviewSelect = (score,event) => {
+  	if(event.target.id === "yellowButton") {
+  		console.log("Im yellow");
+  		event.target.style = "background-color: #ff9800";
+  		event.target.nextSibling.style = "background-color: #999";
+  		event.target.previousSibling.style = "background-color: #999";
+  	} else if(event.target.id === "greenButton") {
+  		console.log("Im green");
+  		event.target.style = "background-color: #4caf50";
+  		event.target.nextSibling.style = "background-color: #999";
+  		event.target.nextSibling.nextSibling.style = "background-color: #999";
+  	} else if(event.target.id === "redButton") {
+  		console.log("Im red");
+  		event.target.style = "background-color: #e91e63";
+  		event.target.previousSibling.style = "background-color: #999";
+  		event.target.previousSibling.previousSibling.style = "background-color: #999";
+  	}
     console.log('you clicked score', score);
     let data = score;
     data.subject === 'ATTENDANCE'
