@@ -9,6 +9,9 @@ router
 
 router.route('/employee/:id').get(goalController.getEmployeeGoals);
 
+ router.route("/within/:start/:end")
+ 	.get(goalController.getGoalsWithin);
+
 // Matches with "/api/goal/:id"
 router
   .route('/:id')

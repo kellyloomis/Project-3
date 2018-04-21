@@ -17,15 +17,15 @@ var delays2 = 80,
 
 const dailySalesChart = {
   data: {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    series: [[12, 17, 7, 17, 23, 18, 38]]
+    labels: ['Attr.', 'Appr.', 'Comm.', 'Prof.', 'Qual.', 'Task.'],
+    series: [[1, 2, 2, 1, 3, 1]]
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
       tension: 0
     }),
     low: 0,
-    high: 50,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 0,
@@ -72,27 +72,27 @@ const dailySalesChart = {
 const emailsSubscriptionChart = {
   data: {
     labels: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec'
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
     ],
-    series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+    series: [[Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1]]
   },
   options: {
     axisX: {
       showGrid: false
     },
     low: 0,
-    high: 1000,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 5,
@@ -131,20 +131,20 @@ const emailsSubscriptionChart = {
 };
 
 // ##############################
-// // // Completed Tasks
+// // // Completed Goals
 // #############################
 
-const completedTasksChart = {
+let completedTasksChart = {
   data: {
-    labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-    series: [[230, 750, 450, 300, 280, 240, 200, 190]]
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    series: [[230, 750, 450, 300, 280, 240, 200, 190, 70, 134, 220, 120]]
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
       tension: 0
     }),
     low: 0,
-    high: 1000,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 0,

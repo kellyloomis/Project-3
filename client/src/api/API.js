@@ -34,6 +34,10 @@ export default {
   deleteEmployee: function(id) {
     return axios.delete('/api/employee/' + id);
   },
+  // Gets all Reviews by Employee
+  getEmployeeReviews: function(id) {
+    return axios.get('/api/review/employee/' + id);
+  },
   // Gets all Goals by Employee
   getEmployeeGoals: function(id) {
     return axios.get('/api/goal/employee/' + id);
@@ -62,13 +66,37 @@ export default {
   deleteGoal: function(id) {
     return axios.delete('/api/goal/' + id);
   },
+  // Gets all achieved goals within a specified date range
+  getAchievedWithin: function(startDate, endDate) {
+    return axios.get("/api/achieved/within/" + startDate + "/" + endDate);
+  },
+  // Gets all achieved goals within a specified date range by an Employee Id
+  getAchievedWithinByEmployee: function(startDate, endDate, employeeId) {
+    return axios.get("/api/achieved/within/" + startDate + "/" + endDate + "/" + employeeId);
+  },
   // Saves an achieved goal to the database
   saveAchieved: function(achievedData) {
     return axios.post('/api/achieved', achievedData);
   },
   // Deletes the achieved goal with the given id
   deleteAchieved: function(id) {
-    return axios.delete('/api/achieved/' + id);
+    return axios.delete("/api/achieved/" + id);
+  },
+  // Gets all reviews
+  getAllReviews: function() {
+    return axios.get('/api/review');
+  },
+  // Gets the review with the given id
+  getReview: function(id) {
+    return axios.get('/api/review/' + id);
+  },
+  // Gets all reviews within a specified date range
+  getReviewsWithin: function(startDate, endDate) {
+    return axios.get("/api/review/within/" + startDate + "/" + endDate);
+  },
+  // Gets all reviews within a specified date range by an Employee Id
+  getReviewsWithinByEmployee: function(startDate, endDate, employeeId) {
+    return axios.get("/api/review/within/" + startDate + "/" + endDate + "/" + employeeId);
   },
   // Saves a review to the database
   saveReview: function(reviewData) {
