@@ -10,30 +10,36 @@ class Profile extends Component {
     const { links } = this.props;
     return (
       <div>
-        {links.googleplus &&
+        {links.googleplus && (
           <Button href={links.googleplus} link justIcon>
             <i className="fa fa-google-plus" />
-          </Button>}
-        {links.linkedin &&
+          </Button>
+        )}
+        {links.linkedin && (
           <Button href={links.linkedin} link justIcon>
             <i className="fa fa-linkedin" />
-          </Button>}
-        {links.instagram &&
+          </Button>
+        )}
+        {links.instagram && (
           <Button href={links.instagram} link justIcon>
             <i className="fa fa-instagram" />
-          </Button>}
-        {links.facebook &&
+          </Button>
+        )}
+        {links.facebook && (
           <Button href={links.facebook} link justIcon>
             <i className="fa fa-facebook-square" />
-          </Button>}
-        {links.youtube &&
+          </Button>
+        )}
+        {links.youtube && (
           <Button href={links.youtube} link justIcon>
             <i className="fa fa-youtube-play" />
-          </Button>}
-        {links.twitter &&
+          </Button>
+        )}
+        {links.twitter && (
           <Button href={links.twitter} link justIcon>
             <i className="fa fa-twitter" />
-          </Button>}
+          </Button>
+        )}
       </div>
     );
   }
@@ -47,12 +53,8 @@ class Profile extends Component {
           <Image src={img} circle responsive className="img-raised" />
         </div>
         <div className="name">
-          <h3 className="title">
-            {name}
-          </h3>
-          <h6>
-            {role}
-          </h6>
+          <h3 className="title">{name}</h3>
+          <h6>{role}</h6>
         </div>
         <p
           className="description"

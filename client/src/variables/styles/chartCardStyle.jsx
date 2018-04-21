@@ -19,14 +19,14 @@ import {
   infoColor,
   primaryColor,
   roseColor
-} from "./../../variables/styles.jsx";
+} from './../../variables/styles.jsx';
 
 const chartCardStyle = {
   card,
   cardHeader: {
     ...cardHeader,
-    padding: "0",
-    minHeight: "160px",
+    padding: '0',
+    minHeight: '160px',
     ...defaultFont
   },
   orangeCardHeader,
@@ -35,36 +35,36 @@ const chartCardStyle = {
   blueCardHeader,
   purpleCardHeader,
   cardContent: {
-    padding: "15px 20px"
+    padding: '15px 20px'
   },
   cardTitle: {
-    marginTop: "0",
-    marginBottom: "5px",
+    marginTop: '0',
+    marginBottom: '5px',
     ...defaultFont,
-    fontSize: "1.175em"
+    fontSize: '1.175em'
   },
   cardCategory: {
-    marginBottom: "0",
+    marginBottom: '0',
     color: grayColor,
     ...defaultFont,
-    fontSize: "0.9em"
+    fontSize: '0.9em'
   },
   cardActions: {
     ...cardActions,
-    padding: "0!important"
+    padding: '0!important'
   },
   cardStats: {
-    lineHeight: "22px",
+    lineHeight: '22px',
     color: grayColor,
-    fontSize: "12px",
-    display: "inline-block",
-    margin: "0!important"
+    fontSize: '12px',
+    display: 'inline-block',
+    margin: '0!important'
   },
   cardStatsIcon: {
-    position: "relative",
-    top: "4px",
-    width: "16px",
-    height: "16px"
+    position: 'relative',
+    top: '4px',
+    width: '16px',
+    height: '16px'
   },
   warningCardStatsIcon: {
     color: warningColor
@@ -89,7 +89,7 @@ const chartCardStyle = {
   },
   cardStatsLink: {
     color: primaryColor,
-    textDecoration: "none",
+    textDecoration: 'none',
     ...defaultFont
   }
 };

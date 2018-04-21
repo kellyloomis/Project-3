@@ -1,11 +1,17 @@
-body,h1,h2,h3,h4,h5,h6 {
-  	font-family: "Raleway", sans-serif;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
-	max-width: 1600px;
+  max-width: 1600px;
 }
 
-#employee-select{
-	width: 200px;
+#employee-select {
+  width: 200px;
 }
