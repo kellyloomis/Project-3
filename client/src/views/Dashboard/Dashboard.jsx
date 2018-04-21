@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+import ChartistGraph from 'react-chartist';
 import {
   Store,
   DateRange,
@@ -8,26 +8,20 @@ import {
   ArrowUpward,
   AccessTime,
   Accessibility
-} from "material-ui-icons";
-import { withStyles, Grid } from "material-ui";
+} from 'material-ui-icons';
+import { withStyles, Grid } from 'material-ui';
 
-import {
-  StatsCard,
-  ChartCard,
-  TasksCard,
-  ItemGrid
-} from "./../../components";
+import { StatsCard, ChartCard, TasksCard, ItemGrid } from './../../components';
 
 import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart
-} from "./../../variables/charts";
+} from './../../variables/charts';
 
-import dashboardStyle from "./../../variables/styles/dashboardStyle";
+import dashboardStyle from './../../variables/styles/dashboardStyle';
 
 class Dashboard extends React.Component {
-
   render() {
     return (
       <div>
@@ -50,9 +44,9 @@ class Dashboard extends React.Component {
                   <span className={this.props.classes.successText}>
                     <ArrowUpward
                       className={this.props.classes.upArrowCardCategory}
-                    />{" "}
+                    />{' '}
                     55%
-                  </span>{" "}
+                  </span>{' '}
                   increase in today sales.
                 </span>
               }

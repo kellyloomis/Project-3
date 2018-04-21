@@ -9,38 +9,38 @@ import {
   successColor,
   warningColor,
   dangerColor
-} from "./../../variables/styles.jsx";
+} from './../../variables/styles.jsx';
 
 const typographyStyle = {
   defaultFontStyle: {
     ...defaultFont,
-    fontSize: "14px"
+    fontSize: '14px'
   },
   defaultHeaderMargins: {
-    marginTop: "20px",
-    marginBottom: "10px"
+    marginTop: '20px',
+    marginBottom: '10px'
   },
   pStyle: {
-    margin: "0 0 10px"
+    margin: '0 0 10px'
   },
   quote: {
-    padding: "10px 20px",
-    margin: "0 0 20px",
-    fontSize: "17.5px",
-    borderLeft: "5px solid #eee"
+    padding: '10px 20px',
+    margin: '0 0 20px',
+    fontSize: '17.5px',
+    borderLeft: '5px solid #eee'
   },
   quoteText: {
-    margin: "0 0 10px",
-    fontStyle: "italic"
+    margin: '0 0 10px',
+    fontStyle: 'italic'
   },
   quoteAuthor: {
-    display: "block",
-    fontSize: "80%",
-    lineHeight: "1.42857143",
-    color: "#777"
+    display: 'block',
+    fontSize: '80%',
+    lineHeight: '1.42857143',
+    color: '#777'
   },
   mutedText: {
-    color: "#777"
+    color: '#777'
   },
   primaryText: {
     color: primaryColor
@@ -58,16 +58,16 @@ const typographyStyle = {
     color: dangerColor
   },
   smallText: {
-    fontSize: "65%",
-    fontWeight: "400",
-    lineHeight: "1",
-    color: "#777"
+    fontSize: '65%',
+    fontWeight: '400',
+    lineHeight: '1',
+    color: '#777'
   },
   aStyle: {
-    textDecoration: "none",
-    backgroundColor: "transparent",
-    "&,&:hover": {
-      color: "#FFFFFF"
+    textDecoration: 'none',
+    backgroundColor: 'transparent',
+    '&,&:hover': {
+      color: '#FFFFFF'
     }
   }
 };

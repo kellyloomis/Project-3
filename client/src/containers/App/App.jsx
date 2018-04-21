@@ -1,27 +1,26 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { auth } from './../../firebase.js';
 
-import PerfectScrollbar from "perfect-scrollbar";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
+import PerfectScrollbar from 'perfect-scrollbar';
+import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
-import { withStyles, Hidden } from "material-ui";
+import { withStyles, Hidden } from 'material-ui';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import PowerSettingsNew from 'material-ui-icons/PowerSettingsNew';
 import { Dashboard, Person } from 'material-ui-icons';
 
-import { Header, Sidebar } from "./../../components";
+import { Header, Sidebar } from './../../components';
 
-import appRoutes from "./../../routes/app.jsx";
+import appRoutes from './../../routes/app.jsx';
 
-import appStyle from "./../../variables/styles/appStyle.jsx";
+import appStyle from './../../variables/styles/appStyle.jsx';
 // import "./../../assets/css/bootstrap.css";
 
-
-import logo from "./../../assets/img/reactlogo.png";
+import logo from './../../assets/img/reactlogo.png';
 
 const switchRoutes = (
   <Switch>
@@ -37,11 +36,11 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: sessionStorage.getItem("user"),
+      user: sessionStorage.getItem('user'),
       mobileOpen: false,
       open: false,
       hidden: false
-    }
+    };
     this.logout = this.logout.bind(this);
     this.profile = this.profile.bind(this);
     this.reports = this.reports.bind(this);
@@ -51,54 +50,53 @@ class App extends React.Component {
   };
   componentDidMount() {
     console.log(this.state.user);
-    if(!this.state.user) {
-      this.props.history.push("/landing");
+    if (!this.state.user) {
+      this.props.history.push('/landing');
     }
-    if(navigator.platform.indexOf('Win') > -1){
+    if (navigator.platform.indexOf('Win') > -1) {
       // eslint-disable-next-line
       const ps = new PerfectScrollbar(this.refs.mainPanel);
     }
   }
   componentDidUpdate() {
     this.refs.mainPanel.scrollTop = 0;
-  };
+  }
 
   profile() {
-    this.props.history.push("/profile");
-  };
+    this.props.history.push('/profile');
+  }
 
   reports() {
-    this.props.history.push("/select-report");
-  };
+    this.props.history.push('/select-report');
+  }
 
   logout() {
-    console.log("Logging out");
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-        this.props.history.push("/signup");
+    console.log('Logging out');
+    auth.signOut().then(() => {
+      this.setState({
+        user: null
       });
+      this.props.history.push('/signup');
+    });
   }
 
   handleClick = () => {
     this.setState({
-      open: !this.state.open,
+      open: !this.state.open
     });
   };
 
   handleOpen = () => {
     if (!this.state.hidden) {
       this.setState({
-        open: true,
+        open: true
       });
     }
   };
 
   handleClose = () => {
     this.setState({
-      open: false,
+      open: false
     });
   };
 
@@ -126,30 +124,29 @@ class App extends React.Component {
           open={open}
         >
           <SpeedDialAction
-            key={"Logout"}
+            key={'Logout'}
             icon={<PowerSettingsNew />}
-            tooltipTitle={"Logout"}
+            tooltipTitle={'Logout'}
             onClick={this.logout}
           />
           <SpeedDialAction
-            key={"Profile"}
+            key={'Profile'}
             icon={<Person />}
-            tooltipTitle={"Profile"}
+            tooltipTitle={'Profile'}
             onClick={this.profile}
           />
           <SpeedDialAction
-            key={"Reports"}
+            key={'Reports'}
             icon={<Dashboard />}
-            tooltipTitle={"Reports"}
+            tooltipTitle={'Reports'}
             onClick={this.reports}
           />
         </SpeedDial>
 
-
         <Hidden mdUp>
           <Sidebar
             routes={appRoutes}
-            logoText={"Peak Performance"}
+            logoText={'Peak Performance'}
             logo={logo}
             // Can pass an image as prop to display it as a background image for Sidebar
             // image={}

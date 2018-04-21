@@ -28,23 +28,27 @@ class Header extends Component {
   };
 
   render() {
-
     const navbarStyles = cx({
       'navbar-transparent': this.state.navbarTransparent
     });
 
     return (
-      <Navbar bsStyle="default" fixedTop className={navbarStyles} style={{padding: '0'}}>
+      <Navbar
+        bsStyle="default"
+        fixedTop
+        className={navbarStyles}
+        style={{ padding: '0' }}
+      >
         <Navbar.Header>
           <Navbar.Toggle />
           <a href="/">
-          <Navbar.Brand>
-            <p style={{color: '#fff'}}>Peak Performance</p>
-          </Navbar.Brand> 
+            <Navbar.Brand>
+              <p style={{ color: '#fff' }}>Peak Performance</p>
+            </Navbar.Brand>
           </a>
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav style={{float: 'right'}}>
+          <Nav style={{ float: 'right' }}>
             <NavItem eventKey={1} href="/signup">
               <Button bsStyle="danger" bsSize="large">
                 Get Started!

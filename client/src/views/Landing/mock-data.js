@@ -7,10 +7,10 @@ export const team = [
   {
     id: 1,
     img: team1,
-    name: 'Kris Jenner',
-    role: 'Role Here',
+    name: 'Roy Norton',
+    role: 'Front-End Specialist',
     description:
-      'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
+      'Professional career spans 25 years in the military defense industry as a software developer. Seeking to expand my career into a full-time web development position. Experienced in Ada, C, C++, HTML5, CSS3, Javascript, JQuery, Bootstrap, Node Js, Express Js and Handlebar Js. Additionally, have an engineering-based bachelor’s degree with distinct skills in problem solving, developing a software product from start to end to include defining the requirements, visualizing the design, implementing the design in a software programming language(s), developing and executing the software test plan, and delivering the final product with supporting end-user operation and training material.',
     links: {
       twitter: '#twitter',
       instagram: '#instagram',
@@ -23,7 +23,7 @@ export const team = [
     name: 'Caitlyn Jenner',
     role: 'Role Here',
     description:
-        'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
+      'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
     links: {
       twitter: '#twitter',
       linkedin: '#linkedin'

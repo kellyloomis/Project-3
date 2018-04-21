@@ -11,15 +11,10 @@ class CustomButton extends Component {
       'btn-round': round,
       'btn-simple': link,
       'btn-just-icon': justIcon,
-      'btn-fab btn-fab-mini': floating,
+      'btn-fab btn-fab-mini': floating
     });
 
-    return (
-      <Button
-        className={btnClasses}
-        {...rest}
-      />
-    );
+    return <Button className={btnClasses} {...rest} />;
   }
 }
 
@@ -27,7 +22,7 @@ CustomButton.propTypes = {
   round: PropTypes.bool,
   link: PropTypes.bool,
   floating: PropTypes.bool,
-  justIcon: PropTypes.bool,
-}
+  justIcon: PropTypes.bool
+};
 
 export default CustomButton;
