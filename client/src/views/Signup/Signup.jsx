@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
 import firebase, { auth, provider } from './../../firebase.js';
 import API from './../../api/API';
 import { Grid, Row, Col } from 'react-bootstrap';
@@ -8,18 +7,7 @@ import Button from './../../components/Signup/elements/CustomButton/CustomButton
 import { CustomInput } from './../../components';
 
 import './../../assets/css/App.css';
-
-const particlesOptions = {
-  particles: {
-    number: {
-      value: 30,
-      density: {
-        enable: true,
-        value_area: 800
-      }
-    }
-  }
-};
+import bg from './../../assets/img/bg.jpg';
 
 class Signup extends Component {
   constructor() {
@@ -93,21 +81,11 @@ class Signup extends Component {
           <div
             className="header header-filter"
             style={{
-              backgroundColor: '#000',
+              backgroundImage: `url(${bg})`,
               backgroundSize: 'cover',
               backgroundPosition: 'top center'
             }}
           >
-            <Particles
-              params={particlesOptions}
-              style={{
-                position: 'fixed',
-                top: '0',
-                right: '0',
-                bottom: '0',
-                left: '0'
-              }}
-            />
             <Grid>
               <Row>
                 <Col md={4} mdOffset={4} sm={6} smOffset={3}>
