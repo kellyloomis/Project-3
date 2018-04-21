@@ -26,6 +26,10 @@ export default {
   getEmployee: function(id) {
     return axios.get('/api/employee/' + id);
   },
+  // Gets the employee with the given id
+  getEmployeeByName: function(first, last) {
+    return axios.get('/api/employee/name/' + first + "/" + last);
+  },
   // Updates an employee to the database
   updateEmployee: function(id, employeeData) {
     return axios.post('/api/employee/' + id, employeeData);

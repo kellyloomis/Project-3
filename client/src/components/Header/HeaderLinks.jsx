@@ -1,38 +1,83 @@
 import React from "react";
-import classNames from "classnames";
-import { Manager, Target, Popper } from "react-popper";
+import { Redirect } from 'react-router';
 import {
-  withStyles,
-  IconButton,
-  MenuItem,
-  MenuList,
-  Grow,
-  Paper,
-  ClickAwayListener
+  withStyles
 } from "material-ui";
-import { Notifications, Search } from "material-ui-icons";
+import { Search } from "material-ui-icons";
 
-import { CustomInput, IconButton as SearchButton } from "./../../components";
+import { CustomInput, Snackbar, IconButton as SearchButton } from "./../../components";
 
 import headerLinksStyle from "./../../variables/styles/headerLinksStyle";
 
+import API from './../../api/API';
+
 class HeaderLinks extends React.Component {
+
   state = {
-    open: false
-  };
-  handleClick = () => {
-    this.setState({ open: !this.state.open });
+    searchField: "",
+    tc: false
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  // Handles updating component state when the user types into the input field
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
+
+  handleSearch = () => {
+    if(this.state.searchField) {
+      let names = this.state.searchField.split(' ');
+      API.getEmployeeByName(names[0], names[1])
+        .then(res => {
+          console.log(res);
+          if(res.data.length === 0) {
+            this.showNotification("tc");
+          } else {
+            console.log(res.data);
+            this.setState({redirect: true, employeeIdSelected: res.data[0].id});
+          }
+        });
+    }
+  };
+
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    setTimeout(
+      function() {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      6000
+    );
+  };
+
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    if (this.state.redirect) {
+      console.log(this.state);
+      return <Redirect push to={{pathname: "/employee-profile", state: {employeeIdSelected: this.state.employeeIdSelected}}}  />;
+    }
     return (
       <div>
+        <Snackbar
+          place="tc"
+          color="primary"
+          icon={Search}
+          message="No employee found."
+          open={this.state.tc}
+          closeNotification={() => this.setState({ tc: false })}
+          close
+        />
         <CustomInput
+          labelText="Search Employee"
+          id="search"
+          value={this.state.searchField}
+          onChange={this.handleInputChange}
+          name="searchField"
           formControlProps={{
             className: classes.top + " " + classes.search
           }}
@@ -46,66 +91,11 @@ class HeaderLinks extends React.Component {
         <SearchButton
           color="white"
           aria-label="edit"
+          onClick={this.handleSearch}
           customClass={classes.top + " " + classes.searchButton}
         >
           <Search className={classes.searchIcon} />
         </SearchButton>
-        <Manager style={{ display: "inline-block" }}>
-          <Target>
-            <IconButton
-              color="inherit"
-              aria-label="Notifications"
-              aria-owns={open ? "menu-list" : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-              className={classes.buttonLink}
-            >
-              <Notifications className={classes.links} />
-              <span className={classes.notifications}>3</span>
-
-            </IconButton>
-          </Target>
-          <Popper
-            placement="bottom-start"
-            eventsEnabled={open}
-            className={
-              classNames({ [classes.popperClose]: !open }) +
-              " " +
-              classes.pooperResponsive
-            }
-          >
-            <ClickAwayListener onClickAway={this.handleClose}>
-              <Grow
-                in={open}
-                id="menu-list"
-                style={{ transformOrigin: "0 0 0" }}
-              >
-                <Paper className={classes.dropdown}>
-                  <MenuList role="menu">
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={classes.dropdownItem}
-                    >
-                      You have 5 new reviews pending.
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={classes.dropdownItem}
-                    >
-                      John Doe review is overdue!
-                    </MenuItem>
-                    <MenuItem
-                      onClick={this.handleClose}
-                      className={classes.dropdownItem}
-                    >
-                      Elsa needs a review!
-                    </MenuItem>
-                  </MenuList>
-                </Paper>
-              </Grow>
-            </ClickAwayListener>
-          </Popper>
-        </Manager>
       </div>
     );
   }

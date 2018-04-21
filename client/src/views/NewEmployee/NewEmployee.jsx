@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, InputLabel } from 'material-ui';
+import { HighlightOff } from "material-ui-icons";
 import API from './../../api/API';
 
-import { RegularCard, Button, CustomInput, ItemGrid } from './../../components';
+import { RegularCard, Button, CustomInput, ItemGrid, Snackbar } from './../../components';
 
 class NewEmployee extends Component {
   // Setting our component's initial state
@@ -17,7 +18,14 @@ class NewEmployee extends Component {
     goals: '',
     userId: '',
     employeeId: '',
-    firebaseId: ''
+    firebaseId: '',
+    emailError: false,
+    firstnameError: false,
+    lastnameError: false,
+    managerError: false,
+    departmentError: false,
+    companyError: false,
+    tc: false
   };
 
   // When the component mounts, load the current manager(User model) and save them to this.state.manager
@@ -26,7 +34,7 @@ class NewEmployee extends Component {
     console.log(this.state.user);
     if (this.state.user) {
       this.setState({
-        company: this.state.user.companyName || '',
+        companyName: this.state.user.companyName || '',
         manager: this.state.user.email,
         userId: this.state.user.id
       });
@@ -42,23 +50,103 @@ class NewEmployee extends Component {
   };
 
   // Checks if the form has been completed and returns true if it has, false if not
-  // Console.log for now but will eventually be a notification popup
   isValid = () => {
-    if (
-      this.state.firstName &&
-      this.state.lastName &&
-      this.state.companyName &&
-      this.state.manager &&
-      this.state.department
-    ) {
+    let fnError = this.validFirstName();
+    let lnError = this.validLastName();
+    let eError = this.validEmail();
+    let cError = this.validCompany();
+    let mError = this.validManager();
+    let dError = this.validDepartment()
+    if (fnError && lnError && eError && cError && mError && dError) {
       return true;
     } else {
       console.log('Please complete all fields of the form.');
+      this.showNotification("tc");
     }
   };
 
-  parseGoals = () => {
-    console.log('PARSING');
+  validEmail = () => {
+    if(this.state.email) {
+      this.setState({
+        emailError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        emailError: true
+      });
+      return false;
+    }
+  };
+
+  validFirstName = () => {
+    if(this.state.firstName) {
+      this.setState({
+        firstnameError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        firstnameError: true
+      });
+      return false;
+    }
+  };
+
+  validLastName = () => {
+    if(this.state.lastName) {
+      this.setState({
+        lastnameError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        lastnameError: true
+      });
+      return false;
+    }
+  };
+
+  validManager = () => {
+    if(this.state.manager) {
+      this.setState({
+        managerError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        managerError: true
+      });
+      return false;
+    }
+  };
+
+  validDepartment = () => {
+    if(this.state.department) {
+      this.setState({
+        departmentError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        departmentError: true
+      });
+      return false;
+    }
+  };
+
+  validCompany = () => {
+    if(this.state.companyName) {
+      this.setState({
+        companyError: false
+      });
+      return true;
+    } else {
+      this.setState({
+        companyError: true
+      });
+      return false;
+    }
   };
 
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
@@ -84,27 +172,51 @@ class NewEmployee extends Component {
             employeeId: res.data.id
           });
           console.log(res);
-          goalArray.forEach(goal => {
-            API.saveGoal({
-              goals: goal.trim(),
-              EmployeeId: this.state.employeeId
-            })
-              .then(res => {
-                console.log(res);
+          if(goalArray) {
+            goalArray.forEach(goal => {
+              API.saveGoal({
+                goals: goal.trim(),
+                EmployeeId: this.state.employeeId
               })
-              .catch(err => console.log(err));
-          });
+                .then(res => {
+                  console.log(res);
+                  this.props.history.push("/welcome");
+                })
+                .catch(err => console.log(err));
+            });
+          } else {
+            this.props.history.push("/welcome");
+          }
         })
-        // .done(() => {
-        //   this.props.history.push("/");
-        // })
         .catch(err => console.log(err));
     }
+  };
+
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    setTimeout(
+      function() {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      6000
+    );
   };
 
   render() {
     return (
       <div>
+        <Snackbar
+          place="tc"
+          color="warning"
+          icon={HighlightOff}
+          message="Please complete all of the required fields."
+          open={this.state.tc}
+          closeNotification={() => this.setState({ tc: false })}
+          close
+        />
         <Grid container>
           <ItemGrid xs={12} sm={12} md={12}>
             <RegularCard
@@ -121,6 +233,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="companyName"
                         formControlProps={{
+                          error: this.state.companyError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -133,6 +247,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="email"
                         formControlProps={{
+                          error: this.state.emailError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -147,6 +263,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="firstName"
                         formControlProps={{
+                          error: this.state.firstnameError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -159,6 +277,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="lastName"
                         formControlProps={{
+                          error: this.state.lastnameError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -173,6 +293,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="manager"
                         formControlProps={{
+                          error: this.state.managerError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -185,6 +307,8 @@ class NewEmployee extends Component {
                         onChange={this.handleInputChange}
                         name="department"
                         formControlProps={{
+                          error: this.state.departmentError,
+                          required: true,
                           fullWidth: true
                         }}
                       />
@@ -196,7 +320,7 @@ class NewEmployee extends Component {
                         Goals
                       </InputLabel>
                       <CustomInput
-                        labelText="Enter goals here."
+                        labelText="Enter goals here separated by comma(,) ex: Goal 1, Goal 2, Goal 3"
                         id="goals"
                         value={this.state.goals}
                         onChange={this.handleInputChange}

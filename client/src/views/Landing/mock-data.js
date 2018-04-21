@@ -10,7 +10,7 @@ export const team = [
     name: 'Jamie David',
     role: 'Operations Specialist',
     description:
-      'Proffesional implementor of website architecture, programs, scripts & design user interfaces including menus & forms through the use of technologies such as: HTML5, CSS3, BootStrap, JavaScript, jQuery, PHP, & MySQL.',
+      'An organism capable of converting caffeine into code or a red-eyed, mumbling mammal capable of conversing with inanimate objects. On a good day I can be both!',
     links: {
       twitter: '#twitter',
       linkedin: '#linkedin'
@@ -46,7 +46,7 @@ export const team = [
     id: 4,
     img: team4,
     name: 'Dillon Faulkner',
-    role: 'Digital Janitor',
+    role: 'Digital Custodian Specialist',
     description:
       'No project is too big for my digital mop & I. We will cleanup & optimize anything & everything we can get our keys on. Did you say refactor? Let me at \'em!.',
     links: {

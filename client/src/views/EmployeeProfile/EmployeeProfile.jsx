@@ -9,7 +9,7 @@ import {
   InputAdornment,
   InputLabel
 } from 'material-ui';
-import { Done } from 'material-ui-icons';
+import { AddAlert, Done } from 'material-ui-icons';
 
 import API from './../../api/API';
 
@@ -19,6 +19,7 @@ import {
   Button,
   CustomInput,
   ItemGrid,
+  Snackbar,
   TasksCard
 } from './../../components';
 
@@ -35,7 +36,8 @@ class EmployeeProfile extends Component {
     lastname: '',
     goals: '',
     newGoals: 0,
-    newGoalCount: 0
+    newGoalCount: 0,
+    tc: false
   };
 
   componentDidMount() {
@@ -99,9 +101,22 @@ class EmployeeProfile extends Component {
     })
       .then(res => {
         console.log(res);
-        this.props.history.push('/');
+        this.showNotification("tc");
       })
       .catch(err => console.log(err));
+  };
+
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    setTimeout(
+      function() {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      6000
+    );
   };
 
   render() {
@@ -140,6 +155,15 @@ class EmployeeProfile extends Component {
     }
     return (
       <div>
+        <Snackbar
+          place="tc"
+          color="info"
+          icon={AddAlert}
+          message="Profile successfully updated!"
+          open={this.state.tc}
+          closeNotification={() => this.setState({ tc: false })}
+          close
+        />
         <Grid container>
           <ItemGrid xs={12} sm={12} md={8}>
             <RegularCard

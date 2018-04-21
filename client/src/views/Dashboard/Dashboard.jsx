@@ -29,12 +29,12 @@ import dashboardStyle from './../../variables/styles/dashboardStyle';
 class Dashboard extends React.Component {
 
   state = {
-    start: "",
-    end: "",
     monthlyGoalsData: "",
     monthlyGoalsSeries: [],
     averageReviewsSeries: [],
-    performanceTrendSeries: []
+    performanceTrendSeries: [],
+    employeeName: "",
+    employeeCount: ""
   };
 
   getCompletedGoals = () => {
@@ -74,6 +74,24 @@ class Dashboard extends React.Component {
         });
     }
   };
+
+  getEmployeeName = (employeeId) => {
+    API.getEmployee(employeeId)
+      .then(res => {
+        this.setState({
+          employeeName: res.data.firstname + " " + res.data.lastname
+        });
+      });
+  };
+
+  getEmployeeCount = () => {
+    API.getAllEmployee()
+      .then(res => {
+        this.setState({
+          employeeCount: res.data.length
+        });
+      });
+  }
 
   getAverageReviews = () => {
     let seriesData = [];
@@ -191,26 +209,19 @@ class Dashboard extends React.Component {
       });
   };
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     if(this.props.location.state.id) {
       console.log("Getting Employee Data");
       this.getPerformanceTrendEmployee(this.props.location.state.id);
       this.getAverageReviewsEmployee(this.props.location.state.id);
       this.getCompletedGoalsEmployee(this.props.location.state.id);
+      this.getEmployeeName(this.props.location.state.id);
     } else {
       console.log("Getting All Data");
       this.getCompletedGoals();
       this.getAverageReviews();
       this.getPerformanceTrend();
-    }
-  };
-
-  componentWillMount = () => {
-    if(this.props.location.state) {
-      this.setState({
-        start: this.props.location.state.start + " 00:00:00",
-        end: this.props.location.state.end + " 00:00:00"
-      });
+      this.getEmployeeCount();
     }
   }
 
@@ -236,8 +247,8 @@ class Dashboard extends React.Component {
             <StatsCard
               icon={Accessibility}
               iconColor="blue"
-              title="Employees"
-              description="+245"
+              title="Employee(s) Shown"
+              description={this.state.employeeName || this.state.employeeCount + " Employees"}
               statIcon={Update}
               statText="Just Updated"
             />

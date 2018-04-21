@@ -1,4 +1,5 @@
 const db = require('../models');
+const sequelize = require('sequelize');
 
 // Defining methods for the employeeController
 module.exports = {
@@ -11,6 +12,19 @@ module.exports = {
   findById: function(req, res) {
     db.Employee
       .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findByName: function(req, res) {
+    let fname = req.params.first.toLowerCase();
+    let lname = req.params.last.toLowerCase();
+    db.Employee
+      .findAll({
+        where: {
+          firstname: sequelize.where(sequelize.fn('LOWER', sequelize.col('firstname')), 'LIKE', '%' + fname + '%'),
+          lastname: sequelize.where(sequelize.fn('LOWER', sequelize.col('lastname')), 'LIKE', '%' + lname + '%')
+        }
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -10,13 +10,14 @@ class Category extends Component {
             type="button"
             className="btn btn-info btn-circle btn-xl"
             id="greenButton"
-            onClick={score =>
+            onClick={(score,event) =>
               this.props.onClick(
                 {
                   subject: this.props.title,
                   score: 3
                 },
-                score
+                score,
+                event
               )
             }
           >

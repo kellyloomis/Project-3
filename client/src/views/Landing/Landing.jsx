@@ -39,9 +39,7 @@ class Landing extends Component {
                     will utilize existing templates, with the option of
                     customizing, to individually score each employee on a scale
                     of: below expectations, meets expectations, exceeds
-                    expectations. Managers will have a required text box for
-                    each question to briefly explain why the selected
-                    option/score was given.
+                    expectations.
                   </h5>
                 </Col>
               </Row>
@@ -54,7 +52,7 @@ class Landing extends Component {
                         <i className="material-icons">chat</i>
                       </div>
                       <h4 className="info-title">Engaging</h4>
-                      <p>Progress Made Fun</p>
+                      <p>Important Progress Tracking Made Fun.</p>
                     </div>
                   </Col>
                   <Col md={4}>
@@ -63,7 +61,7 @@ class Landing extends Component {
                         <i className="material-icons">verified_user</i>
                       </div>
                       <h4 className="info-title">Accurate</h4>
-                      <p>Clarity Through Simplicity</p>
+                      <p>Clarity Through Simplicity; No Head-Scratching Filler.</p>
                     </div>
                   </Col>
                   <Col md={4}>
@@ -72,7 +70,7 @@ class Landing extends Component {
                         <i className="material-icons">fingerprint</i>
                       </div>
                       <h4 className="info-title">Secure</h4>
-                      <p>Only The Best Intentions</p>
+                      <p>Only The Best Intentions.</p>
                     </div>
                   </Col>
                 </Row>
