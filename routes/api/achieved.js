@@ -1,21 +1,23 @@
-const router = require("express").Router();
-const achievedController = require("../../controllers/achievedController");
+const router = require('express').Router();
+const achievedController = require('../../controllers/achievedController');
 
 // Matches with "/api/achieved"
-router.route("/")
+router
+  .route('/')
   .get(achievedController.findAll)
   .post(achievedController.create);
 
 // Matches with "/api/achieved/employee/:id"
-router.route("/employee/:id")
-	.get(achievedController.getEmployeeAchieveds);
+router
+  .route('/employee/:id')
+  .get(achievedController.getEmployeeAchieveds);
 
  router.route("/within/:start/:end")
  	.get(achievedController.getAchievedWithin);
 
 // Matches with "/api/achieved/:id"
 router
-  .route("/:id")
+  .route('/:id')
   .get(achievedController.findById)
   .post(achievedController.update)
   .delete(achievedController.remove);

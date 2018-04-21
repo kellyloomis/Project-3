@@ -14,15 +14,15 @@ import './assets/css/dashboard.css';
 const history = createBrowserHistory();
 
 ReactDOM.render(
-	<Router history={history}>
-		<Switch>
-			<Route path="/signup" component={Signup} />
-			<Route path="/landing" component={Landing} />
-			{indexRoutes.map((prop, key) => {
-				return <Route path={prop.path} component={prop.component} key={key} />;
-			})}
-		</Switch>
-	</Router>,
-	document.getElementById('root')
+  <Router history={history}>
+    <Switch>
+      <Route path="/signup" component={Signup} />
+      <Route path="/landing" component={Landing} />
+      {indexRoutes.map((prop, key) => {
+        return <Route path={prop.path} component={prop.component} key={key} />;
+      })}
+    </Switch>
+  </Router>,
+  document.getElementById('root')
 );
 registerServiceWorker();

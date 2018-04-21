@@ -1,8 +1,9 @@
-const router = require("express").Router();
-const reviewController = require("../../controllers/reviewController");
+const router = require('express').Router();
+const reviewController = require('../../controllers/reviewController');
 
 // Matches with "/api/review"
-router.route("/")
+router
+  .route('/')
   .get(reviewController.findAll)
   .post(reviewController.create);
 
@@ -11,7 +12,7 @@ router.route("/within/:start/:end")
 
 // Matches with "/api/review/:id"
 router
-  .route("/:id")
+  .route('/:id')
   .get(reviewController.findById)
   .post(reviewController.update)
   .delete(reviewController.remove);

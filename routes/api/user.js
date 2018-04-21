@@ -1,18 +1,17 @@
-const router = require("express").Router();
-const userController = require("../../controllers/userController");
+const router = require('express').Router();
+const userController = require('../../controllers/userController');
 
 // Matches with "/api/user"
-router.route("/")
+router
+  .route('/')
   .get(userController.findAll)
   .post(userController.create);
 
-router
- 	.route("/fid")
- 	.post(userController.findOne);
+router.route('/fid').post(userController.findOne);
 
 // Matches with "/api/user/:id"
 router
-  .route("/:id")
+  .route('/:id')
   .get(userController.findById)
   .post(userController.update)
   .delete(userController.remove);

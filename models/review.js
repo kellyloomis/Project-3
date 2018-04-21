@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Review = sequelize.define("Review", {
+  var Review = sequelize.define('Review', {
     // Giving the Review model an attendance of type INTEGER
     attendance: {
       type: DataTypes.INTEGER,
@@ -44,4 +44,3 @@ module.exports = function(sequelize, DataTypes) {
 
   return Review;
 };
-

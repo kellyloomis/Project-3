@@ -1,7 +1,7 @@
 import {
-	Navbar,
-	Pagination,
-	Button,
+  Navbar,
+  Pagination,
+  Button,
 } from 'react-bootstrap';
 import { addStyle } from 'react-bootstrap/lib/utils/bootstrapUtils';
 
