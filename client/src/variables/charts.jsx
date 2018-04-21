@@ -76,7 +76,7 @@ const emailsSubscriptionChart = {
       "Feb",
       "Mar",
       "Apr",
-      "Mai",
+      "May",
       "Jun",
       "Jul",
       "Aug",
@@ -85,14 +85,14 @@ const emailsSubscriptionChart = {
       "Nov",
       "Dec"
     ],
-    series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+    series: [[Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1, Math.random() * (3 - 1) + 1]]
   },
   options: {
     axisX: {
       showGrid: false
     },
-    low: 0,
-    high: 1000,
+    low: 1,
+    high: 3,
     chartPadding: {
       top: 0,
       right: 5,
@@ -131,20 +131,20 @@ const emailsSubscriptionChart = {
 };
 
 // ##############################
-// // // Completed Tasks
+// // // Completed Goals
 // #############################
 
-const completedTasksChart = {
+let completedTasksChart = {
   data: {
-    labels: ["12am", "3pm", "6pm", "9pm", "12pm", "3am", "6am", "9am"],
-    series: [[230, 750, 450, 300, 280, 240, 200, 190]]
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    series: [[230, 750, 450, 300, 280, 240, 200, 190, 70, 134, 220, 120]]
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
       tension: 0
     }),
     low: 0,
-    high: 1000,
+    high: 1,
     chartPadding: {
       top: 0,
       right: 0,

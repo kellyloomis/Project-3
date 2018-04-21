@@ -10,6 +10,9 @@ router.route("/")
 router.route("/employee/:id")
 	.get(achievedController.getEmployeeAchieveds);
 
+ router.route("/within/:start/:end")
+ 	.get(achievedController.getAchievedWithin);
+
 // Matches with "/api/achieved/:id"
 router
   .route("/:id")

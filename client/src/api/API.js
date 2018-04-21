@@ -64,6 +64,10 @@ export default {
   deleteGoal: function(id) {
     return axios.delete("/api/goal/" + id);
   },
+  // Gets all achieved goals within a specified date range
+  getAchievedWithin: function(startDate, endDate) {
+    return axios.get("/api/achieved/within/" + startDate + "/" + endDate);
+  },
   // Saves an achieved goal to the database
   saveAchieved: function(achievedData) {
     return axios.post("/api/achieved", achievedData);
@@ -71,5 +75,9 @@ export default {
   // Deletes the achieved goal with the given id
   deleteAchieved: function(id) {
     return axios.delete("/api/achieved/" + id);
+  },
+  //
+  getReviewsWithin: function(startDate, endDate) {
+    return axios.get("/api/review/within/" + startDate + "/" + endDate);
   }
 };

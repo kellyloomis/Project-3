@@ -35,5 +35,18 @@ module.exports = {
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  getReviewWithin: function(req, res) {
+    db.Review
+      .findAll({
+        where: {
+          updatedAt: {
+            $between: [req.params.start, req.params.end]
+          }
+        }
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
+
 };

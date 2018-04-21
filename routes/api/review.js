@@ -6,6 +6,9 @@ router.route("/")
   .get(reviewController.findAll)
   .post(reviewController.create);
 
+router.route("/within/:start/:end")
+ 	.get(reviewController.getReviewWithin);
+
 // Matches with "/api/review/:id"
 router
   .route("/:id")
