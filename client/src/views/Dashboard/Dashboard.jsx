@@ -2,7 +2,7 @@ import React from 'react';
 // react plugin for creating charts
 import ChartistGraph from 'react-chartist';
 import {
-  Store,
+  Description,
   DateRange,
   Update,
   ArrowUpward,
@@ -144,9 +144,9 @@ class Dashboard extends React.Component {
           averageSum = sumArray.reduce((a, b) => {return a + b}, 0);
           console.log(averageSum);
           if(reviewCount > 0) {
-            seriesData.push(averageSum/reviewCount);
+            seriesData[i-1] = (averageSum/reviewCount);
           } else {
-            seriesData.push(0);
+            seriesData[i-1] = (0);
           }
           if(i === 12) {
             this.setState({
@@ -188,9 +188,9 @@ class Dashboard extends React.Component {
           console.log(averageSum);
           console.log(reviewCount);
           if(reviewCount > 0) {
-            seriesData.push(averageSum/reviewCount);
+            seriesData[i-1] = (averageSum/reviewCount);
           } else {
-            seriesData.push(0);
+            seriesData[i-1] = (0);
           }
           if(i === 12) {
             console.log(seriesData);
@@ -263,8 +263,8 @@ class Dashboard extends React.Component {
         <Grid container>
           <ItemGrid xs={12} sm={6} md={6}>
             <StatsCard
-              icon={Store}
-              iconColor="green"
+              icon={Description}
+              iconColor="purple"
               title="Selected Reports"
               description={this.props.location.state.id ? "Individual Employee" : "All Employees"}
               statIcon={DateRange}

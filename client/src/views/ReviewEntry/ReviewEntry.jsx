@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import Category from '../../components/ReviewEntryPage/Category/Category.jsx';
 import categories from '../../components/ReviewEntryPage/Category/categories.json';
 import API from './../../api/API';
 import { FormControl, InputLabel, MenuItem, Select } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
+
+import {
+  Button
+} from "./../../components";
 
 import './ReviewEntry.css';
 
@@ -108,9 +113,8 @@ class ReviewEntry extends Component {
         <div>
           <br />
           <br />
-          <button className="w3-btn w3-blue" onClick={this.handleSubmit}>
-            Submit
-          </button>
+          
+          <Button onClick={this.handleSubmit} component={Link} to="/welcome" color="warning">Submit</Button>
         </div>
       </div>
     );
