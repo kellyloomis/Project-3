@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid } from 'material-ui';
+import { AddAlert } from "material-ui-icons";
 import API from './../../api/API';
 
 import {
@@ -7,7 +8,8 @@ import {
   RegularCard,
   Button,
   CustomInput,
-  ItemGrid
+  ItemGrid,
+  Snackbar
 } from './../../components';
 
 import avatar from './../../assets/img/vader.jpg';
@@ -19,7 +21,8 @@ class UserProfile extends Component {
     username: '',
     email: '',
     firstname: '',
-    lastname: ''
+    lastname: '',
+    tc: false
   };
 
   componentDidMount() {
@@ -60,16 +63,38 @@ class UserProfile extends Component {
             console.log('API returns:');
             console.log(res);
             sessionStorage.setItem('user', JSON.stringify(res.data[0]));
-            this.props.history.push('/');
+            this.showNotification("tc");
           })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   };
 
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    setTimeout(
+      function() {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      6000
+    );
+  };
+
   render() {
     return (
       <div>
+        <Snackbar
+          place="tc"
+          color="info"
+          icon={AddAlert}
+          message="Profile successfully updated!"
+          open={this.state.tc}
+          closeNotification={() => this.setState({ tc: false })}
+          close
+        />
         <Grid container>
           <ItemGrid xs={12} sm={12} md={8}>
             <RegularCard
