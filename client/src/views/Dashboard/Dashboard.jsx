@@ -49,7 +49,8 @@ class Dashboard extends React.Component {
     end: "",
     monthlyGoalsData: "",
     monthlyGoalsSeries: [],
-    averageReviewsSeries: []
+    averageReviewsSeries: [],
+    performanceTrendSeries: []
   };
 
   getMonths = () => {
@@ -94,6 +95,25 @@ class Dashboard extends React.Component {
     }
   };
 
+  getCompletedGoalsEmployee = (employeeId) => {
+    let seriesData = [];
+    for(let i = 1; i <= 12; i++) {
+      API.getAchievedWithinByEmployee("2018-" + i + "-01 00:00:00", "2018-" + i + "-28 00:00:00", employeeId)
+        .then(res => {
+          //console.log(res.data);
+          seriesData.push(res.data.length);
+          if(res.data.length > completedTasksChart.options.high) {
+            completedTasksChart.options.high = res.data.length + 1;
+          }
+          if(i === 12) {
+            this.setState({
+              monthlyGoalsSeries: [seriesData]
+            });
+          }
+        });
+    }
+  };
+
   getAverageReviews = () => {
     let seriesData = [];
     let averageSum = 0;
@@ -109,7 +129,18 @@ class Dashboard extends React.Component {
           /* eslint-enable */
           console.log(res.data);
           reviewCount = res.data.length;
-          sumArray = res.data.map(review => Object.keys(review).reduce((sum,key) => sum + review[key], 0));
+          sumArray = res.data.map(review => {
+            console.log(review);
+            return (
+                  (review.appearance) + 
+                  (review.attendance) + 
+                  (review.communication) + 
+                  (review.professionalism) + 
+                  (review.quality) + 
+                  (review.taskcompletion)
+                  ) / 6;
+          });
+          console.log(sumArray);
           averageSum = sumArray.reduce((a, b) => {return a + b}, 0);
           console.log(averageSum);
           if(reviewCount > 0) {
@@ -126,9 +157,91 @@ class Dashboard extends React.Component {
     }
   };
 
+  getAverageReviewsEmployee = (employeeId) => {
+    let seriesData = [];
+    let averageSum = 0;
+    let sumArray = [];
+    let reviewCount = 0;
+    /* eslint-disable */
+    for(let i = 1; i <= 12; i++) {
+      averageSum = 0;
+      sumArray = [];
+      reviewCount = 0;
+      API.getReviewsWithinByEmployee("2018-" + i + "-01 00:00:00", "2018-" + i + "-28 00:00:00", employeeId)
+        .then(res => {
+          /* eslint-enable */
+          console.log(res.data);
+          reviewCount = res.data.length;
+          sumArray = res.data.map(review => {
+            console.log(review);
+            return (
+                  (review.appearance) + 
+                  (review.attendance) + 
+                  (review.communication) + 
+                  (review.professionalism) + 
+                  (review.quality) + 
+                  (review.taskcompletion)
+                  ) / 6;
+          });
+          console.log(sumArray);
+          averageSum = sumArray.reduce((a, b) => {return a + b}, 0);
+          console.log(averageSum);
+          console.log(reviewCount);
+          if(reviewCount > 0) {
+            seriesData.push(averageSum/reviewCount);
+          } else {
+            seriesData.push(0);
+          }
+          if(i === 12) {
+            console.log(seriesData);
+            this.setState({
+              averageReviewsSeries: [seriesData]
+            });
+          }
+        });
+    }
+  };
+
+  getPerformanceTrend = () => {
+    API.getAllReviews()
+      .then(res => {
+        console.log(res);
+        if(res.data.length === 0) {
+          return;
+        } 
+        let review = res.data[0];
+        this.setState({
+          performanceTrendSeries: [[review.appearance, review.attendance, review.communication, review.professionalism, review.quality, review.taskcompletion]]
+        });
+      });
+  };
+
+  getPerformanceTrendEmployee = (employeeId) => {
+    API.getEmployeeReviews(employeeId)
+      .then(res => {
+        console.log(res);
+        if(res.data.length === 0) {
+          return;
+        } 
+        let review = res.data[0];
+        this.setState({
+          performanceTrendSeries: [[review.appearance, review.attendance, review.communication, review.professionalism, review.quality, review.taskcompletion]]
+        });
+      });
+  };
+
   componentDidMount = () => {
-    this.getCompletedGoals();
-    this.getAverageReviews();
+    if(this.props.location.state.id) {
+      console.log("Getting Employee Data");
+      this.getPerformanceTrendEmployee(this.props.location.state.id);
+      this.getAverageReviewsEmployee(this.props.location.state.id);
+      this.getCompletedGoalsEmployee(this.props.location.state.id);
+    } else {
+      console.log("Getting All Data");
+      this.getCompletedGoals();
+      this.getAverageReviews();
+      this.getPerformanceTrend();
+    }
   };
 
   componentWillMount = () => {
@@ -144,6 +257,7 @@ class Dashboard extends React.Component {
     console.log(this.props);
     completedTasksChart.data.series = this.state.monthlyGoalsSeries;
     emailsSubscriptionChart.data.series = this.state.averageReviewsSeries;
+    dailySalesChart.data.series = this.state.performanceTrendSeries;
     return (
       <div>
         <Grid container>
@@ -151,8 +265,8 @@ class Dashboard extends React.Component {
             <StatsCard
               icon={Store}
               iconColor="green"
-              title="Selected Date"
-              description={this.props.location.state.start + " to " + this.props.location.state.end}
+              title="Selected Reports"
+              description={this.props.location.state.id ? "Individual Employee" : "All Employees"}
               statIcon={DateRange}
               statText="Last 24 Hours"
             />
@@ -181,7 +295,7 @@ class Dashboard extends React.Component {
                 />
               }
               chartColor="green"
-              title="Daily Reviews"
+              title="Performance Trend"
               text={
                 <span>
                   <span className={this.props.classes.successText}>
@@ -190,7 +304,7 @@ class Dashboard extends React.Component {
                     />{' '}
                     55%
                   </span>{" "}
-                  increase from yesterday performance.
+                  increase from last reviewed performance.
                 </span>
               }
               statIcon={AccessTime}

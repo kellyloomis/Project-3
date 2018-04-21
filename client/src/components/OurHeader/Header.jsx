@@ -37,7 +37,7 @@ class Header extends Component {
 			      <Link to={{ pathname: '/review-entry', state: { employees: this.props.employees} }} className="w3-bar-item w3-button">
 			       		Enter Review
 			       </Link>
-			      <Link to="/select-report" className="w3-bar-item w3-button">
+			      <Link to={{ pathname: '/select-report', state: { employees: this.props.employees} }} className="w3-bar-item w3-button">
 			       		Run Reports
 			       </Link>
 			       <Link to="/add-employee" className="w3-bar-item w3-button">

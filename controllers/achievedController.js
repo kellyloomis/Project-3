@@ -46,6 +46,19 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  getAchievedWithinByEmployee: function(req, res) {
+    db.Achieved
+      .findAll({
+        where: {
+          EmployeeId: req.params.employeeId,
+          updatedAt: {
+            $between: [req.params.start, req.params.end]
+          }
+        }
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   getAchievedWithin: function(req, res) {
     db.Achieved
       .findAll({

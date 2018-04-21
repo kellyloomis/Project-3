@@ -17,15 +17,15 @@ var delays2 = 80,
 
 const dailySalesChart = {
   data: {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    series: [[12, 17, 7, 17, 23, 18, 38]]
+    labels: ['Attr.', 'Appr.', 'Comm.', 'Prof.', 'Qual.', 'Task.'],
+    series: [[1, 2, 2, 1, 3, 1]]
   },
   options: {
     lineSmooth: Chartist.Interpolation.cardinal({
       tension: 0
     }),
     low: 0,
-    high: 50,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 0,
@@ -91,8 +91,8 @@ const emailsSubscriptionChart = {
     axisX: {
       showGrid: false
     },
-    low: 1,
-    high: 3,
+    low: 0,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 5,
@@ -144,7 +144,7 @@ let completedTasksChart = {
       tension: 0
     }),
     low: 0,
-    high: 1,
+    high: 4,
     chartPadding: {
       top: 0,
       right: 0,

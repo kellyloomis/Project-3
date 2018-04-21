@@ -22,7 +22,7 @@ app.use(routes);
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 // Add {force: true} inside of sync to resolve DB/model changes
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log(`🌎 ==> Server now on port ${PORT}!`);
   });
