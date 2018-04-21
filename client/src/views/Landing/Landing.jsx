@@ -105,7 +105,7 @@ class Landing extends Component {
             <div className="section landing-section">
               <Row>
                 <Col md={8} mdOffset={2}>
-                  <h2 className="text-center title">Connect with us</h2>
+                  <h2 className="text-center title">Support Us</h2>
                   <h4 className="text-center description">
                     We accept funding through your generous donations! With
                     every donation of $999+ we will plant a tree & adopt a
@@ -124,7 +124,7 @@ class Landing extends Component {
                     <Input label="Your Pledge" type="textarea" rows="4" />
 
                     <div className="text-center">
-                      <Button bsStyle="primary">Send Message</Button>
+                      <Button bsStyle="primary">Send</Button>
                     </div>
                   </form>
                 </Col>
