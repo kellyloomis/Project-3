@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
+import ChartistGraph from 'react-chartist';
 import {
   Store,
   DateRange,
@@ -22,9 +22,9 @@ import {
   dailySalesChart,
   emailsSubscriptionChart,
   completedTasksChart
-} from "./../../variables/charts";
+} from './../../variables/charts';
 
-import dashboardStyle from "./../../variables/styles/dashboardStyle";
+import dashboardStyle from './../../variables/styles/dashboardStyle';
 
 const MONTHS = [
       "FILLER",
@@ -187,7 +187,7 @@ class Dashboard extends React.Component {
                   <span className={this.props.classes.successText}>
                     <ArrowUpward
                       className={this.props.classes.upArrowCardCategory}
-                    />{" "}
+                    />{' '}
                     55%
                   </span>{" "}
                   increase from yesterday performance.

@@ -6,11 +6,23 @@ import team4 from './img/droid.png';
 export const team = [
   {
     id: 1,
-    img: team1,
-    name: 'Kris Jenner',
-    role: 'Role Here',
+    img: team2,
+    name: 'Jamie David',
+    role: 'Operations Specialist',
     description:
-      'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
+      'Proffesional implementor of website architecture, programs, scripts & design user interfaces including menus & forms through the use of technologies such as: HTML5, CSS3, BootStrap, JavaScript, jQuery, PHP, & MySQL.',
+    links: {
+      twitter: '#twitter',
+      linkedin: '#linkedin'
+    }
+  },
+  {
+    id: 2,
+    img: team1,
+    name: 'Roy Norton',
+    role: 'Front-End Specialist',
+    description:
+      'Professional career spans 25 years in the military defense industry as a software developer. Experienced in Ada, C, C++, HTML5, CSS3, Javascript, JQuery, Bootstrap, Node Js, Express Js & Handlebar Js.',
     links: {
       twitter: '#twitter',
       instagram: '#instagram',
@@ -18,24 +30,12 @@ export const team = [
     }
   },
   {
-    id: 2,
-    img: team2,
-    name: 'Caitlyn Jenner',
-    role: 'Role Here',
-    description:
-        'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
-    links: {
-      twitter: '#twitter',
-      linkedin: '#linkedin'
-    }
-  },
-  {
     id: 3,
     img: team3,
-    name: 'Kendall Jenner',
-    role: 'Role Here',
+    name: 'Kelly Loomis',
+    role: 'Project Manager & Consultant',
     description:
-      'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
+      'Experienced Human Resources Manager with a demonstrated history of working in the government contracts & healthcare industries. Strong human resources professional skilled in Full Cycle Recruitment, Employee Relations, Talent Management, Career Development, Coaching, Personnel Management, Organizational Development & Start-Ups.',
     links: {
       googleplus: '#googleplus',
       youtube: '#youtube',
@@ -45,10 +45,10 @@ export const team = [
   {
     id: 4,
     img: team4,
-    name: 'Kylie Jenner',
-    role: 'Role Here',
+    name: 'Dillon Faulkner',
+    role: 'Digital Janitor',
     description:
-      'Can write here details about team members. We can give more details about ourselves. Feel free to add some <a href="#">links</a> for social media.',
+      'No project is too big for my digital mop & I. We will cleanup & optimize anything & everything we can get our keys on. Did you say refactor? Let me at \'em!.',
     links: {
       googleplus: '#googleplus',
       youtube: '#youtube',

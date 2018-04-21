@@ -3,8 +3,6 @@ import axios from 'axios';
 export default {
   // Gets the user with the given firebase id
   getUser: function(firebaseUser) {
-    console.log('getUser called');
-    console.log(firebaseUser);
     return axios.post('/api/user/fid', firebaseUser);
   },
   // Updates a User to the database
@@ -19,7 +17,7 @@ export default {
   // Gets all employees from User
   getAllEmployeeFromUser: function(userId) {
     return axios.get('/api/employee/user/' + userId);
-  },  
+  },
   // Saves an employee to the database
   saveEmployee: function(employeeData) {
     return axios.post('/api/employee', employeeData);
@@ -79,5 +77,13 @@ export default {
   // Gets all reviews within a specified date range
   getReviewsWithin: function(startDate, endDate) {
     return axios.get("/api/review/within/" + startDate + "/" + endDate);
+  },
+  // Saves a review to the database
+  saveReview: function(reviewData) {
+    return axios.post('/api/review', reviewData);
+  },
+  // Deletes the review with the given id
+  deleteReview: function(id) {
+    return axios.delete('/api/review/' + id);
   }
 };

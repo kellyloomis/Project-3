@@ -70,10 +70,7 @@ class CustomInput extends Component {
     if (type === 'textarea') {
       return (
         <FormGroup className={cnInput} validationState={state}>
-          {label &&
-            <ControlLabel>
-              {label}
-            </ControlLabel>}
+          {label && <ControlLabel>{label}</ControlLabel>}
           <FormControl
             rows={4}
             componentClass="textarea"
@@ -92,14 +89,10 @@ class CustomInput extends Component {
       return (
         <FormGroup validationState={state} className={cnInput}>
           <InputGroup>
-            <InputGroup.Addon>
-              {addonIcon}
-            </InputGroup.Addon>
+            <InputGroup.Addon>{addonIcon}</InputGroup.Addon>
             {this.renderFormControl()}
           </InputGroup>
-          <FormControl.Feedback>
-            {feedbackIcon}
-          </FormControl.Feedback>
+          <FormControl.Feedback>{feedbackIcon}</FormControl.Feedback>
         </FormGroup>
       );
     }
@@ -107,14 +100,9 @@ class CustomInput extends Component {
     // Input without Addon Icon
     return (
       <FormGroup validationState={state} className={cnInput}>
-        {label &&
-          <ControlLabel>
-            {label}
-          </ControlLabel>}
+        {label && <ControlLabel>{label}</ControlLabel>}
         {this.renderFormControl()}
-        <FormControl.Feedback>
-          {feedbackIcon}
-        </FormControl.Feedback>
+        <FormControl.Feedback>{feedbackIcon}</FormControl.Feedback>
       </FormGroup>
     );
   }

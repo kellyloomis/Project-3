@@ -1,42 +1,37 @@
-import React, { Component } from "react";
-import { Grid, InputLabel } from "material-ui";
-import API from "./../../api/API";
+import React, { Component } from 'react';
+import { Grid, InputLabel } from 'material-ui';
+import API from './../../api/API';
 
-import {
-  RegularCard,
-  Button,
-  CustomInput,
-  ItemGrid
-} from "./../../components";
+import { RegularCard, Button, CustomInput, ItemGrid } from './../../components';
 
 class NewEmployee extends Component {
   // Setting our component's initial state
   state = {
-    user: JSON.parse(sessionStorage.getItem("user")),
-    companyName: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    manager: "",
-    department: "",
-    goals: "",
-    userId: "",
-    employeeId: "",
-    firebaseId: ""
+    user: JSON.parse(sessionStorage.getItem('user')),
+    companyName: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    manager: '',
+    department: '',
+    goals: '',
+    userId: '',
+    employeeId: '',
+    firebaseId: ''
   };
 
   // When the component mounts, load the current manager(User model) and save them to this.state.manager
   // Also save the User ID to this.state.userId
   componentDidMount() {
     console.log(this.state.user);
-    if(this.state.user) {
+    if (this.state.user) {
       this.setState({
-        company: this.state.user.companyName || "",
+        company: this.state.user.companyName || '',
         manager: this.state.user.email,
         userId: this.state.user.id
       });
     }
-  };
+  }
 
   // Handles updating component state when the user types into the input field
   handleInputChange = event => {
@@ -49,28 +44,32 @@ class NewEmployee extends Component {
   // Checks if the form has been completed and returns true if it has, false if not
   // Console.log for now but will eventually be a notification popup
   isValid = () => {
-    if(this.state.firstName && this.state.lastName && 
-       this.state.companyName && this.state.manager && this.state.department) {
+    if (
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.companyName &&
+      this.state.manager &&
+      this.state.department
+    ) {
       return true;
     } else {
-      console.log("Please complete all fields of the form.");
+      console.log('Please complete all fields of the form.');
     }
   };
 
   parseGoals = () => {
-    console.log("PARSING");
-    
+    console.log('PARSING');
   };
 
   // When the form is submitted, use the API.saveEmployee method to save the Employee data
   handleFormSubmit = event => {
     event.preventDefault();
-    let goalArray = "";
+    let goalArray = '';
     if (this.isValid()) {
-      if(this.state.goals) {
-      goalArray = this.state.goals.split(',');
-      console.log(goalArray);
-    }
+      if (this.state.goals) {
+        goalArray = this.state.goals.split(',');
+        console.log(goalArray);
+      }
       API.saveEmployee({
         company: this.state.companyName,
         email: this.state.email,
@@ -82,19 +81,18 @@ class NewEmployee extends Component {
       })
         .then(res => {
           this.setState({
-            employeeId : res.data.id
+            employeeId: res.data.id
           });
-          console.log(res)
+          console.log(res);
           goalArray.forEach(goal => {
             API.saveGoal({
-            goals: goal.trim(),
-            EmployeeId: this.state.employeeId
-          })
-            .then(res => {
-              console.log(res);
-              
+              goals: goal.trim(),
+              EmployeeId: this.state.employeeId
             })
-            .catch(err => console.log(err));
+              .then(res => {
+                console.log(res);
+              })
+              .catch(err => console.log(err));
           });
         })
         // .done(() => {
@@ -194,7 +192,7 @@ class NewEmployee extends Component {
                   </Grid>
                   <Grid container>
                     <ItemGrid xs={12} sm={12} md={12}>
-                      <InputLabel style={{ color: "#AAAAAA" }}>
+                      <InputLabel style={{ color: '#AAAAAA' }}>
                         Goals
                       </InputLabel>
                       <CustomInput
@@ -215,7 +213,11 @@ class NewEmployee extends Component {
                   </Grid>
                 </div>
               }
-              footer={<Button onClick={this.handleFormSubmit} color="primary">Add Employee</Button>}
+              footer={
+                <Button onClick={this.handleFormSubmit} color="primary">
+                  Add Employee
+                </Button>
+              }
             />
           </ItemGrid>
         </Grid>

@@ -11,13 +11,13 @@ import {
   redCardHeader,
   blueCardHeader,
   purpleCardHeader
-} from "./../../variables/styles.jsx";
+} from './../../variables/styles.jsx';
 
 const regularCardStyle = {
   card,
   cardPlain: {
-    background: "transparent",
-    boxShadow: "none"
+    background: 'transparent',
+    boxShadow: 'none'
   },
   cardHeader: {
     ...cardHeader,
@@ -33,22 +33,22 @@ const regularCardStyle = {
   blueCardHeader,
   purpleCardHeader,
   cardTitle: {
-    color: "#FFFFFF",
-    marginTop: "0",
-    marginBottom: "5px",
+    color: '#FFFFFF',
+    marginTop: '0',
+    marginBottom: '5px',
     ...defaultFont,
-    fontSize: "1.125em"
+    fontSize: '1.125em'
   },
   cardSubtitle: {
     ...defaultFont,
-    marginBottom: "0",
-    color: "rgba(255, 255, 255, 0.62)",
-    margin: "0 0 10px"
+    marginBottom: '0',
+    color: 'rgba(255, 255, 255, 0.62)',
+    margin: '0 0 10px'
   },
   cardActions: {
-    padding: "14px",
-    display: "block",
-    height: "auto"
+    padding: '14px',
+    display: 'block',
+    height: 'auto'
   }
 };
 
