@@ -18,7 +18,7 @@ import { Header, Sidebar } from './../../components';
 import appRoutes from './../../routes/app.jsx';
 
 import appStyle from './../../variables/styles/appStyle.jsx';
-// import "./../../assets/css/bootstrap.css";
+import API from "./../../api/API";
 
 import logo from './../../assets/img/reactlogo.png';
 
@@ -36,7 +36,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      user: sessionStorage.getItem('user'),
+      user: JSON.parse(sessionStorage.getItem('user')),
       mobileOpen: false,
       open: false,
       hidden: false
@@ -52,6 +52,14 @@ class App extends React.Component {
     console.log(this.state.user);
     if (!this.state.user) {
       this.props.history.push('/landing');
+    } else {
+      console.log(this.state.user.id);
+      API.getAllEmployeeFromUser(this.state.user.id).then(res => {
+        console.log(res);
+        this.setState({
+          employees: res.data
+        });
+      });
     }
     if (navigator.platform.indexOf('Win') > -1) {
       // eslint-disable-next-line
@@ -67,12 +75,13 @@ class App extends React.Component {
   }
 
   reports() {
-    this.props.history.push('/select-report');
+    this.props.history.push('/select-report', {employees: this.state.employees});
   }
 
   logout() {
     console.log('Logging out');
     auth.signOut().then(() => {
+      sessionStorage.clear();
       this.setState({
         user: null
       });

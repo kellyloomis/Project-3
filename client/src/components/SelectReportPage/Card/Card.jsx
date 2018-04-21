@@ -55,7 +55,7 @@ class Card extends Component {
       console.log(this.props);
         return (
             <div className="w3-half key={this.props.key}">
-                <div className="w3-card w3-container">
+                <div className="w3-card w3-white w3-container">
                     <h3>{this.props.title}</h3><br/>
                     <i className="fa fa-user w3-margin-bottom w3-text-theme"></i>
                     <p>{this.props.text1}</p>

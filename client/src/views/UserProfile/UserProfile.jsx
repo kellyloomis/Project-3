@@ -78,7 +78,7 @@ class UserProfile extends Component {
               content={
                 <div>
                   <Grid container>
-                    <ItemGrid xs={12} sm={12} md={5}>
+                    <ItemGrid xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Company"
                         id="company"
@@ -90,7 +90,7 @@ class UserProfile extends Component {
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={3}>
+                    <ItemGrid xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Username"
                         id="username"
@@ -102,7 +102,7 @@ class UserProfile extends Component {
                         }}
                       />
                     </ItemGrid>
-                    <ItemGrid xs={12} sm={12} md={4}>
+                    <ItemGrid xs={12} sm={12} md={12}>
                       <CustomInput
                         labelText="Email address"
                         id="email-address"

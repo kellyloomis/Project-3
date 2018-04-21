@@ -114,7 +114,7 @@ class ReviewEntry extends Component {
           <br />
           <br />
           
-          <Button onClick={this.handleSubmit} component={Link} to="/welcome" color="warning">Submit</Button>
+          <Button fullWidth={true} size="large" onClick={this.handleSubmit} component={Link} to="/welcome" color="warning">Submit</Button>
         </div>
       </div>
     );
