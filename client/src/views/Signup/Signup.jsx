@@ -94,10 +94,10 @@ class Signup extends Component {
                       <div className="header header-primary text-center">
                         <h4>Sign Up</h4>
                         <div className="social-line">
-                          <Button justIcon link>
+                          <Button disabled justIcon link>
                             <i className="fa fa-facebook-square" />
                           </Button>
-                          <Button justIcon link>
+                          <Button disabled justIcon link>
                             <i className="fa fa-twitter" />
                           </Button>
                           <Button justIcon link onClick={this.login}>
